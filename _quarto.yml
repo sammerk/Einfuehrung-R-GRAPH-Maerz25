@@ -1,0 +1,33 @@
+project:
+  type: book
+  output-dir: docs
+book:
+  title: GRAPH Winterakademie 2025
+  subtitle: Einführung in R
+  search: false
+  author: 
+  - name: Samuel Merk
+    orcid: 0000-0003-2594-5337
+  date: today
+  chapters:
+  - index.qmd
+  - grundlegende_begriffe.qmd
+  - livetest.qmd
+  - references.qmd
+  sidebar: 
+    logo: graph_logo.jpg
+    
+bibliography: references.bib
+csl: apa.csl
+
+format:
+  html:
+    theme: flatly
+    grid:
+      sidebar-width: 230px
+      body-width: 1100px
+      margin-width: 200px    
+    
+lang: de
+
+lightbox: true

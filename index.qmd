@@ -1,0 +1,20 @@
+# Willkommen 👋! {.unnumbered}
+
+Hier finden sich
+
+* Erklärungen, 
+* Videos,
+* Aufgaben,
+* Daten und
+* Code
+
+für unseren Kurs **Bayesian Regression Modelling**.  
+Zu Beginn des Kurses bitte ich alle eine aktuelle Version von {{< iconify fa6-brands r-project >}} und  {{< iconify devicon:rstudio >}}Studio installiert zu haben und außerdem - falls noch nicht mit `{brms}` gearbeitet wurde - [dieser Anleitung](https://learnb4ss.github.io/learnB4SS/articles/install-brms.html) zur Installation und Verknüpfung des {{< iconify fa6-brands r-project >}}-Paketes `{brms}` zu folgen. Bei Problemen bitte gerne bei mir vorab melden!
+
+
+:::{.callout-note collapse=false appearance='default' icon=false}
+## Zweck dieses E-Books {{< iconify fa6-solid lightbulb >}}
+Dieses E-Book soll keine Lehrbuch zum Thema Bayesian Regression Modelling sein. Vielmehr ein Notizbuch für den Workshop mit einer Sammlung von Code, Links, Datensätzen und Literaturverweisen.
+:::
+
+

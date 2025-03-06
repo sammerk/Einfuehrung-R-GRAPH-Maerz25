@@ -189,10 +189,10 @@ Der Funktion für das exponentieren ist `^`. Also `25` erhält man z.B. via `5^2
 ```{r}
 #| results: asis
 
-library(exams2forms)
-download.file("https://raw.githubusercontent.com/sammerk/aufgaben/refs/heads/master/inferenzstatistik/interpretation-u3-p/exams/interpretation-u3-p.Rmd",
-              "tempfile.Rmd")
-exams2forms("tempfile.Rmd", n = 1)
+#library(exams2forms)
+#download.file("https://raw.githubusercontent.com/sammerk/aufgaben/refs/heads#/master/inferenzstatistik/interpretation-u3-p/exams/interpretation-u3-p.Rmd"#,
+#              "tempfile.Rmd")
+#exams2forms("tempfile.Rmd", n = 1)
 ```
 
 download.file("https://raw.githubusercontent.com/sammerk/aufgaben/refs/heads/master/inferenzstatistik/interpretation-u3-p/exams/interpretation-u3-p.Rmd",

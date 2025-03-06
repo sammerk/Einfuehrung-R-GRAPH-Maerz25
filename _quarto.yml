@@ -26,9 +26,9 @@ format:
       sidebar-width: 230px
       body-width: 1100px
       margin-width: 200px 
-    html-math-method: mathjax
-    css: css/webex.css
-    include-after-body: css/webex.js
+    # html-math-method: mathjax
+    # css: css/webex.css
+    # include-after-body: css/webex.js
     
 lang: de
 

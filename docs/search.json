@@ -4,69 +4,59 @@
     "href": "index.html",
     "title": "GRAPH Winterakademie 2025",
     "section": "",
-    "text": "Willkommen 👋!\nHier finden sich\n\nErklärungen,\nVideos,\nAufgaben,\nDaten und\nCode\n\nfür unseren Kurs Bayesian Regression Modelling.\nZu Beginn des Kurses bitte ich alle eine aktuelle Version von  und Studio installiert zu haben und außerdem - falls noch nicht mit {brms} gearbeitet wurde - dieser Anleitung zur Installation und Verknüpfung des -Paketes {brms} zu folgen. Bei Problemen bitte gerne bei mir vorab melden!\n\n\n\n\n\n\nZweck dieses E-Books \n\n\n\n\n\nDieses E-Book soll keine Lehrbuch zum Thema Bayesian Regression Modelling sein. Vielmehr ein Notizbuch für den Workshop mit einer Sammlung von Code, Links, Datensätzen und Literaturverweisen.",
+    "text": "Willkommen 👋!\nHier finden sich\n\nErklärungen,\ninteraktive Aufgaben,\nDaten und\nCode\n\nfür unseren Kurs Einführung in R.\nZu Beginn des Kurses bitte ich alle eine aktuelle Version von  und Studio zu installieren.\n\n\n\n\n\n\nZweck dieses E-Books \n\n\n\n\n\nDieses E-Book soll kein Lehrbuch für  sein. Vielmehr ein Notizbuch für den Workshop mit einer Sammlung von Erklärungen, Aufgaben, Code, Links, Datensätzen und Literaturverweisen.",
     "crumbs": [
       "Willkommen 👋!"
     ]
   },
   {
-    "objectID": "grundlegende_begriffe.html",
-    "href": "grundlegende_begriffe.html",
-    "title": "1  Grundlegende Begriffe",
+    "objectID": "Basics.html",
+    "href": "Basics.html",
+    "title": "1  Basics",
     "section": "",
-    "text": "1.1 Wahrscheinlichkeitsbegriff von Laplace\nDie mathematische Wahrscheinlichkeitstheorie (Stochastik) ist ein vergleichsweise junge Subdisziplin, die erst zu Beginn des 20. Jahrhunderts axiomatisch formalisiert wurde. in diesen Ansätzen definiert man Wahrscheinlichkeitsmaße z.B. durch die folgenden Axiome.\nDas ist weder besonders intuitiv noch hilfreich für die Anwendung in der Datenanalyse. Eine wichtige Kontextinfromation könnte jedoch sein, dass die Wahrscheinlichkeitsrechnung bis ins 19. Jhd. hinein vor allem als Hilfsmittel für Glücksspiele und Wetten entwickelt wurde. In diesem Kontext ist es recht hilfreich und intuitiv Wahrscheinlichkeit als relative Häufigkeit zu verstehen. So findet man auch etwa in Mathematikbüchern der 7.ten Klasse Aussagen wie",
+    "text": "1.1 How it Works: Syntax, Exekution, Output\nDie Software  ist eine Programmiersprache, die darauf spezialisiert ist statistische Modellierungen vorzunehmen.  führt jedoch nur Computationen aus. Die Steuerung dieser Computationen mithilfe von Syntax (Befehle in Textform) und die Darstellung der Ergebnisse wird von sogenannten Graphical User Interfaces (GUI) oder Integrated Development Environments (IDE) übernommen.\nEinige Autoren (Ismay & Kim, 2020) erklären diesen Unterschied ( vs. GUI/IDE) mit einer Analogie zu dem Verhältnis eines Automotors (= ) zu einem Autocockpit (= GUI/IDE). Die eigentliche Arbeit verrichtet der Motor, er wird jedoch vom Cockpit aus gesteuert und sein “Output” (Drehzahl, Geschwindigkeit, etc.) wird ebenfalls dort angezeigt.\nIm Rahmen dieses Kapitels verwenden wir ein sehr einfaches GUI (siehe folgender Abschnitt), das die Eingabe von Syntax in einem kleinen Textfenster erlaubt, diese Syntax via Klick auf den -Button an R übergibt und dann Output unterhalb des Fensters darstellt.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Grundlegende Begriffe</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Basics</span>"
     ]
   },
   {
-    "objectID": "grundlegende_begriffe.html#wahrscheinlichkeitsbegriff-von-laplace",
-    "href": "grundlegende_begriffe.html#wahrscheinlichkeitsbegriff-von-laplace",
-    "title": "1  Grundlegende Begriffe",
+    "objectID": "Basics.html#how-it-works-syntax-exekution-output",
+    "href": "Basics.html#how-it-works-syntax-exekution-output",
+    "title": "1  Basics",
     "section": "",
-    "text": "“Die Wahrscheinlichkeit, dass eine gerade Zahl gewürfelt wird, beträgt 3/6, denn es gibt 6 mögliche Ergebnisse und drei günstige.”",
+    "text": "R: Motor\nGUI/IDE: Cockpit",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Grundlegende Begriffe</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Basics</span>"
     ]
   },
   {
-    "objectID": "grundlegende_begriffe.html#stochastik-vs.-statistik",
-    "href": "grundlegende_begriffe.html#stochastik-vs.-statistik",
-    "title": "1  Grundlegende Begriffe",
-    "section": "1.2 Stochastik vs. Statistik",
-    "text": "1.2 Stochastik vs. Statistik\nInfolge dessen waren dann viele Mathematiker:innen daran interessiert bei welchen Spielen mit welche Strategien mit welcher Wahrscheinlichkeit welcher Erfolg eintritt. Also zum Beispiel beim Roulette: Ich starte mit 10.000€ und setze immer 100€ + die Gewinne aus den Vorrunden auf Rot. Wie wahrscheinlich ist es, dass ich in 100 Runden 20.000€ habe? Wie wahrscheinlich ist es, dass ich nach 100 Runden pleite bin? Die Berechnung der Wahrscheinlichkeit solcher real einretender Szenarien (= Daten) kann man anstellen, weil man die Wahrscheinlichekit der Elementarereignisse (Rot, Schwarz, Grün) kennt. Das ist das kerninteresse der Stochastik.\nDie Statistik hingegen interessiert sich für die umgekehrte Frage: Wenn ich die Beobachtungen (Daten) habe, was kann ich dann über die Wahrscheinlichkeiten der Elementarereignisse sagen?",
+    "objectID": "Basics.html#arithmetische-operationen",
+    "href": "Basics.html#arithmetische-operationen",
+    "title": "1  Basics",
+    "section": "1.2 Arithmetische Operationen",
+    "text": "1.2 Arithmetische Operationen\n\n1.2.1 Syntax für arithmetische Operationen\nNeben komplexeren statistischen Modellierungen kann  natürlich auch einfache arithmetische Operationen ausführen.\n\nAddition: +\nSubtraktion: -\nMultiplikation: *\nDivision: /\nExponentiation: ^\nQuadratwurzel: sqrt()\n…\n\nDabei wendet  (genau wie Taschenrechner) die üblichen Konventionen (z.B. »Punktrechnung vor Strichrechnung« oder »Klammer zuerst« an), wie an folgendem In- und Output erkennbar:\n\n(2 + 3)*5\n\n[1] 25\n\n\n\n\n1.2.2 Übung 1\nAddieren Sie im folgenden Fenster 5 und 13.\n\n#| exercise: arith_ex1\n\n\n\n\n\n\n\n\n\nHinweis:\n\n\n\n\n\n______ + ______\n\n\n\n\n\nLösung. \n\n\n\n\n\n\nLösung:\n\n\n\n\n\n5 + 13\n\n\n\n\n\n\n1.2.3 Übung 2\nBerechnen Sie im folgenden Fenster die Wurzel aus 16, indem Sie in der gegebenen Syntax die ______ ersetzen.\n\n#| exercise: arith_ex2\n\n\n\n\n\n\n\n\n\nHinweis:\n\n\n\n\n\nFragen Sie eine Suchmaschine oder KI nach einer passenden Funktion.\n\n\n\n\n\nLösung. \n\n\n\n\n\n\nLösung:\n\n\n\n\n\nsqrt(16)\n\n\n\n\n\n\n1.2.4 Übung 3\nRecherchieren Sie die Funktion (»das Zeichen« auch »den Operator« genannt) für den Logarithmus zur Basis 10. Berechnen Sie im folgenden Fenster log10(100).\n\n#| exercise: arith_ex3\n\n\n\n\n\n\n\n\n\nHinweis:\n\n\n\n\n\nlog(______, base = ______)\n\n\n\n\n\nLösung. \n\n\n\n\n\n\nLösung:\n\n\n\n\n\nlog(100, base = 10)",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Grundlegende Begriffe</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Basics</span>"
     ]
   },
   {
-    "objectID": "grundlegende_begriffe.html#bayesianischer-wahrscheinlichkeitsbegriff",
-    "href": "grundlegende_begriffe.html#bayesianischer-wahrscheinlichkeitsbegriff",
-    "title": "1  Grundlegende Begriffe",
-    "section": "1.3 Bayesianischer Wahrscheinlichkeitsbegriff",
-    "text": "1.3 Bayesianischer Wahrscheinlichkeitsbegriff\nWenn es sich bei den Elementarereignissen nicht um Glücksspiele handelt, kann die relative Häufigkeit etwas kontraintuitiv sein: Wenn die Wahrscheinlichkeit einer Befragung ergibt, dass Donald J. Trump 🍊 mit 54% Wahrscheinlichkeit eine neue Amtszeit bekommt, dann ist die Interpretation, dass er in 54 von 100 Fällen gewinnt nicht besonders hilfreich. Vielmehr ist die Wahrscheinlichkeit dann eine Aussage über die Unsicherheit, die wir haben, wenn wir aufgrund der Daten Schlussfolgerungen über den die Daten generierenden Mechanismus treffen wollen. Die 54% würden dann also als »ziemlich genau in der Mitte von unmöglich und sicher« interpretiert werden.",
+    "objectID": "Basics.html#logische-vergleichsoperatoren",
+    "href": "Basics.html#logische-vergleichsoperatoren",
+    "title": "1  Basics",
+    "section": "1.3 Logische Vergleichsoperatoren",
+    "text": "1.3 Logische Vergleichsoperatoren\n\n1.3.1 Syntax für arithmetische Operationen/Funktionen\nFür Wahrheitsabfragen hält  einige Vergleichsoperatoren bereit:\n\n\n&lt; für »kleiner als«\n&gt; für »größer als«\n&lt;= für »kleiner als oder gleich wie«\n&gt;= für »größer als oder gleich wie«\n== für »gleich«\n!= für »ungleich«\n%in% für »liegt in der Menge«\n\nAls Ergebnis eines solchen Vergleichs erhält man TRUE oder FALSE, wie folgende Beispiele zeigen:\n\n4 + 2 &lt; 3\n\n[1] FALSE\n\n10 == 4 + 6\n\n[1] TRUE\n\n\nZusätzlich werden oftmals noch die logischen Operatoren\n\n& für »und«\n| für »oder«\n\nbenutzt.\n\n\n1.3.2 Übung 1\nPrüfen Sie im folgenden Fenster ob \\(2^2 + 3^2\\) gleich \\(5^2\\) ist.\n\n#| exercise: log_ex1\n\n\n\n\n\n\n\n\n\nHinweis:\n\n\n\n\n\nDer Funktion für das exponentieren ist ^. Also 25 erhält man z.B. via 5^2.\n\n\n\n\n\nLösung. \n\n\n\n\n\n\nLösung:\n\n\n\n\n\n2^2 + 3^2 == 5^2\n\n\n\n\n\n\n1.3.3 Übung 2\nlibrary(exams2forms)\nWarning: package 'exams2forms' was built under R version 4.4.2\nLoading required package: exams\ndownload.file(\"https://raw.githubusercontent.com/sammerk/aufgaben/refs/heads/master/inferenzstatistik/interpretation-u3-p/exams/interpretation-u3-p.Rmd\",\n              \"tempfile.Rmd\")\nexams2forms(\"tempfile.Rmd\", n = 1)\n\n\nEin Forscher untersucht, inwiefern sich Lehramtsstudierende von anderen Studierenden bzgl. ihrer kognitiven Fähigkeiten unterscheiden. Sie findet ein Cohen’s U₃ = .52 mit einem p-Wert von .562\n\nEs liegt eine signifikante (bei ⍺-Niveau = .05) Mittelwertsdifferenz vor.Der vorliegende Effekt kann nicht von den Daten auf die Population verallgemeinert werden.Es liegt Evidenz für die Nullhypothese (Cohen's \\(U_3\\) = .5) vor.Die Nullhypothese ist wahr.Es liegt ein substantieller (mindestens kleiner) Effekt vor.\n\n\n\ndownload.file(“https://raw.githubusercontent.com/sammerk/aufgaben/refs/heads/master/inferenzstatistik/interpretation-u3-p/exams/interpretation-u3-p.Rmd”, “tempfile.Rmd”) exams2forms(“tempfile.Rmd”, n = 15)\n\n\n\n\nIsmay, C., & Kim, A. Y. (2020). Statistical Inference via Data Science A Moderndive into R and the Tidyverse. Boca Raton: CRC.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Grundlegende Begriffe</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Basics</span>"
     ]
   },
   {
-    "objectID": "grundlegende_begriffe.html#bayes-theorem",
-    "href": "grundlegende_begriffe.html#bayes-theorem",
-    "title": "1  Grundlegende Begriffe",
-    "section": "1.4 Bayes Theorem",
-    "text": "1.4 Bayes Theorem\nBayes Theorem ist ein stochastischer Satz der eine bedingte Wahrscheinlichkeit \\(P(A|B)\\) zur bedingten Wahrscheinlichkeit \\(P(B|A)\\) in die andere Richtung umrechnet.\n\\(P(A|B)\\) ist dabei schulmathematisch als »Die Wahrscheinlichkeit dass A eintritt unter der Annahme, dass B bereits eingetreten ist« zu verstehen.\n\nBeispiel: Es liegen in einer Urne 2 blaue und vier grüne Kugeln, ich ziehe zwei Kugeln ohne zurücklegen.\nIst das Ereignis \\(A\\) = »Blaue Kugel im ersten Zug«, \\(B\\) = »grüne Kugel im ersten Zug« und \\(C\\) = »grüne Kugel im zweiten Zug« dann ist \\(P(C|A) = 4/5\\) und \\(P(C|B) = 3/5\\)\n\n\n1.4.1 Dynamische Veranschaulichung\nDie beste dynamische Visualisierung zur Erklärung des Bayes Theorems, die ich kenne, ist die folgende:\nGefragt wird ja zu Beginn nach \\(P(\\text{librarian}|\\text{meek\\;and\\;tidy\\;soul})\\) welche unter Verwendung der Wahrscheinlichkeit \\(P(\\text{meek\\;and\\;tidy\\;soul}|\\text{librarian})\\) berechnet wird.\nVerallgemeinert kann man sagen dass Bayes Theorem die Wahrscheinlichkeit \\(P(\\text{Hypothesis}|\\text{Data})\\) unter Verwendung der Wahrscheinlichkeit \\(P(\\text{Data}|\\text{Hypothesis})\\) mit folgender Formel berechnet:\n\\[\n\\overbracket[0.25pt]{P (\\text{Hypothesis} \\mid \\text{Data})}^{\\text{Posterior}} = \\frac\n{{\\overbracket[0.25pt]{P (\\text{Hypothesis})}^{\\text{Prior}}} \\times\n{\\overbracket[0.25pt]{P (\\text{Data} \\mid \\text{Hypothesis})}^{\\text{Likelihood}}}}\n{{\\underbracket[0.25pt]{{P(\\text{Data})}}_{\\text{Average likelihood}}}}\n\\]\nIm YouTube-Beispiel haben wir gesehen wie Bayes Theorem auf ein Modell angewendet wird, das wir uns als Urne mit Kugeln zweier Farben vorstellen können, wobei eine Farbe Farmer und eien Farbe Librarians enkodiert.\nIn der Regressionsmodellierung wird Bayes Theorem benutzt um die Parameter eines Regressionsmodells zu spezifizieren. Nehmen wir an wir wollen modellieren mit welcher Vorbereitungszeit welcher Erfolg in einer Klausur einhergeht, könnten Prior (Predictions), Data & Likelihood sowie Posterior (Predictions) wie folgt aussehen:\n Bevor wir uns aber anschauen wie wir zu diesen Posterior-Verteilungen kommen, schauen wir uns nochmal die grundlegende Unterscheidung Inferenz- und Deskriptivstatistik sowie zwischen Schätzung und Testung an.",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Grundlegende Begriffe</span>"
-    ]
-  },
-  {
-    "objectID": "livetest.html",
-    "href": "livetest.html",
-    "title": "2  R Example",
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "Literatur",
     "section": "",
-    "text": "for (x in 1:5) {\n  print(x ** 2)\n}",
+    "text": "Ismay, C., & Kim, A. Y. (2020). Statistical\nInference via Data Science A moderndive into\nR and the tidyverse. Boca Raton: CRC.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>R Example</span>"
+      "Literatur"
     ]
   }
 ]

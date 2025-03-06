@@ -11,11 +11,10 @@ book:
   date: today
   chapters:
   - index.qmd
-  - grundlegende_begriffe.qmd
-  - livetest.qmd
+  - Basics.qmd
   - references.qmd
   sidebar: 
-    logo: graph_logo.jpg
+    logo: img/graph_logo.jpg
     
 bibliography: references.bib
 csl: apa.csl
@@ -26,7 +25,10 @@ format:
     grid:
       sidebar-width: 230px
       body-width: 1100px
-      margin-width: 200px    
+      margin-width: 200px 
+    html-math-method: mathjax
+    css: css/webex.css
+    include-after-body: css/webex.js
     
 lang: de
 

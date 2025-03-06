@@ -8,7 +8,7 @@ Hier finden sich
 * Code
 
 für unseren Kurs **Einführung in R**.  
-Zu Beginn des Kurses bitte ich alle eine aktuelle Version von {{< iconify fa6-brands r-project >}} und  {{< iconify devicon:rstudio >}}Studio zu installieren.
+Zu Beginn des Kurses bitte ich alle eine aktuelle Version von {{< iconify fa6-brands r-project >}} und {{< iconify devicon:rstudio >}} Studio zu installieren.
 
 
 :::{.callout-note collapse=false appearance='default' icon=false}

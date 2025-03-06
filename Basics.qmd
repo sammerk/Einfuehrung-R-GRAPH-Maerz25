@@ -2,7 +2,6 @@
 title: Basics
 engine: knitr
 format: live-html
-theme: flatly
 ---
 
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
@@ -185,16 +184,17 @@ Der Funktion für das exponentieren ist `^`. Also `25` erhält man z.B. via `5^2
 :::
 
 ### Übung 2
+Sagen Sie vorher, ob die folgenden Ausdrücke `TRUE` oder `FALSE` ergeben und Prüfen Sie anschließend in folgendem Code-Fenster:
 
-```{r}
-#| results: asis
+* `2*3 == 6`
+* `4 + 4 = 8` 
+* `2 < 1 | 5 > 3`
+* `6 < 7 & 7 < 5`
 
-#library(exams2forms)
-#download.file("https://raw.githubusercontent.com/sammerk/aufgaben/refs/heads#/master/inferenzstatistik/interpretation-u3-p/exams/interpretation-u3-p.Rmd"#,
-#              "tempfile.Rmd")
-#exams2forms("tempfile.Rmd", n = 1)
+
+```{webr}
+#| exercise: log_ex2
+
+
 ```
 
-download.file("https://raw.githubusercontent.com/sammerk/aufgaben/refs/heads/master/inferenzstatistik/interpretation-u3-p/exams/interpretation-u3-p.Rmd",
-              "tempfile.Rmd")
-exams2forms("tempfile.Rmd", n = 15)

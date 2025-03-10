@@ -795,7 +795,7 @@
     "href": "Section_Reproducible_Reporting_mit_quarto/Literal_Programming_mit_quarto.html#ein-neues-quarto-dokument-erstellen",
     "title": "Literal Programming (a.k.a. Reproducible Reporting) mit quarto",
     "section": "Ein neues Quarto-Dokument erstellen",
-    "text": "Ein neues Quarto-Dokument erstellen\n\nRStudio öffnen\nDatei → Neues Datei → Quarto Document…\nGewünschte Format (z. B. HTML, PDF, Word) wählen (empfehlenswert ist zu Beginn .html)\nNamen für die Datei eingeben und als mein_report.qmd.\nAuf das Render-Symbol klicken. quarto führt dann den R-Code aus und fügt In- wie Output mit dem gerenderten Markdown zu einem Dokument zusammen",
+    "text": "Ein neues Quarto-Dokument erstellen\n\nRStudio öffnen\nDatei → Neues Datei → Quarto Document…\nGewünschte Format (z. B. HTML, PDF, Word) wählen (empfehlenswert ist zu Beginn .html)\nNamen für die Datei eingeben und als mein_report.qmd speichern.\nAuf das Render-Symbol klicken. quarto führt dann den R-Code aus und fügt In- wie Output mit dem gerenderten Markdown zu einem Dokument zusammen",
     "crumbs": [
       "Reproducible Reporting",
       "Literal Programming (a.k.a. Reproducible Reporting) mit quarto"
@@ -807,6 +807,17 @@
     "title": "Literal Programming (a.k.a. Reproducible Reporting) mit quarto",
     "section": "Beispielergebnis",
     "text": "Beispielergebnis\n\n\n\n.qmd-File und gerenderte Ergebnisse",
+    "crumbs": [
+      "Reproducible Reporting",
+      "Literal Programming (a.k.a. Reproducible Reporting) mit quarto"
+    ]
+  },
+  {
+    "objectID": "Section_Reproducible_Reporting_mit_quarto/Literal_Programming_mit_quarto.html#übung-1",
+    "href": "Section_Reproducible_Reporting_mit_quarto/Literal_Programming_mit_quarto.html#übung-1",
+    "title": "Literal Programming (a.k.a. Reproducible Reporting) mit quarto",
+    "section": "Übung 1",
+    "text": "Übung 1\nLaden Sie dieses zip-File herunter, dekomprimieren Sie es und öffnen Sie das .Rproj-File. Nach Installation der notwendigen Pakete können Sie mit dem Render-Button den im Abschnitt zuvor dargestellten Report erzeugen.",
     "crumbs": [
       "Reproducible Reporting",
       "Literal Programming (a.k.a. Reproducible Reporting) mit quarto"

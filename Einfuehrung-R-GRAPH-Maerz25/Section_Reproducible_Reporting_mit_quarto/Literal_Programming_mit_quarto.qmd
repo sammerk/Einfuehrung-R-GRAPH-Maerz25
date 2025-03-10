@@ -19,7 +19,7 @@ Mit [quarto](https://quarto.org), einem modernen Dokumentations- und Publishing-
 
 quarto bietet in einer IDE wie RStudio grafische Tools, um:
 
-* Berichte mit Markdown und LaTeX zu formatieren
+* Text mit Markdown und LaTeX zu formatieren
 * Plots und Tabellen direkt in das Dokument einzubinden
 * Ergebnisse automatisch zu aktualisieren, wenn sich der Code ändert
 * Interaktive Dashboards oder Blogs zu erstellen
@@ -28,8 +28,11 @@ quarto bietet in einer IDE wie RStudio grafische Tools, um:
 * RStudio öffnen
 * Datei → Neues Datei → Quarto Document...
 * Gewünschte Format (z. B. HTML, PDF, Word) wählen (empfehlenswert ist zu Beginn .html)
-* Namen für die Datei eingeben und als mein_report.qmd.
+* Namen für die Datei eingeben und als mein_report.qmd speichern.
 * Auf das **Render**-Symbol klicken. quarto führt dann den R-Code aus und fügt In- wie Output mit dem gerenderten Markdown zu einem Dokument zusammen 
 
 ## Beispielergebnis
 ![.qmd-File und gerenderte Ergebnisse](../img/quartoout.png)
+
+## Übung 1
+Laden Sie [dieses zip-File](../Reproducible_Penguin_Report.zip) herunter, dekomprimieren Sie es und öffnen Sie das .Rproj-File. Nach Installation der notwendigen Pakete können Sie mit dem `Render`-Button den im Abschnitt zuvor dargestellten Report erzeugen.

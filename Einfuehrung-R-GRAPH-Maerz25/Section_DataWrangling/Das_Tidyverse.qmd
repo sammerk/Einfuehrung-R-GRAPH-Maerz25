@@ -1,0 +1,27 @@
+---
+title: Das Tidyverse
+engine: knitr
+format: live-html
+toc: true
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+Das sog. `tidyverse` [@grolemund] ist eine Suite von `r fontawesome::fa(name = "r-project", fill = "#18bc9c")`-Paketen die besonders gut auf einander abgestimmt und nach bestimmten Prinzipien programmiert sind. Diese Pakete sind sehr populär und ersetzen in vielen Universitäten mittlerweile viele Funktionen die auch in Base-`r fontawesome::fa(name = "r-project", fill = "#18bc9c")` verfügbar sind. Die populärsten dieser Pakete sind:
+
+| Logo | Paket       | Funktion |
+|------|------------|----------|
+| ![](https://ggplot2.tidyverse.org/logo.png){width=60px} | [**ggplot2**](https://ggplot2.tidyverse.org) | Erstellen von Grafiken und Datenvisualisierungen |
+| ![](https://dplyr.tidyverse.org/logo.png){width=60px} | [**dplyr**](https://dplyr.tidyverse.org)   | Datenmanipulation (Filtern, Gruppieren, Aggregieren) |
+| ![](https://tidyr.tidyverse.org/logo.png){width=60px} | [**tidyr**](https://tidyr.tidyverse.org)   | Umstrukturierung und Bereinigung von Daten (z. B. `pivot_longer()`, `pivot_wider()`) |
+| ![](https://readr.tidyverse.org/logo.png){width=60px} | [**readr**](https://readr.tidyverse.org)   | Einlesen von **CSV- und Textdateien** effizient |
+| ![](https://tibble.tidyverse.org/logo.svg){width=60px} | [**tibble**](https://tibble.tidyverse.org)  | Alternative zu `data.frame`, optimiert für Tidyverse |
+| ![](https://purrr.tidyverse.org/logo.png){width=60px} | [**purrr**](https://purrr.tidyverse.org)   | Funktionale Programmierung, **Map-Funktionen** (`map()`, `map_df()`) |
+| ![](https://stringr.tidyverse.org/logo.png){width=60px} | [**stringr**](https://stringr.tidyverse.org) | Arbeiten mit **Zeichenketten** (z. B. `str_detect()`, `str_replace()`) |
+| ![](https://forcats.tidyverse.org/logo.png){width=60px} | [**forcats**](https://forcats.tidyverse.org) | Handhabung von **Faktoren** (z. B. `fct_reorder()`, `fct_lump()`) |
+| ![](https://lubridate.tidyverse.org/logo.png){width=60px} | [**lubridate**](https://lubridate.tidyverse.org) | Erleichtert die Arbeit mit **Datum/Zeit**-Daten (`ymd()`, `floor_date()`) |
+
+
+
+Wir werden primär mit `{ggplot2}`, `{dplyr}`, `{tidyr}`, `{readr}` arbeiten.
+

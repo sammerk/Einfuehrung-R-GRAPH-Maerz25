@@ -1,0 +1,78 @@
+---
+title: Polymorphie
+engine: knitr
+format: live-html
+toc: true
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+
+Die verschiedenen Datenklassen sind für die Arbeit mit `r fontawesome::fa(name = "r-project", fill = "#18bc9c")` essentiell, da sie erlauben ein und denselben Operator/ein und dieselbe Funktion (z.B. das `+`) auf verschiedene Art und Weise sinnvoll auszuführen: So resultiert etwa `2 + 2` in `4` aber `as.Date("2019-12-24") + 2` in `"2019-12-26"`. Diese Polymorphie (»Vielgestaltigkeit«) des `+` Operators erleichter die Arbeit mit Daten, da so nicht für jede Datenklasse ein anderer Operator für die jeweilige »Addition« verwendet werden muss.  
+Allerdings sind einige Operatoren für einige Datenklassen nicht sinnvoll und daher nicht in `r fontawesome::fa(name = "r-project", fill = "#18bc9c")` hinterlegt.  
+
+## Weitere Beispiele für die Polymorphie in `r fontawesome::fa(name = "r-project", fill = "#18bc9c")`
+
+### Polymorphie des `>`-Operators
+```{r, echo = T}
+5 > 3
+
+as.Date("2019-12-24") > as.Date("2019-12-24")
+
+as.character("Hund") > as.character("Katze")
+
+as.character("groß") > as.character("klein")
+```
+
+## Übung 1
+Auch der `==`-Operator ist polymorph. Welcher der folgenden Syntaxen wird im Output `TRUE` resultieren (gerne im folgenden Code-Fenster di eiegene Einschätzung überprüfen)?
+
+* `5 == 3`
+* `2 + 4 == 6`
+* `"hund" == "Hund"`
+* `as.Date("2019-12-24") == as.Date("2019-11-24")`
+
+```{webr}
+#| exercise: poly_ex1
+#| min-lines: 2
+
+
+```
+
+
+
+## Übung 1
+Nicht alle Funktionen sind polymorph für alle Datenklassen. Prüfen Sie, ob die Polymorphie der `mean()`-Funktion - die das arithmetische Mittel berechnet - für die Klasse `"Date"` definiert ist.
+
+
+```{webr}
+#| exercise: poly_ex2
+#| min-lines: 4
+
+
+```
+
+
+::: { .hint exercise="poly_ex2"}
+::: { .callout-note collapse="false"}
+## Hinweis:
+Man kann zuerst einen Vektor mit Dates definieren und diesen dann an die `mean()`-Funktion übergeben.
+
+:::
+:::
+
+::: { .solution exercise="poly_ex2" }
+::: { .callout-tip collapse="false"}
+## Lösung:
+
+```{r}
+dates1 <- c(as.Date("2024-02-27"), as.Date("2024-03-02")) 
+mean(dates1)
+dates2 <- c(as.Date("2025-02-27"), as.Date("2025-03-02")) 
+mean(dates2)
+```
+
+Die Funktion `mean()`ist also polymorph für die Klasse `"Date"` definiert und `r fontawesome::fa(name = "r-project", fill = "#18bc9c")` kennt auch die Schaltjahre.
+
+:::
+:::

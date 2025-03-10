@@ -1,0 +1,135 @@
+---
+title: Kontrollstrukturen
+engine: knitr
+format: live-html
+toc: true
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+Kontrollstrukturen sind die Befehle an die man wahrscheinlich als erstes denkt, wenn man das Stichwort »programmieren« hört. Sie kommen in nahezu allen Sprachen vor - auch in `r fontawesome::fa(name = "r-project", fill = "#18bc9c")`. Im Folgenden sind zwei ausgewählte Kontrollstrukturen etwas genauer beschrieben: `ifelse()` und die `for`-Schleife.
+
+## `ifelse`
+`ifelse` wird von Sozialwissenschaftler:innen sehr oft zum Rekodieren von Variablen benutzt. Es hat die Struktur 
+
+> `ifelse(Wahrheitsprüfung, falls TRUE, falls FASLE)`
+
+```r
+berufe <- c("Bäcker", "Grundschullehrer", "Studienrätin", "Architektin")   # <1>
+
+lehrer_in <-                                                               # <2>
+  ifelse(berufe %in% c("Grundschullehrer", "Studienrätin"),                # <3>
+         "Lehrer:in",                                                      # <4>
+         "keine Lehrer:in")                                                # <5>
+print(lehrer_in)                                                                
+```
+1. Definion der Daten
+2. Erstellung neues Objekts
+3. Wahrheitsprüfung ob die Elemente von `berufe` gleich `Grundschullehrer` oder `Studienrätin` sind
+4. Falls 3 `TRUE`, schreibe `"Lehrer:in"`
+5. Falls 3 `FALSE`, schreibe `"keine Lehrer:in"`
+
+
+
+## Übung 1
+Wie kann der Vektor `c("kein Abschluss", "Abitur", "Fachhochschulreife")` in einen Vektor `c("keine HZB", "HZB", "HZB")` (HZB = Hochschulzugangsberechtigung) rekodiert werden?
+
+```{webr}
+#| exercise: cont_ex1
+#| min-lines: 10
+
+
+```
+
+
+::: { .hint exercise="cont_ex1"}
+::: { .callout-note collapse="false"}
+## Hinweis:
+
+Passe das zuvor gegebene Beispiel an.
+
+:::
+:::
+
+::: { .solution exercise="cont_ex1" }
+::: { .callout-tip collapse="false"}
+## Lösung:
+
+```r
+abschluesse <- c("kein Abschluss", "Abitur", "Fachhochschulreife")  
+
+hzb <-                                                               
+  ifelse(abschluesse %in% c("Abitur", "Fachhochschulreife"),                
+         "HZB",                                                      
+         "keine HZB")                                                
+print(hzb)  
+```
+
+:::
+:::
+
+
+## Schleifen
+Schleifen kommen in `r fontawesome::fa(name = "r-project", fill = "#18bc9c")` eher selten vor, weil es dort oft elegantere Wege gibt, dasselbe zu erreichen. Sozialwissenschaftler:innen nutzen sie aber oft für Simulationen (z.B. für Poweranalysen).
+
+In R gibt es die folgenden Schleifen
+
+| Schleife | Beschreibung |
+| :--- | :--- |
+| `for` | Wiederholt Code für eine feste Anzahl von Durchläufen |
+| `while` | Wiederholt Code, solange eine Bedingung erfüllt ist |
+| `repeat` | Wiederholt Code unendlich, bis `break` aufgerufen wird |
+| `next` | Überspringt die aktuelle Iteration, fährt aber fort |
+| `break` | Bricht die Schleife sofort ab |
+
+### `for`-Schleifen
+
+:::{.callout-tip collapse=false appearance='default' icon=true}
+## Beispielstudie
+Angenommen ein Forscher:innenteam möchte eine deskriptive Studie durchführen und die Forschungsfrage fragt nach der Prävalenz von Klassenwiederholung in der Grundschule.
+Da sich die Behörden nicht auskunftsbereit zeigen, startet das Team eine Random Digit Dialling Befragung - wählt also zufällig generierte Telefonnummern, fragt ob Eltern von Grundschüler:innen am Telefon sind und falls ja, ob diese:r Grundschüler:in dieses Jahr die Klasse wiederholt. Das Team hat jedoch nur die Ressourcen für 1000 Anrufe bei Eltern und fragt sich, wie präzise es damit die Prävalenz schätzen kann.
+:::
+
+
+Diese Abschätzung kann man mit einer `for`-Schleife erzielen. Dazu 
+
+1) nimmt man eine Prävalenz an (z.B. 3%)
+2) simuliert dann das Ziehen (mit zurücklegen) von 1000 Kugeln aus einer Urne in der 97 Kugeln mit 0 beschriftet sind (Versetzung) und 3 Kugeln mit 1 (Sitzenbleiben)
+3) berechnet die Summe der Kugeln geteilt durch 1000 (Anteil der Wiederholer:innen)
+4) wiederholt 2 und 3 sehr oft (hier 100 mal - realistischerweise eher $10^5$ mal).
+
+```r
+for(i in 1:100){                      # <1>
+    stichprobe_i <-                   # <2>
+        sample(c(0,1),                # <2>
+               size = 1000,           # <2>
+               replace = TRUE,        # <2>
+               prob = c(.97, .03))    # <2>
+    mean_i <- mean(stichprobe_i)      # <3>
+    print(mean_i)                     # <4>
+}                               
+```
+1. Startet die for-Schleife. Die Runde Klammer definiert den »Laufindex«, in der geschweiften Klammer wird definiert was für jeden Laufindex passieren soll.
+2. Für jedes `i` wird ein Objekt namens `stichprobe_i` angelegt, das 1000 Einträge hat, die mit Wahrscheinlichkeit 97% `0` und 3% `1` betragen. 
+3. Von dieser Stichprobe wird das arithmetische Mittel berechnet
+4. Dieses arithmetische Mittel wird ausgegeben
+
+
+## Übung 2
+Exekutieren Sie die gegebene `for`-Schleife und interpretiert das Ergebnis. Verändern Sie die Stichprobengröße (`size = `) auf 5, 50 und 50000 und sagen Sie jeweils vorher wie sich das Ergebnis ändern wird.
+
+```{webr}
+#| exercise: cont_ex2
+
+for(i in 1:100){
+    stichprobe_i <- 
+        sample(c(0,1),
+               size = 1000,
+               replace = TRUE,
+               prob = c(.97, .03))
+    
+    mean_i <- mean(stichprobe_i)
+    print(mean_i)
+}
+```
+

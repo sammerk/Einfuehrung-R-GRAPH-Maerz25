@@ -1,0 +1,97 @@
+---
+title: Manipulate Cases
+engine: knitr
+format: live-html
+toc: true
+webr:
+  packages:
+    - dplyr
+    - palmerpenguins
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+In diesem Kapitel soll es um das Auswählen von Fällen (Cases) gehen, oft auch »*Filtering*« genannt.
+
+
+## Beispiel 1: Gentoo only
+```{r}
+#| echo: false
+#| results: hide
+#| message: false
+#| warning: false
+library(dplyr)
+library(palmerpenguins)
+```
+
+Möchte man beispielsweise das arithmetische Mittel der Schnabellänge nur der Gentoo berechnen, muss man als erstes nur die Zeilen auswählen, für die `species == "Gentoo` `TRUE` ergibt. 
+Im tidyverse verwendet man dazu die Funktion `filter()` aus dem Paket `{dplyr}`.
+
+```{r}
+penguins %>% 
+  filter(species == "Gentoo")
+
+# oder gleichwertig
+filter(penguins, 
+       species == "Gentoo")
+```
+
+Der Pipe-Operator `a %>% b %>% c` bedeutet dabei in etwa »*nimm a und mache damit b und mache mit dem Ergebnis davon c*«.
+
+
+## Übung 1
+Filtern Sie den `penguins` Datensatz so, dass er nur weibliche Tiere enthält.
+
+```{webr}
+#| exercise: manipc_ex1
+#| min-lines: 
+penguins %>% 
+  ______(______ == ______)
+```
+
+
+::: { .hint exercise="manipc_ex1"}
+::: { .callout-note collapse="false"}
+## Hinweis:
+Die Variablennamen sind im Absatz zuvor sichtbar. 
+
+:::
+:::
+
+::: { .solution exercise="manipc_ex1" }
+::: { .callout-tip collapse="false"}
+## Eine Lösung:
+
+```r
+penguins %>% 
+  filter(sex == "female")
+```
+
+:::{.callout-warning collapse=false appearance='default' icon=true}
+## Achtung
+`sex == female` (ohne Anführungszeichen) würde nicht funktionieren, da R sonst nach dem Objekt `female` sucht.
+:::
+
+
+:::
+:::
+
+<br>
+Das Paket `{dplyr}` hat viele hilfreiche vektorisierte Funktionen für die Manipulation von Fällen. Einen guten Überblick liefert das Cheatsheet.
+
+:::: {.columns}
+
+::: {.column width='47%'}
+![https://rstudio.github.io/cheatsheets/](../img/dpylr_cs1.jpg){.lightbox}
+:::
+
+::: {.column width='6%'}
+:::
+
+::: {.column width='47%'}
+![](../img/dpylr_cs2.jpg){.lightbox}
+:::
+
+::::
+
+

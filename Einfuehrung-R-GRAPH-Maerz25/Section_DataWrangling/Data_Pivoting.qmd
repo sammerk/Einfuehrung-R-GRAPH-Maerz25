@@ -1,0 +1,238 @@
+---
+title: Data Pivoting
+engine: knitr
+format: live-html
+toc: true
+webr:
+  packages:
+    - dplyr
+    - palmerpenguins
+lang: de
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+Dieselben Daten derselben Merkmalsträger in denselben Variablen können in unterschiedlichen Datensätzen resultieren:
+
+:::: {.columns}
+
+::: {.column width='45%'}
+| ID | bill_length | bill_depth |
+|----|-------------|------------|
+| A  | 39.4        | 18.2       |
+| B  | 37.6        | 17.9       |
+:::
+
+::: {.column width='10%'}
+:::
+
+::: {.column width='45%'}
+| ID | bill_variable | bill_value     |
+|----|---------------|----------------|
+| A  | bill_depth    | 18.2           |
+| B  | bill_depth    | 17.9           |
+| A  | bill_length   | 39.4           |
+| B  | bill_length   | 37.6           |
+:::
+
+::::
+
+
+Das führt oft dazu, dass Daten in einem anderen Format vorliegen, als sie für ein Wrangling, eine Visualisierung oder eine statistische Modellierung benötigt werden.
+Dementsprechend ist es hilfreich, das Format ändern zu können. Dies kann sehr komplex werden - im folgenden betrachten wir eher einfache Minimalbeispiele.
+
+## Beispiel 1: `bill`-Variablen
+```{r}
+#| echo: false
+#| results: hide
+#| message: false
+#| warning: false
+library(dplyr)
+library(palmerpenguins)
+library(tidyr)
+library(tinytable)
+```
+
+:::{.callout-tip collapse=false appearance='default' icon=true}
+## Beispielstudie
+Angenommen ein Forscher:innenteam möchte Mittelwert und Standardabweichungen aller `bill` Variablen getrennt nach `species` und `sex` haben. Was wäre eine geeignete Syntax?
+:::
+
+
+:::: {.columns}
+
+::: {.column width='36%'}
+Lägen die Daten wie in der @tbl-SAC (rechts) vor, könnte man einen Spilt-Apply-Combine-Approach mit `group_by(sepcies, sex, billvariable)` anwenden.
+:::
+
+::: {.column width='8%'}
+:::
+
+::: {.column width='56%'}
+::: {style="font-size: 11px; line-height: 0.8"}
+
+Table: Tabelle für Split-Apply-Combine {#tbl-SAC}
+
+| species   | sex    | bill_variable | bill_value |
+|-----------|--------|---------------|------------|
+| Adelie    | male   | bill_depth    | 18.2       |
+| Chinstrap | male   | bill_depth    | 17.9       |
+| Chinstrap | male   | bill_length   | 39.4       |
+| Gentoo    | female | bill_length   | 37.6       |
+:::
+:::
+
+::::
+
+Ein Format wie in @tbl-SAC erhält man durch folgende Syntax:
+
+```{r}
+penguins %>% 
+  select(sex, species, bill_length_mm, bill_depth_mm) %>% 
+  pivot_longer(names_to = "bill_variable",
+               values_to = "bill_value",
+               cols = c(bill_length_mm, bill_depth_mm))
+```
+
+
+Die Berechnung der gewünschten MW und SD kann nun folgen:
+
+```{r}
+penguins %>% 
+  select(sex, species, bill_length_mm, bill_depth_mm) %>% 
+  pivot_longer(names_to = "bill_variable",
+               values_to = "bill_value",
+               cols = c(bill_length_mm, bill_depth_mm)) %>% 
+  group_by(sex, species, bill_variable) %>% 
+  summarize(means = mean(bill_value, na.rm = T),
+            sds = sd(bill_value, na.rm = T))
+```
+
+
+
+## Übung 1: Längsschnittliche Daten
+
+:::{.callout-tip collapse=false appearance='default' icon=true}
+## Beispielstudie
+Angenommen ein Forscher:innenteam erhebt zu zwei Zeitpunkten das Mathamatikselbstkonzept sowie die Mathematikleistung in den folgenden beiden Datensätzen. 
+
+:::: {.columns}
+
+::: {.column width='50%'}
+```{r}
+#| echo: false
+#| warning: false
+#| label: tbl-datat1
+#| tbl-cap: "Datensatz `data_mathe_t1`"
+data_t1 <- 
+  tibble(ID = c("A", "B", "C"),
+         selbst_t1 = c(5.3, 6.1, 4.8),
+         mleist_t1 = c(532, 610, 480))
+
+data_t1%>% 
+  tt()
+```
+
+:::
+
+::: {.column width='50%'}
+```{r}
+#| echo: false
+#| warning: false
+#| label: tbl-datat2
+#| tbl-cap: "Datensatz `data_mathe_t2`"
+data_t2 <- 
+  tibble(ID = c("A", "B", "C"),
+         selbst_t2 = c(5.0, 5.7, 4.2),
+         mleist_t2 = c(562, 652, 489))
+
+data_t2%>% 
+  tt()
+```
+
+:::
+
+::::
+
+
+Es möchte nun MW SD je Variable und je Zeitpunkt sowie die Korrelation von Selbstkonzept und Leistung sowohl je Zeitpunkt als auch über beide Zeitpunkte hinweg berechnen.
+:::
+
+
+In folgendem Codefenster sind die beiden Datensätze `data_mathe_t1` und `data_mathe_t2` als ebenso benannte Objekte hinterlegt. Führen Sie einen geeigneten Join durch und berechnen Sie die oben genannten MW, SD und Korrelationen.
+
+```{webr}
+#| setup: true
+#| exercise: piv_ex1
+data_t1 <- 
+  tibble(ID = c("A", "B", "C"),
+         selbst_t1 = c(5.3, 6.1, 4.8),
+         mleist_t1 = c(532, 610, 480))
+
+data_t2 <- 
+  tibble(ID = c("A", "B", "C"),
+         selbst_t2 = c(5.0, 5.7, 4.2),
+         mleist_t2 = c(562, 652, 489))
+```
+
+
+```{webr}
+#| exercise: piv_ex1
+#| min-lines: 12
+
+
+```
+
+
+::: { .hint exercise="piv_ex1"}
+::: { .callout-note collapse="false"}
+## Hinweis:
+
+* Für die Berechnung der MW und SD kann man schlicht alle Variablen außer `ID` in `pivot_longer()` an das Argument `cols = ` übergeben und dann einen Split-Apply-Combine Ansatz fahren.
+* Für die Berechnung einer Korrelation macht es im `{tidyverse}` Sinn, der Base-R-Funktion `cor()` einen slektierten Datensatz via Pipeoperator `%>%` zu übergeben.
+* Der `cor()` Funktion kann mit dem Argument `use = pairwise` signalisiert werden, dass es paarweise vollständige Beobachtungen in die Berechnung miteinbeziehen soll (fallweiser Ausschluss von fehlenden Werten).
+
+:::
+:::
+
+
+::: { .solution exercise="piv_ex1" }
+::: { .callout-tip collapse="false"}
+## Eine Lösung
+
+```{r}
+# MW und SD
+full_join(data_t1, data_t2) %>% 
+  pivot_longer(names_to = "variablen",
+               values_to = "werte",
+               cols = -ID) %>% 
+  group_by(variablen) %>% 
+  summarize(means = mean(werte, na.rm = T),
+            sd = sd(werte, na.rm = T))
+
+# Korrelation t1
+data_t1 %>% 
+  select(selbst_t1, mleist_t1) %>% 
+  cor(use = "pairwise")
+
+# Korrelation t2
+data_t2 %>% 
+  select(selbst_t2, mleist_t2) %>% 
+  cor(use = "pairwise")
+
+# Korrelation gesamt
+full_join(data_t1, data_t2) %>% 
+  pivot_longer(names_to = "variablen",
+               values_to = "werte",
+               cols = -ID) %>% 
+  mutate(time = substr(variablen, 8, 9),
+         variablen = substr(variablen, 1, 6)) %>% 
+  pivot_wider(values_from = "werte",
+              names_from = "variablen") %>% 
+  select(selbst, mleist) %>% 
+  cor(use = "pairwise")
+
+```
+
+:::
+:::

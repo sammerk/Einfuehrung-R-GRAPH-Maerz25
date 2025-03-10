@@ -1,0 +1,101 @@
+---
+title: Variablenzuweisung
+engine: knitr
+format: live-html
+toc: true
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+## Der Zuweisungsoperator `<-`
+Ein grundlegendes Konzept der Sprache `r fontawesome::fa(name = "r-project", fill = "#18bc9c")` stellen sogenannte Objekte dar. Mit deren Hilfe kann man bestimmte Werte (z.B. `32` oder `TRUE`) unter einem Namen speichern und diese dann später wiederverwenden.
+Dazu verwendet man den Zuweisungsoperator `<-`. Damit kann man beispielsweise das Objekt `mein_objekt1` mit dem Wert 32 generieren:
+
+```{r, echo=TRUE}
+mein_objekt1 <- 32
+mein_objekt2 <- 2
+```
+
+Möchte man das so generierte Objekt wieder ausgeben (»print«), führt man eine Zeile aus, in der nur der Objektname steht.
+
+```{r, echo = T}
+mein_objekt2
+```
+
+
+Beispiele für die Wiederverwendung der Objekte sind:
+
+```{r, echo=TRUE}
+mein_objekt1*2
+mein_objekt1 > 30
+mein_objekt2 == TRUE
+```
+
+
+## Übung 1
+Weisen Sie im folgenden Fenster dem Variablennamen `x` den Wert 4 zu und geben Sie diesen Wert wieder aus. Ersetzen Sie dazu die Leerstellen `______` .
+
+```{webr}
+#| exercise: assign_ex3
+
+x <- ______
+x
+```
+
+
+::: { .hint exercise="assign_ex3"}
+::: { .callout-note collapse="false"}
+## Hinweis:
+
+```r
+`x` ist gleichwertig mit `print(x)`
+```
+:::
+:::
+
+::: { .solution exercise="assign_ex3" }
+::: { .callout-tip collapse="false"}
+## Lösung:
+
+```r
+x <- 4
+x
+```
+
+:::
+:::
+
+## Übung 2
+Speichern Sie im folgenden Fenster $\frac{2}{3}$ unter dem Variablennamen `bruch`. Geben Sie dieses Objekt wieder aus und multiplizieren Sie es mit 3. Ersetzen Sie dazu die Leerstellen `______` . 
+
+```{webr}
+#| exercise: assign_ex2
+
+______ <- 2/3
+______
+______*______
+```
+
+
+::: { .hint exercise="assign_ex2"}
+::: { .callout-note collapse="false"}
+## Hinweis:
+
+```r
+`x` ist gleichwertig mit `print(x)`
+```
+:::
+:::
+
+::: { .solution exercise="assign_ex2" }
+::: { .callout-tip collapse="false"}
+## Lösung:
+
+```r
+bruch <- 2/3
+bruch
+bruch*3
+```
+
+:::
+:::

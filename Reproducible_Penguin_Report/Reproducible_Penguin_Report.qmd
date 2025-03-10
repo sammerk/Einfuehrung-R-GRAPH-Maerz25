@@ -1,0 +1,59 @@
+---
+title: "Reproducible_Penguin_Report"
+author: "Superauthor"
+format: 
+  docx: default
+bibliography: references.bib
+---
+
+Im vorliegenden Report wird beispielhaft demonstriert wie man mit quarto Reproducible Reports via Literate Programming @knuth1984 erzeugen kann.
+
+## Datensatz
+
+Der vorliegende Report berichtet eine Sekundäranalyse auf den Daten von @gorman2014. Dieser enthält Informationen über drei Pinguinarten:
+
+-   Adelie
+-   Chinstrap
+-   Gentoo
+
+![Artwork CC-0 by \@allison_horst](https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png){width="1000"}
+## Deskriptive Flipper Length Analyse
+Von herausragendem Interesse sind Längenmaße der Flipper. Sie betragen je Art:
+
+```{r}
+#| warning: false
+#| message: false
+
+library(dplyr)
+library(readr)
+library(tinytable)
+
+data_peng_field <- read_csv("data/palmerpenguins_fielddata.csv")
+
+data_peng_field %>% 
+  group_by(species) %>% 
+  summarize(mean = mean(flipper_length_mm, na.rm = T)) %>% 
+  tt()
+```
+
+## Prädiktion der Flügellänge
+Fittet man eine Serie von Modellen einfacher linearer Regression zur Vorhersage der Flipper Length
+
+$$FlipperLength_i = b_0 + b_1 \cdot BillDepth_i + ... + b_j \cdot I^{Gentoo}_i + \epsilon_i$$
+erhält man:
+```{r}
+#| warning: false
+
+library(modelsummary)
+mod0 <- lm(flipper_length_mm ~ species, data = data_peng_field)
+mod1 <- lm(flipper_length_mm ~ species + bill_length_mm, data = data_peng_field)
+mod2 <- lm(flipper_length_mm ~ species + bill_length_mm + bill_depth_mm, data = data_peng_field)
+
+modelsummary(
+  list(
+    "mod0" = mod0,
+    "mod1" = mod1,
+    "mod2" = mod2
+  )
+)
+```

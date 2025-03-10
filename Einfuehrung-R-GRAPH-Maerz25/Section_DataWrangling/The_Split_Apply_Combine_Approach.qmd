@@ -1,0 +1,103 @@
+---
+title: Der Split-Apply-Combine Approach
+engine: knitr
+format: live-html
+toc: true
+webr:
+  packages:
+    - dplyr
+    - palmerpenguins
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+Der sogenannte Split-Apply-Combine Approach in eine sehr mächtige Codingstrategie. Er wendet in `summarize()` oder `mutate()` gewrappte Funktionen getrennt auf Untergruppen des Datensatzes an und führt die Ergebnisse anschließend wieder zusammen:
+
+![https://rstudio.github.io/cheatsheets/](../img/split_apply_combine.jpg){width=200px}
+
+
+
+
+## MW und SD der `bill`-Variablen *je Species*
+```{r}
+#| echo: false
+#| results: hide
+#| message: false
+#| warning: false
+library(dplyr)
+library(palmerpenguins)
+```
+
+:::{.callout-tip collapse=false appearance='default' icon=true}
+## Beispielstudie
+Angenommen ein Forscher:innenteam möchte Mittelwert und Standardabweichungen der `bill`-Variablen je Spezies berichten - was wäre eine geeignete Syntax?
+:::
+
+```r
+penguins %>%                                              # <1>
+  group_by(species) %>%                                   # <2>
+  summarize(                                              # <3>
+    bill_length_mean = mean(bill_length_mm, na.rm = T),   
+    bill_depth_mean = mean(bill_depth_mm, na.rm = T),     
+    bill_length_sd = sd(bill_length_mm, na.rm = T) ,      
+    bill_depth_sd = sd(bill_depth_mm, na.rm = T))         
+```
+
+1. Nimm das Objekt/den Datensatz `penguins` und
+2. Splitte ihn Unterdatensätz je nach Ausprägung von `species`
+2. Berechne Zusammenfassungen von Variablen
+
+## Übung 1
+Führen Sie die den obigen Code aus. Diskutieren Sie die Größe der Mittelwertsunterschiede als »bedeutsam« bezeichnen würden.
+
+```{webr}
+#| exercise: sum_ex1
+#| min-lines: 12
+
+
+```
+
+
+::: { .solution exercise="sum_ex1" }
+::: { .callout-tip collapse="false"}
+## Eine Lösung
+`bill_length` unterscheidet sich bspw. zwischen `Adelie` und `Chinstrap` um ca. 10mm. Nimmt man an, dass die `bill_length` normalverteilt ist, entspricht das bei einer $\overline{SD} \approx 3$ einem Cohen's $d \approx 3.3$, also liegen 99.9% der Bills der Gentoo länger als der durchschnittliche Adelie Bill bzw. die beiden Gruppen überlappen nur zu 9,9% [(interaktive Übersicht)](https://rpsychologist.com/cohend).
+:::
+:::
+
+
+
+
+
+## `rowwise` als Extremfall
+Man kann mit der Funktion `rowwise()` den Datensatz in so viele Teildatensätze aufteilen wie er Zeilen hat. Das ist für Sozialwissenschaftler:innen sehr nützlich, um z.B. Skalenwerte zu bilden. Möchte man etwa den Mittelwert von z-standandardisierten bill-Variablen berechnen, kann man in `mutate()` nicht `mean()` verwenden, da dies ja eine summary-Funktion ist und den Mittelwert der ganzen Spalte berechnen würde. Daher verwendet man besser `rowwise()` im Zusammenhang mit `c_across()`:
+
+```{r}
+penguins %>%                                                                 
+  mutate(bill_length_z = (bill_length_mm - mean(bill_length_mm, na.rm = T))/
+           sd(bill_length_mm, na.rm = T),
+         bill_depth_z = (bill_depth_mm - mean(bill_depth_mm, na.rm = T))/
+           sd(bill_depth_mm, na.rm = T)) %>% 
+  rowwise() %>%
+  mutate(bills_z_mean = mean(c_across(c(bill_length_z, bill_depth_z)))) %>% 
+  select(contains("bill"))
+```
+
+
+## Cheat Sheet
+Auch die Funktionalitäten des Split-Apply-Combine Approaches sind gut im Cheat Sheet abgebildet.
+
+:::: {.columns}
+
+::: {.column width='47%'}
+![https://rstudio.github.io/cheatsheets/](../img/dpylr_cs1.jpg){.lightbox}
+:::
+
+::: {.column width='6%'}
+:::
+
+::: {.column width='47%'}
+![](../img/dpylr_cs2.jpg){.lightbox}
+:::
+
+::::

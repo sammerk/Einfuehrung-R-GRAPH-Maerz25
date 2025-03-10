@@ -1,0 +1,112 @@
+---
+title: Funktionen
+engine: knitr
+format: live-html
+toc: true
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+## Custom Funktionen
+Funktionen sind sehr oft gebrauchte Entitäten in `r fontawesome::fa(name = "r-project", fill = "#18bc9c")`, mithilfe derer man sich hauptsächlich sparen kann sich wiederholenden Code zu schreiben. Als praktische:r Anwender:in schreibt in der Regel Funktionen eher selten selbst, nutzt aber sehr häufig Funktionen anderer. Um damit besser klar zu kommen, lohnt es sich anfangs einige wenige Funktionen selbst zu schreiben.
+
+Die klassische Struktur einer Funktion in `r fontawesome::fa(name = "r-project", fill = "#18bc9c")` sieht wie folgt aus:
+```r
+durchschnittsbilder <-      # <1>
+  function(a,b,c) {         # <2>
+   return((a + b + c)/3)    # <3>
+}                                 
+```
+1. Zuweisung des Objektnamens
+2. Befehl für »Erstellung einer Funktion« (`function()`) und Festlegung deren Argumente
+3. Festlegung des Outputs der Funktion
+
+
+
+
+## Übung 1
+Erstellen Sie eine Funktion `durchschnittsbilder()` die das arithmetische Mittel von vier numerischen atomic vectors (»Zahlen«) berechnet.
+
+```{webr}
+#| exercise: fun_ex1
+#| min-lines: 8
+
+
+```
+
+
+::: { .hint exercise="fun_ex1"}
+::: { .callout-note collapse="false"}
+## Hinweis:
+
+Das schaffst du auch ohne Hinweis 💪🏽!
+
+:::
+:::
+
+::: { .solution exercise="fun_ex1" }
+::: { .callout-tip collapse="false"}
+## Lösung:
+
+```r
+durchschnittsbilder <-      
+  function(hund,katze,maus,zahlvier) {         
+   return((hund + katze + maus + zahlvier)/4)    
+} 
+```
+
+:::
+:::
+
+<br>
+Während die `durchschnittsbilder`-Funktion keinen Output ergibt, wenn man nicht alle Argumente spezifiziert, haben die meisten Funktionen, die wir später nutzen werden *defaults* für viele Argumente.
+
+
+## Übung 2
+Die folgende Funktion hat den default `summe` für das Srgument `methode`. Denken Sie über den Code nach und diskutieren Sie welchen Output die Inputs in den Zeilen 9-11 zeigen werden.
+
+
+```{webr}
+#| exercise: log_ex2
+
+rechenfunktion <- 
+    function(a,b, methode = "summe") {
+        ifelse(methode == "summe",a+b,
+               ifelse(methode == "differenz", a - b,
+                      "nobrain"))
+    }
+
+rechenfunktion(3,2)
+rechenfunktion(3,2, methode = "differenz")
+rechenfunktion(3,2, "differenz")
+```
+
+
+## Vektorisierte Funktionen
+Viele vordefinierte Funktionen sind vektorisiert. Das bedeutet, dass sie ihre Funktion mehrfach ausführen, wenn sie keine atomare Struktur sondern einen Vektor übergeben bekommen. Diese Vektorisierung kann elementweise erfolgen,
+
+```{r}
+c(5, 2, 8) > 3
+c(5, 2, 8) > c(4, 3, 9)
+```
+
+oder über alle paarweisen Kombinationen hinweg:
+
+```{r}
+outer(c(5, 2, 8), c(4, 3, 9), `>`)
+```
+
+
+## Modularität via Bibliotheken
+
+`r fontawesome::fa(name = "r-project", fill = "#18bc9c")` gilt als eine der »schnellsten« Statistiksoftwarelösungen - und zwar im doppelten Sinne: Zum einen dauern auch komplexe Modellierungen nur kurze Zeit, zum anderen werden neu entwickelte statistische Verfahren sehr schnell implementiert. Dies geschieht anhand von »Softwareteilstücken« den sogenannten Bibliotheken (»packages«). Entwickelt ein:e Forscher:in ein neues statistisches Verfahren oder programmiert ein fortgeschrittener User benutzerfreudlichere Operatoren/Funktionen, können diese anhand der Bibliotheken bereitgestellt werden.
+
+### Bibliotheken installieren 
+Zentrale Repositorien halten derzeit über 15.000 Bibliotheken bereit, weshalb es nicht empfehlenswert ist alle zu installieren. Nutz man `r fontawesome::fa(name = "r-project", fill = "#18bc9c")` lokal auf einem Rechner und nicht wie hier im Browser installiert man einzelne Bibliotheken mit der Syntax `install.packages("packagename")`. Dieser Befehl sorgt dafür, dass die Bibliothek von einem Repositorium via Internet auf den Rechner geladen wird. 
+
+### Bibliotheken laden
+Die Operatoren/Funktionen der Bibliothek stehen allerdings erst für eine Anwendung zur Verfügung, wenn eine Bibliothek »geladen« wird. Dies erfolgt (lokal und hier im Browser) mithilfe der Syntax `library(packagename)`.
+
+### Funktionen aus ungeladenen Bibliotheken nutzen
+Möchte man nur eine bestimmte Funktion aus einem bestimmten Paket nutzen, verwendet man die Syntax `paketname::funktionsname()`.
+

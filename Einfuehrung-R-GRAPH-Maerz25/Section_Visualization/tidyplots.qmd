@@ -1,0 +1,211 @@
+---
+title: "Das `{tidyplots}`-Paket"
+engine: knitr
+format: live-html
+toc: true
+webr:
+  packages:
+    - dplyr
+    - palmerpenguins
+    - tidyplots
+lang: de
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+<br><br>
+
+> <center>*...make both calculations and graphs.
+Both sorts of output should be studied; each will contribute to understanding.*<br>
+F. J. Anscombe (1973)</center>
+
+<br><br>
+
+## Datenvisualisierung
+Datenvisualisierung stellt auch für Sozialwissenschaftler:innen eine essentielle Methode der Datenanalyse dar. Das menschliche System visueller Perzeption ist derart mächtig [@franconeri2021], dass es bei geeigneten Aufbereitungen selbst Laien leicht möglich ist, komplexere statistische Entitäten wie Effektstärken für Mittelwerte [@schneider2025] vergleichweise unverzerrt zu rezipieren. Zudem sind graphische Darstellungen sehr gut für die Aufdeckung von Artefakten in Daten und für die explorative Analyse geeignet [@grolemund].
+
+## Unterschiede zwischen `{tidyplots}` und `{ggplot2}`
+Im Folgenden wird in Visualisierungen mit den Paketen `{tidyplots}` und `{ggplot2}` eingeführt. Vergleichende Vor- und Nachteile sind in @tbl-vnplotpackages gegeben. Am Ende dieses Abschnitts ist zudem ein Cheatsheet für einen Überblick verlinkt.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| tbl-cap: Vergleich der besprochenen Pakete
+#| label: tbl-vnplotpackages
+library(tidyverse)
+library(tinytable)
+library(palmerpenguins)
+library(tidyplots)
+tibble(
+  Kategorie = c("", "", "", "ggplot2", "", ""),
+  Vorteile = c(
+    "Sehr einfache Syntax, wenig Code nötig",
+    "Automatische gute Designs",
+    "Perfekt für schnelle Explorationsplots",
+    "Extrem flexibel und anpassbar",
+    "Sehr gut für komplexe Visualisierungen",
+    "Interaktivität leicht hinzufügbar"
+  ),
+  Nachteile = c(
+    "Weniger flexibel, begrenzte Anpassungsmöglichkeiten",
+    "Nicht ideal für komplexe oder Publikationsplots",
+    "Kaum Unterstützung für Interaktivität",
+    "Steilere Lernkurve, mehr Code nötig",
+    "Standarddesign oft zu schlicht",
+    "Erfordert manuelle Stilisierung für ansprechende Plots"
+  )
+) %>% 
+  tt() %>% 
+  style_tt(i = c(1,4), j = 1, rowspan = 3,
+  align = "c",  alignv = "m",  bold = TRUE) %>% 
+  style_tt(i = 3, line = "b", line_color = "grey", line_width = 0.1) %>% 
+  plot_tt(i = 1, j = 1, images = "https://jbengler.github.io/tidyplots/logo.svg", height = 4) %>% 
+  plot_tt(i = 4, j = 1, images = "https://ggplot2.tidyverse.org/logo.png", height = 4) 
+
+```
+
+## `{tidyplots}`
+Die grundlegende Konstruktion erfolgt in `{tidyplots}` in den folgenden Schritten:
+
+1) Festlegung des Datensatzes
+2) Zuweisung von Variablen des Datensatzes zu 
+    * x-Achse
+    * y-Achse
+    * Farbe
+3) Hinzufügen von grafischen Elementen (Punkte, Balken, ...)
+4) Aufteilung in Unterplots
+
+### Beispiel 1: `bill_length_mm` per Species
+:::{.callout-tip collapse=false appearance='default' icon=true}
+## Beispielstudie
+Angenommen ein Forscher:innenteam möchte explorieren wie groß die Effekte der Mittelwertunterschiede in `bill_length_mm` sind und ob diese statistisch signifikant sind. Was wäre ein geeigneter Plot?
+:::
+
+```{r}
+#| lightbox: true
+#| 
+penguins %>%                              # <1>
+  tidyplot(x = species,                   # <2>
+           y = bill_length_mm,            # <3>
+           color = species) %>%           # <4>
+  add_data_points_beeswarm() %>%          # <5>
+  add_sd_errorbar(linewidth = .2,         # <6>
+                  width = .21,            # <7>
+                  color = "#111") %>%     # <8> 
+  add_ci95_errorbar(linewidth = .8,       # <9>
+                    width = 0,            # <10>
+                    color = "#111")       # <11>
+```
+
+1. Wähle den Datensatz `penguins`
+2. Lege die Variable `species` auf die x-Achse
+3. Lege die Variable `bill_length_mm` auf die y-Achse
+4. Enkodiere die Variable `species` farblich
+5. Stelle jeden Datenpunkt sortiert nach dem beeswarm-Algorithmus dar
+6. Trage die Standardabweichung als vertikalen Balken der Breite .2,
+7. mit horizontalen Enden der Länge .21
+8. und der Farbe schwarz auf.
+9. Trage ein 95%-Konfidenzinterval als vertikalen Balken der Breite .8,
+10. mit horizontalen Enden der Länge 0
+11. und der Farbe schwarz auf.
+
+### Übung 1: Korrelation `bill_depth_mm` und `bill_depth_mm`
+Plotten Sie die `penguins`-Daten so dass Sie die Korrelation `bill_depth_mm` und `bill_depth_mm` innerhalb der Spezies und speziesübergreifend explorieren können.
+
+```{webr}
+#| exercise: tidyplot_ex1
+#| min-lines: 7
+#| warning: false
+penguins %>% 
+  tidyplot(x = ______,
+           y = ______,
+           color = ______) %>% 
+  ______ %>%
+  ______
+```
+
+
+::: { .hint exercise="tidyplot_ex1"}
+::: { .callout-note collapse="false"}
+## Hinweis:
+Mit `add_curve_fit(method = "lm")` können Regressionsgeraden eingefügt werden.
+
+:::
+:::
+
+::: { .solution exercise="tidyplot_ex1" }
+::: { .callout-tip collapse="false"}
+## Eine Lösung:
+```r
+# Speziesübergreifend
+penguins %>% 
+  tidyplot(x = bill_depth_mm,
+           y = bill_length_mm) %>% 
+  add_data_points() %>%
+  add_curve_fit(method = "lm")
+
+# Für jede Spezies
+penguins %>% 
+  tidyplot(x = bill_depth_mm,
+           y = bill_length_mm,
+           color = species) %>% 
+  add_data_points() %>%
+  add_curve_fit(method = "lm")
+```
+
+
+
+:::
+:::
+
+
+### Übung 2: Verteilungsform der `flipper_length`
+Plotten Sie mithilfe des Cheatsheet die Verteilungsform der `flipper_length` per Spezies in unterschiedlichen Farben als Violinplots und fügen sie das arithmetische Mittel je Species als Punkt hinzu.
+
+```{webr}
+#| exercise: tidyplot_ex2
+#| min-lines: 7
+#| warning: false
+
+```
+
+
+::: { .solution exercise="tidyplot_ex2" }
+::: { .callout-tip collapse="false"}
+## Eine Lösung:
+```r
+penguins %>% 
+  tidyplot(x = species,
+           y = flipper_length_mm,
+           color = species) %>% 
+  add_violin() %>% 
+  add_mean_dot()
+```
+
+
+
+:::
+:::
+
+
+### Cheatsheet `{tidyplots}`
+:::: {.columns}
+
+::: {.column width='47%'}
+![https://tidyplots.org](../img/tidyplots.jpg){.lightbox}
+:::
+
+::: {.column width='6%'}
+:::
+
+::: {.column width='47%'}
+
+:::
+
+::::
+
+
+
+
+

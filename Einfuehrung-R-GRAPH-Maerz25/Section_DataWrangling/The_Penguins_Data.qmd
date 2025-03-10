@@ -1,0 +1,81 @@
+---
+title: The Palmer Penguins Data
+engine: knitr
+format: live-html
+toc: true
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+Der Palmer Penguins Datensatz  [@gorman2014, @horst2020] ist ein beliebtes Datenbeispiel in der `r fontawesome::fa(name = "r-project", fill = "#18bc9c")`-Community und wird oft als Alternative zum berühmten Iris-Datensatz verwendet. Der Datensatz enthält Informationen zu verschiedenen Pinguinarten in der Antarktis und wurde von Allison Horst und Alison Hill berühmt gemacht und illustriert. Der Datensatz ist besonders nützlich, um statistische Methoden zu demonstrieren und Datenvisualisierungen zu erstellen.
+
+
+### Enthaltene Variablen
+
+Der Palmer Penguins Datensatz umfasst folgende Variablen:
+
+| **Variable**           | **Beschreibung**                                                                                      |
+|------------------------|-------------------------------------------------------------------------------------------------------|
+| **species**            | Die Art des Pinguins (z. B. Adelie , Chinstrap, Gentoo).                                                |
+| **island**             | Die Insel, auf der der Pinguin gefunden wurde (z. B. Torgersen, Biscoe, Dream).                       |
+| **bill_length_mm**     | Die Länge des Schnabels des Pinguins in Millimetern.                                                   |
+| **bill_depth_mm**      | Die Tiefe des Schnabels des Pinguins in Millimetern.                                                   |
+| **flipper_length_mm**  | Die Länge der Flossen des Pinguins in Millimetern.                                                    |
+| **body_mass_g**        | Die Körpermasse des Pinguins in Gramm.                                                                 |
+| **sex**                | Das Geschlecht des Pinguins (männlich oder weiblich).   |
+
+
+:::: {.columns}
+
+::: {.column width='53%'}
+![Artwork CC-0 by \@allison_horst](https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png)
+:::
+
+::: {.column width='47%'}
+![](https://allisonhorst.github.io/palmerpenguins/reference/figures/culmen_depth.png){.lightbox}
+:::
+
+::::
+
+
+## Paket
+Die Daten sind im Paket `{palmerpenguins}` hinterlegt und und können mit dem Befehl `penguins` aufgerufen werden.
+
+## Übung 1
+* *Laden* Sie die Bibliothek `{palmerpenguins}` (sie ist bereits vorinstalliert).
+* Lassen Sie sich die Klasse des Objekts `penguins` ausgeben, sowie die
+* Variablennamen,
+* den Kopf des Datensatzes (Variablennamen und die ersten 6 Zeilen) und
+* die Zeilenanzahl.
+
+```{webr}
+#| exercise: peng1_ex1
+#| min-lines: 10
+
+
+
+```
+
+::: { .solution exercise="peng1_ex1" }
+::: { .callout-tip collapse="false"}
+## Lösung:
+
+```r
+# laden der Bibiothek
+library(palmerpenguins) 
+
+# Prüfen der Klasse
+class(penguins)
+
+# Ausgabe des Kopfes
+head(penguins)
+
+# Ausgabe der Variablennamen
+names(penguins)
+
+# Ausgabe der Zeilenanzahl
+nrow(penguins)
+```
+
+:::
+:::

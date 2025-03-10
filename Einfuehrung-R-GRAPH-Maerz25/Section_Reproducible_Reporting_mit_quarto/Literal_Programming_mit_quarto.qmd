@@ -35,4 +35,4 @@ quarto bietet in einer IDE wie RStudio grafische Tools, um:
 ![.qmd-File und gerenderte Ergebnisse](../img/quartoout.png)
 
 ## Übung 1
-Laden Sie [dieses zip-File](../Reproducible_Penguin_Report.zip) herunter, dekomprimieren Sie es und öffnen Sie das .Rproj-File. Nach Installation der notwendigen Pakete können Sie mit dem `Render`-Button den im Abschnitt zuvor dargestellten Report erzeugen.
+Laden Sie [dieses zip-File](../../Reproducible_Penguin_Report.zip) herunter, dekomprimieren Sie es und öffnen Sie das .Rproj-File. Nach Installation der notwendigen Pakete können Sie mit dem `Render`-Button den im Abschnitt zuvor dargestellten Report erzeugen.

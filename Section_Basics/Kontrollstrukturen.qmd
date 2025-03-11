@@ -94,7 +94,7 @@ Da sich die Behörden nicht auskunftsbereit zeigen, startet das Team eine Random
 Diese Abschätzung kann man mit einer `for`-Schleife erzielen. Dazu 
 
 1) nimmt man eine Prävalenz an (z.B. 3%)
-2) simuliert dann das Ziehen (mit zurücklegen) von 1000 Kugeln aus einer Urne in der 97 Kugeln mit 0 beschriftet sind (Versetzung) und 3 Kugeln mit 1 (Sitzenbleiben)
+2) aus einer Urne in der 97 Kugeln mit 0 beschriftet sind (Versetzung) und 3 Kugeln mit 1 (Sitzenbleiben) zieht man 100 mal mit zurücklegen..
 3) berechnet die Summe der Kugeln geteilt durch 1000 (Anteil der Wiederholer:innen)
 4) wiederholt 2 und 3 sehr oft (hier 100 mal - realistischerweise eher $10^5$ mal).
 

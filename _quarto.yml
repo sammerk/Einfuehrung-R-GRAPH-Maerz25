@@ -1,6 +1,8 @@
 project:
   type: website
   output-dir: docs
+  resources: 
+    - "/*.zip"
 
 website:
   title: GRAPH Winterakademie 2025

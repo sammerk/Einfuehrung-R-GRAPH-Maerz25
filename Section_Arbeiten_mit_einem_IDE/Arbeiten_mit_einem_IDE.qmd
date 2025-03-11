@@ -67,4 +67,4 @@ Da RStudio beim Öffnen eines Projekts automatisch das Arbeitsverzeichnis setzt,
 
 
 ## Ein vorhanden RStudio-Projekt öffnen
-RStudio-Projekte erlauben auch sehr gute Portabilität. Lädt man beispielsweise [dieses zip-File](../../Penguin_Analyses_RStudioProject.zip) herunter, dekomprimiert es und öffnet die `.RProj`-Datei, hat man direkt Code, Daten, Environment etc. zur Verfügung und muss nicht zuerst Pfadnamen etc. ändern.
+RStudio-Projekte erlauben auch sehr gute Portabilität. Lädt man beispielsweise [dieses zip-File](../Penguin_Analyses_RStudioProject.zip) herunter, dekomprimiert es und öffnet die `.RProj`-Datei, hat man direkt Code, Daten, Environment etc. zur Verfügung und muss nicht zuerst Pfadnamen etc. ändern.

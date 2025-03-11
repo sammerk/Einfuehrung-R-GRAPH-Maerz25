@@ -63,7 +63,7 @@ Während die `durchschnittsbilder`-Funktion keinen Output ergibt, wenn man nicht
 
 
 ## Übung 2
-Die folgende Funktion hat den default `summe` für das Srgument `methode`. Denken Sie über den Code nach und diskutieren Sie welchen Output die Inputs in den Zeilen 9-11 zeigen werden.
+Die folgende Funktion hat den default `summe` für das Argument `methode`. Denken Sie über den Code nach und diskutieren Sie welchen Output die Inputs in den Zeilen 9-11 zeigen werden.
 
 
 ```{webr}

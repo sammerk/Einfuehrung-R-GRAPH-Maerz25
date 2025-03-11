@@ -41,7 +41,7 @@ Auch der `==`-Operator ist polymorph. Welcher der folgenden Syntaxen wird im Out
 
 
 
-## Übung 1
+## Übung 2
 Nicht alle Funktionen sind polymorph für alle Datenklassen. Prüfen Sie, ob die Polymorphie der `mean()`-Funktion - die das arithmetische Mittel berechnet - für die Klasse `"Date"` definiert ist.
 
 

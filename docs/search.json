@@ -556,11 +556,11 @@
     ]
   },
   {
-    "objectID": "Section_Basics/Polymorphie.html#übung-1-1",
-    "href": "Section_Basics/Polymorphie.html#übung-1-1",
+    "objectID": "Section_Basics/Polymorphie.html#übung-2",
+    "href": "Section_Basics/Polymorphie.html#übung-2",
     "title": "Polymorphie",
-    "section": "Übung 1",
-    "text": "Übung 1\nNicht alle Funktionen sind polymorph für alle Datenklassen. Prüfen Sie, ob die Polymorphie der mean()-Funktion - die das arithmetische Mittel berechnet - für die Klasse \"Date\" definiert ist.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHinweis:\n\n\n\n\n\nMan kann zuerst einen Vektor mit Dates definieren und diesen dann an die mean()-Funktion übergeben.\n\n\n\n\n\n\n\n\n\n\n\nLösung:\n\n\n\n\n\n\ndates1 &lt;- c(as.Date(\"2024-02-27\"), as.Date(\"2024-03-02\")) \nmean(dates1)\n\n[1] \"2024-02-29\"\n\ndates2 &lt;- c(as.Date(\"2025-02-27\"), as.Date(\"2025-03-02\")) \nmean(dates2)\n\n[1] \"2025-02-28\"\n\n\nDie Funktion mean()ist also polymorph für die Klasse \"Date\" definiert und  kennt auch die Schaltjahre.",
+    "section": "Übung 2",
+    "text": "Übung 2\nNicht alle Funktionen sind polymorph für alle Datenklassen. Prüfen Sie, ob die Polymorphie der mean()-Funktion - die das arithmetische Mittel berechnet - für die Klasse \"Date\" definiert ist.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHinweis:\n\n\n\n\n\nMan kann zuerst einen Vektor mit Dates definieren und diesen dann an die mean()-Funktion übergeben.\n\n\n\n\n\n\n\n\n\n\n\nLösung:\n\n\n\n\n\n\ndates1 &lt;- c(as.Date(\"2024-02-27\"), as.Date(\"2024-03-02\")) \nmean(dates1)\n\n[1] \"2024-02-29\"\n\ndates2 &lt;- c(as.Date(\"2025-02-27\"), as.Date(\"2025-03-02\")) \nmean(dates2)\n\n[1] \"2025-02-28\"\n\n\nDie Funktion mean()ist also polymorph für die Klasse \"Date\" definiert und  kennt auch die Schaltjahre.",
     "crumbs": [
       "Basics",
       "Polymorphie"

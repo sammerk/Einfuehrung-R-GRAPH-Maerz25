@@ -1,0 +1,38 @@
+---
+title: Literal Programming (a.k.a. Reproducible Reporting) mit quarto 
+engine: knitr
+format: html
+toc: true
+lang: de
+---
+
+Im vorherigen Kapiteln hat man gesehen, dass `r fontawesome::fa(name = "r-project", fill = "#18bc9c")` ein Kommandozeilenprogramm ist, das in einem Terminal genutzt oder in einer IDE wie RStudio ausgeführt werden kann. Doch oft reicht es nicht aus, nur Code zu schreiben – man will seine Analysen verständlich dokumentieren, reproduzierbar machen und in einer lesbaren Form präsentieren.
+Dazu dient das sogenannte Literate Programming [@knuth1992] ins Spiel. Dabei werden Code und erklärender Text in einem einzigen Dokument kombiniert. Statt reinen Code zu schreiben, dokumentiert man den Gedankenprozess hinter der Analyse, indem Code-Blöcke mit Fließtext, Formeln und Visualisierungen gemischt werden.
+
+Mit [quarto](https://quarto.org), einem modernen Dokumentations- und Publishing-Framework, kann das leicht umgesetzt werden. quarto ermöglicht es, Code, Ergebnisse und erklärenden Text in einem einzigen .qmd-Dokument zu verfassen und in verschiedene Formate zu rendern, z. B.:
+
+* HTML (interaktive Berichte mit Grafiken und Formatierungen)
+* pdf (für formelle wissenschaftliche Berichte mit LaTeX-Unterstützung)
+* Word (für einfache Dokumente, die in Textverarbeitungstools weiterbearbeitet werden können)
+* Präsentationen (z. B. mit Reveal.js oder PowerPoint)
+* Websites (wie diese hier)
+
+quarto bietet in einer IDE wie RStudio grafische Tools, um:
+
+* Text mit Markdown und LaTeX zu formatieren
+* Plots und Tabellen direkt in das Dokument einzubinden
+* Ergebnisse automatisch zu aktualisieren, wenn sich der Code ändert
+* Interaktive Dashboards oder Blogs zu erstellen
+
+## Ein neues Quarto-Dokument erstellen
+* RStudio öffnen
+* Datei → Neues Datei → Quarto Document...
+* Gewünschte Format (z. B. HTML, PDF, Word) wählen (empfehlenswert ist zu Beginn .html)
+* Namen für die Datei eingeben und als mein_report.qmd speichern.
+* Auf das **Render**-Symbol klicken. quarto führt dann den R-Code aus und fügt In- wie Output mit dem gerenderten Markdown zu einem Dokument zusammen 
+
+## Beispielergebnis
+![.qmd-File und gerenderte Ergebnisse](../img/quartoout.png)
+
+## Übung 1
+Laden Sie [dieses zip-File](../Reproducible_Penguin_Report.zip) herunter, dekomprimieren Sie es und öffnen Sie das .Rproj-File. Nach Installation der notwendigen Pakete können Sie mit dem `Render`-Button den im Abschnitt zuvor dargestellten Report erzeugen.

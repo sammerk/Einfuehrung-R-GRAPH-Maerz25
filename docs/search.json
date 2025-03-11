@@ -1,0 +1,859 @@
+[
+  {
+    "objectID": "Section_Visualization/ggplot2.html",
+    "href": "Section_Visualization/ggplot2.html",
+    "title": "Das {ggplot2}-Paket",
+    "section": "",
+    "text": "Das -Paket {ggplot2} basiert auf der Idee des Statistikers Leland Wilkinson (2005), alle Grafiken mittels einer “Grammar of Graphics” systematisch beschreiben zu können indem man Visualisierungen in Schichten (Layers) zerlegt.\nHadley Wickham implementierte diese Idee in  und veröffentlichte {ggplot2} im Jahr (2010).\nEr beschreibt diese Komponenten in seinem Buch ggplot2: Elegant Graphics for Data Analysis (Wickham, 2016) wie folgt:\n{ggplot2} ist das Standard-Visualisierungstool in  und wird weltweit von Data Scientists, Forschenden und Unternehmen genutzt. Wer einmal einen Blick für das Layout gewonnen hat, wird es vielen Büchern, Toppublikationen und Medienberichten wiedererkennen.",
+    "crumbs": [
+      "Data Visualization",
+      "Das `{ggplot2}`-Paket"
+    ]
+  },
+  {
+    "objectID": "Section_Visualization/ggplot2.html#beispiel-1-verteilungen-der-bill_depth_mm-vergleichen",
+    "href": "Section_Visualization/ggplot2.html#beispiel-1-verteilungen-der-bill_depth_mm-vergleichen",
+    "title": "Das {ggplot2}-Paket",
+    "section": "Beispiel 1: Verteilungen der bill_depth_mm vergleichen",
+    "text": "Beispiel 1: Verteilungen der bill_depth_mm vergleichen\n\nMithilfe einer diskreten Achse\n\nViolin- und Boxplot\n\npenguins %&gt;% \n  ggplot(aes(species, bill_depth_mm)) +\n    geom_violin() +\n    geom_boxplot(width = .2) +\n    ggtitle(\"Verteilung der Schnabeltiefe\", \n            \"in den Spezies Adelie, Chinstrap & Gentoo\") +\n    theme_minimal()\n\n\n\n\n\n\n\nAbbildung 1: Violin- und Boxplot in ggplot2\n\n\n\n\n\n\n\nStripplot\n\npenguins %&gt;% \n  ggplot(aes(species, bill_depth_mm)) +\n    geom_jitter() +\n    ggtitle(\"Verteilung der Schnabeltiefe\", \n            \"in den Spezies Adelie, Chinstrap & Gentoo\") +\n    theme_minimal()\n\n\n\n\n\n\n\nAbbildung 2: Stripplot in ggplot2\n\n\n\n\n\n\n\nSinaplot\n\nlibrary(ggforce)\npenguins %&gt;% \n  ggplot(aes(species, bill_depth_mm)) +\n    geom_sina() +\n    ggtitle(\"Verteilung der Schnabeltiefe\", \n            \"in den Spezies Adelie, Chinstrap & Gentoo\") +\n    theme_minimal()\n\n\n\n\n\n\n\nAbbildung 3: Sinaplot in ggplot2\n\n\n\n\n\n\n\n\nMithilfe von Überlappungen\n\nDensity\n\npenguins %&gt;% \n  ggplot(aes(x = flipper_length_mm,\n             color = species,\n             fill = species)) +\n    geom_density(alpha = 0.5) +\n    scale_fill_manual(values = c(\"darkorange\",\"darkorchid\",\"#18bc9c\")) +\n    scale_color_manual(values = c(\"darkorange\",\"darkorchid\",\"#18bc9c\")) +\n    ggtitle(\"Verteilung der Schnabeltiefe\", \n            \"in den Spezies Adelie, Chinstrap & Gentoo\") +\n    theme_minimal()\n\n\n\n\n\n\n\nAbbildung 4: Densityplot in ggplot2\n\n\n\n\n\n\n\nHistogramm\n\npenguins %&gt;% \n  ggplot(aes(x = flipper_length_mm,\n             color = species,\n             fill = species)) +\n    geom_histogram(alpha = 0.5, \n                   position = \"identity\") +\n    scale_fill_manual(values = c(\"darkorange\",\"darkorchid\",\"#18bc9c\")) +\n    scale_color_manual(values = c(\"darkorange\",\"darkorchid\",\"#18bc9c\")) +\n    ggtitle(\"Verteilung der Schnabeltiefe\", \n            \"in den Spezies Adelie, Chinstrap & Gentoo\") +\n    theme_minimal()\n\n\n\n\n\n\n\nAbbildung 5: Histogramm in ggplot2\n\n\n\n\n\n\n\nDotplot\n\npenguins %&gt;% \n  ggplot(aes(x = flipper_length_mm,\n             color = species,\n             fill = species)) +\n    geom_dotplot(alpha = 0.5, \n                 position = \"identity\") +\n    scale_fill_manual(values = c(\"darkorange\",\"darkorchid\",\"#18bc9c\")) +\n    scale_color_manual(values = c(\"darkorange\",\"darkorchid\",\"#18bc9c\")) +\n    ggtitle(\"Verteilung der Schnabeltiefe\", \n            \"in den Spezies Adelie, Chinstrap & Gentoo\") +\n    theme_minimal()\n\n\n\n\n\n\n\nAbbildung 6: Dotplot in ggplot2\n\n\n\n\n\n\n\n\nMilthilfe von Teilplots (facet)\n\nDensity\n\npenguins %&gt;% \n  ggplot(aes(x = flipper_length_mm,\n             color = species,\n             fill = species)) +\n    geom_density(alpha = 0.5) +\n    facet_wrap(~ species, nrow = 1) +\n    scale_fill_manual(values = c(\"darkorange\",\"darkorchid\",\"#18bc9c\")) +\n    scale_color_manual(values = c(\"darkorange\",\"darkorchid\",\"#18bc9c\")) +\n    ggtitle(\"Verteilung der Schnabeltiefe\", \n            \"in den Spezies Adelie, Chinstrap & Gentoo\") +\n    theme_minimal()\n\n\n\n\n\n\n\nAbbildung 7: Densityplot in ggplot2\n\n\n\n\n\n\n\nHistogramm\n\npenguins %&gt;% \n  ggplot(aes(x = flipper_length_mm,\n             color = species,\n             fill = species)) +\n    geom_histogram(alpha = 0.5, \n                   position = \"identity\") +\n    facet_wrap(~ species, nrow = 1) +\n    scale_fill_manual(values = c(\"darkorange\",\"darkorchid\",\"#18bc9c\")) +\n    scale_color_manual(values = c(\"darkorange\",\"darkorchid\",\"#18bc9c\")) +\n    ggtitle(\"Verteilung der Schnabeltiefe\", \n            \"in den Spezies Adelie, Chinstrap & Gentoo\") +\n    theme_minimal()\n\n\n\n\n\n\n\nAbbildung 8: Histogramm in ggplot2",
+    "crumbs": [
+      "Data Visualization",
+      "Das `{ggplot2}`-Paket"
+    ]
+  },
+  {
+    "objectID": "Section_Visualization/ggplot2.html#übung-1-nachbau",
+    "href": "Section_Visualization/ggplot2.html#übung-1-nachbau",
+    "title": "Das {ggplot2}-Paket",
+    "section": "Übung 1: Nachbau",
+    "text": "Übung 1: Nachbau\nBauen Sie einige der obigen Grafiken ohne farbliche Enkodierungen nach. Versuchen Sie dazu zunächst nur das Cheatsheet zu nutzen.",
+    "crumbs": [
+      "Data Visualization",
+      "Das `{ggplot2}`-Paket"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Willkommen 👋!",
+    "section": "",
+    "text": "Willkommen 👋!\nHier finden sich\n\nErklärungen,\ninteraktive Aufgaben,\nDaten und\nCode\n\nfür unseren Kurs Einführung in R auf der GRAPH Winterakademie 2025.\nZu Beginn des Kurses bitte ich alle eine aktuelle Version von  und  Studio zu installieren.\n\n\n\n\n\n\nZweck dieses E-Books \n\n\n\n\n\nDieses E-Book soll kein Lehrbuch für  sein. Vielmehr ein Notizbuch für den Workshop mit einer Sammlung von Erklärungen, Aufgaben, Code, Links, Datensätzen und Literaturverweisen. Diese sollen als Ausgangpunkt für eigene Literatur- und Netzrecherche sowie vielfältiger AI-Chats sein.",
+    "crumbs": [
+      "Willkommen 👋!"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Datentypen_und_klassen.html",
+    "href": "Section_Basics/Datentypen_und_klassen.html",
+    "title": "Datentypen und -klassen",
+    "section": "",
+    "text": "In  unterscheidet man zwischen Datentypen und Datenklassen. Datentypen entscheiden darüber, wie die Daten intern gespeichert werden und Datenklassen darüber, wie die Daten verarbeitet werden.",
+    "crumbs": [
+      "Basics",
+      "Datentypen und -klassen"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Datentypen_und_klassen.html#die-basalen-datentypen",
+    "href": "Section_Basics/Datentypen_und_klassen.html#die-basalen-datentypen",
+    "title": "Datentypen und -klassen",
+    "section": "Die basalen Datentypen",
+    "text": "Die basalen Datentypen\nDa für die angewandte Statistik die technische Prozessierung weniger interessant ist seien die Datentypen hier nur der Vollständigkeit halber gelistet:\n\n\n\nDatentyp\nBeschreibung\nBeispiel\n\n\n\n\nNumeric\nGleitkommazahlen (Dezimalzahlen)\nx &lt;- 3.14\n\n\nInteger\nGanze Zahlen (mit L gekennzeichnet)\nx &lt;- 42L\n\n\nLogical\nWahrheitswerte (Boolean)\nx &lt;-  TRUE\n\n\nCharacter\nZeichenketten (Strings)\nx &lt;- \"Hallo\"\n\n\nComplex\nKomplexe Zahlen\nx &lt;- 2+3 i\n\n\nRaw\nRohdaten (Byte-Daten)\nx &lt;- charToRaw(\"text\")\n\n\n\nMöchte man abfragen, welchen Datentyps ein Objekt ist, kann die Funktion typeof() verwendet werden.",
+    "crumbs": [
+      "Basics",
+      "Datentypen und -klassen"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Datentypen_und_klassen.html#datenklassen-setzen-und-abfragen",
+    "href": "Section_Basics/Datentypen_und_klassen.html#datenklassen-setzen-und-abfragen",
+    "title": "Datentypen und -klassen",
+    "section": "Datenklassen setzen und abfragen",
+    "text": "Datenklassen setzen und abfragen\nGeneriert man ein Objekt mithilfe des &lt;- Zuweisungsoperator, weist  diesem Objekt auch eine Datenklasse zu. Dabei versucht  aufgrund des Objektes eine »naheliegende« Datenklasse zu wählen. Welcher Datentyp von R gewählt wird kann mit dem Befehl class() abgerufen werden, wie folgendes Beispiel zeigt:\n\nobjekt &lt;- 7\nclass(objekt)\n\n[1] \"numeric\"\n\n\nMan kann die Datenklasse aber auch explizit festlegen, indem man Befehle wie\n\nas.numeric()\nas.integer()\nas.factor()\nas.ordered()\nas.character()\nas.Date()\nas.logical()\n\nverwendet.\nMit dem Code object &lt;- as.integer(7) generiert man also ein Objekt, mit dem Wert 7 der Klasse integer.\n\nobject &lt;- as.integer(7)\nclass(object)\n\n[1] \"integer\"",
+    "crumbs": [
+      "Basics",
+      "Datentypen und -klassen"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Datentypen_und_klassen.html#übung-1",
+    "href": "Section_Basics/Datentypen_und_klassen.html#übung-1",
+    "title": "Datentypen und -klassen",
+    "section": "Übung 1",
+    "text": "Übung 1\nPrüfen Sie im folgenden Fenster welche Datenklasse  einem Objekt \"democracy dies in darkness\" zuweist.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHinweis:\n\n\n\n\n\nDie Datenklasse eines Objektes x kann mit class() abgefragt werden\n\n\n\n\n\n\n\n\n\n\n\nLösungen:\n\n\n\n\n\nz.B.\ny &lt;- \"democracy dies in darkness\"\nclass(y)\noder direkt\nclass(\"democracy dies in darkness\")",
+    "crumbs": [
+      "Basics",
+      "Datentypen und -klassen"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Datentypen_und_klassen.html#übung-2",
+    "href": "Section_Basics/Datentypen_und_klassen.html#übung-2",
+    "title": "Datentypen und -klassen",
+    "section": "Übung 2",
+    "text": "Übung 2\nGenerieren Sie im folgenden Fenster ein Objekt namens Datumsobjekt, das die Klasse Date hat und den Wert \"2019-12-25\". Geben Sie dieses Objekt anschließend aus.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHinweis:\n\n\n\n\n\nDie Datenklasse eines Objektes x kann mit class() abgefragt werden\n\n\n\n\n\n\n\n\n\n\n\nLösungen:\n\n\n\n\n\nDatumsobjekt &lt;- as.Date(\"2019-12-25\")\nDatumsobjekt",
+    "crumbs": [
+      "Basics",
+      "Datentypen und -klassen"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Datentypen_und_klassen.html#übung-3",
+    "href": "Section_Basics/Datentypen_und_klassen.html#übung-3",
+    "title": "Datentypen und -klassen",
+    "section": "Übung 3",
+    "text": "Übung 3\nSagen Sie vorher, ob die folgenden Ausdrücke TRUE oder FALSE ergeben und prüfen Sie dies anschließend in folgendem Code-Fenster:\n\nis.character(\"Kaninchen\")\nis.integer(23.3)\nis.factor(ordered(5))",
+    "crumbs": [
+      "Basics",
+      "Datentypen und -klassen"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Logische_Vergleichsoperatoren.html",
+    "href": "Section_Basics/Logische_Vergleichsoperatoren.html",
+    "title": "Logische Vergleichsoperatoren",
+    "section": "",
+    "text": "Für Wahrheitsabfragen hält  einige Vergleichsoperatoren bereit:\n\n\n&lt; für »kleiner als«\n&gt; für »größer als«\n&lt;= für »kleiner als oder gleich wie«\n&gt;= für »größer als oder gleich wie«\n== für »gleich«\n!= für »ungleich«\n%in% für »liegt in der Menge«\n\nAls Ergebnis eines solchen Vergleichs erhält man TRUE oder FALSE, wie folgende Beispiele zeigen:\n\n4 + 2 &lt; 3\n\n[1] FALSE\n\n10 == 4 + 6\n\n[1] TRUE\n\n\nZusätzlich werden oftmals noch die logischen Operatoren\n\n& für »und«\n| für »oder«\n\nbenutzt.",
+    "crumbs": [
+      "Basics",
+      "Logische Vergleichsoperatoren"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Logische_Vergleichsoperatoren.html#syntax-für-arithmetische-operationenfunktionen",
+    "href": "Section_Basics/Logische_Vergleichsoperatoren.html#syntax-für-arithmetische-operationenfunktionen",
+    "title": "Logische Vergleichsoperatoren",
+    "section": "",
+    "text": "Für Wahrheitsabfragen hält  einige Vergleichsoperatoren bereit:\n\n\n&lt; für »kleiner als«\n&gt; für »größer als«\n&lt;= für »kleiner als oder gleich wie«\n&gt;= für »größer als oder gleich wie«\n== für »gleich«\n!= für »ungleich«\n%in% für »liegt in der Menge«\n\nAls Ergebnis eines solchen Vergleichs erhält man TRUE oder FALSE, wie folgende Beispiele zeigen:\n\n4 + 2 &lt; 3\n\n[1] FALSE\n\n10 == 4 + 6\n\n[1] TRUE\n\n\nZusätzlich werden oftmals noch die logischen Operatoren\n\n& für »und«\n| für »oder«\n\nbenutzt.",
+    "crumbs": [
+      "Basics",
+      "Logische Vergleichsoperatoren"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Logische_Vergleichsoperatoren.html#übung-1",
+    "href": "Section_Basics/Logische_Vergleichsoperatoren.html#übung-1",
+    "title": "Logische Vergleichsoperatoren",
+    "section": "Übung 1",
+    "text": "Übung 1\nPrüfen Sie im folgenden Fenster ob \\(2^2 + 3^2\\) gleich \\(5^2\\) ist.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHinweis:\n\n\n\n\n\nDer Funktion für das exponentieren ist ^. Also 25 erhält man z.B. via 5^2.\n\n\n\n\n\n\n\n\n\n\n\nLösung:\n\n\n\n\n\n2^2 + 3^2 == 5^2",
+    "crumbs": [
+      "Basics",
+      "Logische Vergleichsoperatoren"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Logische_Vergleichsoperatoren.html#übung-2",
+    "href": "Section_Basics/Logische_Vergleichsoperatoren.html#übung-2",
+    "title": "Logische Vergleichsoperatoren",
+    "section": "Übung 2",
+    "text": "Übung 2\nSagen Sie vorher, ob die folgenden Ausdrücke TRUE oder FALSE ergeben und prüfen Sie dies anschließend in folgendem Code-Fenster:\n\n2*3 == 6\n4 + 4 = 8\n2 &lt; 1 | 5 &gt; 3\n6 &lt; 7 & 7 &lt; 5",
+    "crumbs": [
+      "Basics",
+      "Logische Vergleichsoperatoren"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Engine_GUI_IDE.html",
+    "href": "Section_Basics/Engine_GUI_IDE.html",
+    "title": "Engine, GUI & IDE",
+    "section": "",
+    "text": "Die Software  ist eine Programmiersprache, die darauf spezialisiert ist statistische Modellierungen vorzunehmen.  führt jedoch nur Computationen aus. Die Steuerung dieser Computationen mithilfe von Syntax (Befehle in Textform) und die Darstellung der Ergebnisse wird von sogenannten Graphical User Interfaces (GUI) oder Integrated Development Environments (IDE) übernommen.\nEinige Autoren (Ismay & Kim, 2020) erklären diesen Unterschied ( vs. GUI/IDE) mit einer Analogie zu dem Verhältnis eines Automotors (= ) zu einem Autocockpit (= GUI/IDE). Die eigentliche Arbeit verrichtet der Motor, er wird jedoch vom Cockpit aus gesteuert und sein »Output« (Drehzahl, Geschwindigkeit, etc.) wird ebenfalls dort angezeigt.\n\n\n\n\n\n\n\nR: Motor\nGUI/IDE: Cockpit\n\n\n\n\n\n\n\n\n\nIm Rahmen dieses Kapitels verwenden wir ein sehr einfaches GUI (siehe folgender Abschnitt), das die Eingabe von Syntax in einem kleinen Textfenster erlaubt, diese Syntax via Klick auf den -Button an R übergibt und dann Output unterhalb des Fensters darstellt.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nReferences\n\nIsmay, C., & Kim, A. Y. (2020). Statistical Inference via Data Science A moderndive into R and the tidyverse. Boca Raton: CRC.",
+    "crumbs": [
+      "Basics",
+      "Engine, GUI & IDE"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Datenstrukturen.html",
+    "href": "Section_Basics/Datenstrukturen.html",
+    "title": "Datenstrukturen",
+    "section": "",
+    "text": "Bei den bisher behandelten Beispielen handelte es sicher immer um so genannte atomare Datenstrukturen. Damit ist gemeint, dass wir - egal welcher Datentyp oder welche Datenklasse - immer nur einen einzigen »Datenpunkt« vorliegen hatten. Da Statistik ja nach Mustern in Daten sucht sind atomare Datenstrukturen in der Regel uninteressant.\nSozialwissenschaftler:innen denken bei Datenstrukturen meistens an eine »Datentabelle«, in der die Zeilen Merkmalsträger:innen darstellen und Spalten Variablen.\nIn  unterscheidet man zunächst homogene von heterogenen Datenstrukturen, welche wiederum vielerlei Untertypen haben können. In homogenen Datenstrukturen haben alle Elemente dieselbe Datenklasse (und damit denselben Datentyp), während diese in heterogenen Datenstrukturen variieren können. Die typische sozialwissenschaftliche »Datentabelle« stellt meistens eine heterogene Datenstruktur dar, da sie typischerweise Variablen verschiedener Skalenniveaus enthält.\nWährend die typische sozialwissenschaftliche »Datentabelle« eine zwei dimensionale Struktur darstellt (Zeilen x Spalten), können Datenstrukturen in R eine oder mehrere Dimensionen besitzen.\nDie Kombination von Homogenität und Dimensionalität stellt eine gute Heuristik für die Definition gängiger Datenstrukturen in  dar:\n\n\n\n\n\n\n\n\n\nDatenstruktur\nHomogenität\nDimensionalität\nBeispiel\n\n\n\n\nVektor\nhomogen\n1\nc(1, 2, 3)\n\n\nMatrix\nhomogen\n2\nmatrix(1:6, nrow = 2, ncol = 3)\n\n\nArray\nhomogen\nn\narray(1:8, dim = c(2,2,2))\n\n\nListe\nheterogen\n1 (aber nestbar)\nlist(1, \"text\", TRUE)\n\n\nData Frame\nheterogen\n2\ndata.frame(Name = c(\"A\", \"B\"), Alter = c(25,30))",
+    "crumbs": [
+      "Basics",
+      "Datenstrukturen"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/Manipulate_Cases.html",
+    "href": "Section_DataWrangling/Manipulate_Cases.html",
+    "title": "Manipulate Cases",
+    "section": "",
+    "text": "In diesem Kapitel soll es um das Auswählen von Fällen (Cases) gehen, oft auch »Filtering« genannt.",
+    "crumbs": [
+      "Data Wrangling",
+      "Manipulate Cases"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/Manipulate_Cases.html#beispiel-1-gentoo-only",
+    "href": "Section_DataWrangling/Manipulate_Cases.html#beispiel-1-gentoo-only",
+    "title": "Manipulate Cases",
+    "section": "Beispiel 1: Gentoo only",
+    "text": "Beispiel 1: Gentoo only\nMöchte man beispielsweise das arithmetische Mittel der Schnabellänge nur der Gentoo berechnen, muss man als erstes nur die Zeilen auswählen, für die species == \"Gentoo TRUE ergibt. Im tidyverse verwendet man dazu die Funktion filter() aus dem Paket {dplyr}.\n\npenguins %&gt;% \n  filter(species == \"Gentoo\")\n\n# A tibble: 124 × 8\n   species island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g\n   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;\n 1 Gentoo  Biscoe           46.1          13.2               211        4500\n 2 Gentoo  Biscoe           50            16.3               230        5700\n 3 Gentoo  Biscoe           48.7          14.1               210        4450\n 4 Gentoo  Biscoe           50            15.2               218        5700\n 5 Gentoo  Biscoe           47.6          14.5               215        5400\n 6 Gentoo  Biscoe           46.5          13.5               210        4550\n 7 Gentoo  Biscoe           45.4          14.6               211        4800\n 8 Gentoo  Biscoe           46.7          15.3               219        5200\n 9 Gentoo  Biscoe           43.3          13.4               209        4400\n10 Gentoo  Biscoe           46.8          15.4               215        5150\n# ℹ 114 more rows\n# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;\n\n# oder gleichwertig\nfilter(penguins, \n       species == \"Gentoo\")\n\n# A tibble: 124 × 8\n   species island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g\n   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;\n 1 Gentoo  Biscoe           46.1          13.2               211        4500\n 2 Gentoo  Biscoe           50            16.3               230        5700\n 3 Gentoo  Biscoe           48.7          14.1               210        4450\n 4 Gentoo  Biscoe           50            15.2               218        5700\n 5 Gentoo  Biscoe           47.6          14.5               215        5400\n 6 Gentoo  Biscoe           46.5          13.5               210        4550\n 7 Gentoo  Biscoe           45.4          14.6               211        4800\n 8 Gentoo  Biscoe           46.7          15.3               219        5200\n 9 Gentoo  Biscoe           43.3          13.4               209        4400\n10 Gentoo  Biscoe           46.8          15.4               215        5150\n# ℹ 114 more rows\n# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;\n\n\nDer Pipe-Operator a %&gt;% b %&gt;% c bedeutet dabei in etwa »nimm a und mache damit b und mache mit dem Ergebnis davon c«.",
+    "crumbs": [
+      "Data Wrangling",
+      "Manipulate Cases"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/Manipulate_Cases.html#übung-1",
+    "href": "Section_DataWrangling/Manipulate_Cases.html#übung-1",
+    "title": "Manipulate Cases",
+    "section": "Übung 1",
+    "text": "Übung 1\nFiltern Sie den penguins Datensatz so, dass er nur weibliche Tiere enthält.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHinweis:\n\n\n\n\n\nDie Variablennamen sind im Absatz zuvor sichtbar.\n\n\n\n\n\n\n\n\n\n\n\nEine Lösung:\n\n\n\n\n\npenguins %&gt;% \n  filter(sex == \"female\")\n\n\n\n\n\n\nAchtung\n\n\n\n\n\nsex == female (ohne Anführungszeichen) würde nicht funktionieren, da R sonst nach dem Objekt female sucht.\n\n\n\n\n\n\n\n Das Paket {dplyr} hat viele hilfreiche vektorisierte Funktionen für die Manipulation von Fällen. Einen guten Überblick liefert das Cheatsheet.\n\n\n\n\n\nhttps://rstudio.github.io/cheatsheets/",
+    "crumbs": [
+      "Data Wrangling",
+      "Manipulate Cases"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/Data_Pivoting.html",
+    "href": "Section_DataWrangling/Data_Pivoting.html",
+    "title": "Data Pivoting",
+    "section": "",
+    "text": "Dieselben Daten derselben Merkmalsträger in denselben Variablen können in unterschiedlichen Datensätzen resultieren:\nDas führt oft dazu, dass Daten in einem anderen Format vorliegen, als sie für ein Wrangling, eine Visualisierung oder eine statistische Modellierung benötigt werden. Dementsprechend ist es hilfreich, das Format ändern zu können. Dies kann sehr komplex werden - im folgenden betrachten wir eher einfache Minimalbeispiele.",
+    "crumbs": [
+      "Data Wrangling",
+      "Data Pivoting"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/Data_Pivoting.html#beispiel-1-bill-variablen",
+    "href": "Section_DataWrangling/Data_Pivoting.html#beispiel-1-bill-variablen",
+    "title": "Data Pivoting",
+    "section": "Beispiel 1: bill-Variablen",
+    "text": "Beispiel 1: bill-Variablen\n\n\n\n\n\n\nBeispielstudie\n\n\n\n\n\nAngenommen ein Forscher:innenteam möchte Mittelwert und Standardabweichungen aller bill Variablen getrennt nach species und sex haben. Was wäre eine geeignete Syntax?\n\n\n\n\n\nLägen die Daten wie in der Tabelle 1 (rechts) vor, könnte man einen Spilt-Apply-Combine-Approach mit group_by(sepcies, sex, billvariable) anwenden.\n\n\n\n\n\n\n\nTabelle 1: Tabelle für Split-Apply-Combine\n\n\n\n\n\nspecies\nsex\nbill_variable\nbill_value\n\n\n\n\nAdelie\nmale\nbill_depth\n18.2\n\n\nChinstrap\nmale\nbill_depth\n17.9\n\n\nChinstrap\nmale\nbill_length\n39.4\n\n\nGentoo\nfemale\nbill_length\n37.6\n\n\n\n\n\n\n\n\n\nEin Format wie in Tabelle 1 erhält man durch folgende Syntax:\n\npenguins %&gt;% \n  select(sex, species, bill_length_mm, bill_depth_mm) %&gt;% \n  pivot_longer(names_to = \"bill_variable\",\n               values_to = \"bill_value\",\n               cols = c(bill_length_mm, bill_depth_mm))\n\n# A tibble: 688 × 4\n   sex    species bill_variable  bill_value\n   &lt;fct&gt;  &lt;fct&gt;   &lt;chr&gt;               &lt;dbl&gt;\n 1 male   Adelie  bill_length_mm       39.1\n 2 male   Adelie  bill_depth_mm        18.7\n 3 female Adelie  bill_length_mm       39.5\n 4 female Adelie  bill_depth_mm        17.4\n 5 female Adelie  bill_length_mm       40.3\n 6 female Adelie  bill_depth_mm        18  \n 7 &lt;NA&gt;   Adelie  bill_length_mm       NA  \n 8 &lt;NA&gt;   Adelie  bill_depth_mm        NA  \n 9 female Adelie  bill_length_mm       36.7\n10 female Adelie  bill_depth_mm        19.3\n# ℹ 678 more rows\n\n\nDie Berechnung der gewünschten MW und SD kann nun folgen:\n\npenguins %&gt;% \n  select(sex, species, bill_length_mm, bill_depth_mm) %&gt;% \n  pivot_longer(names_to = \"bill_variable\",\n               values_to = \"bill_value\",\n               cols = c(bill_length_mm, bill_depth_mm)) %&gt;% \n  group_by(sex, species, bill_variable) %&gt;% \n  summarize(means = mean(bill_value, na.rm = T),\n            sds = sd(bill_value, na.rm = T))\n\n`summarise()` has grouped output by 'sex', 'species'. You can override using\nthe `.groups` argument.\n\n\n# A tibble: 16 × 5\n# Groups:   sex, species [8]\n   sex    species   bill_variable  means   sds\n   &lt;fct&gt;  &lt;fct&gt;     &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;\n 1 female Adelie    bill_depth_mm   17.6 0.943\n 2 female Adelie    bill_length_mm  37.3 2.03 \n 3 female Chinstrap bill_depth_mm   17.6 0.781\n 4 female Chinstrap bill_length_mm  46.6 3.11 \n 5 female Gentoo    bill_depth_mm   14.2 0.540\n 6 female Gentoo    bill_length_mm  45.6 2.05 \n 7 male   Adelie    bill_depth_mm   19.1 1.02 \n 8 male   Adelie    bill_length_mm  40.4 2.28 \n 9 male   Chinstrap bill_depth_mm   19.3 0.761\n10 male   Chinstrap bill_length_mm  51.1 1.56 \n11 male   Gentoo    bill_depth_mm   15.7 0.741\n12 male   Gentoo    bill_length_mm  49.5 2.72 \n13 &lt;NA&gt;   Adelie    bill_depth_mm   18.3 1.27 \n14 &lt;NA&gt;   Adelie    bill_length_mm  37.8 2.80 \n15 &lt;NA&gt;   Gentoo    bill_depth_mm   14.6 0.810\n16 &lt;NA&gt;   Gentoo    bill_length_mm  45.6 1.37",
+    "crumbs": [
+      "Data Wrangling",
+      "Data Pivoting"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/Data_Pivoting.html#übung-1-längsschnittliche-daten",
+    "href": "Section_DataWrangling/Data_Pivoting.html#übung-1-längsschnittliche-daten",
+    "title": "Data Pivoting",
+    "section": "Übung 1: Längsschnittliche Daten",
+    "text": "Übung 1: Längsschnittliche Daten\n\n\n\n\n\n\nBeispielstudie\n\n\n\n\n\nAngenommen ein Forscher:innenteam erhebt zu zwei Zeitpunkten das Mathamatikselbstkonzept sowie die Mathematikleistung in den folgenden beiden Datensätzen.\n\n\n\n\n\n\nTabelle 2: Datensatz data_mathe_t1\n\n\n\n\n\n    \n\n    \n    \n      \n        \n        \n              \n                ID\n                selbst_t1\n                mleist_t1\n              \n        \n        \n        \n                \n                  A\n                  5.3\n                  532\n                \n                \n                  B\n                  6.1\n                  610\n                \n                \n                  C\n                  4.8\n                  480\n                \n        \n      \n    \n\n\n\n\n\n\n\n\n\n\n\nTabelle 3: Datensatz data_mathe_t2\n\n\n\n\n\n    \n\n    \n    \n      \n        \n        \n              \n                ID\n                selbst_t2\n                mleist_t2\n              \n        \n        \n        \n                \n                  A\n                  5.0\n                  562\n                \n                \n                  B\n                  5.7\n                  652\n                \n                \n                  C\n                  4.2\n                  489\n                \n        \n      \n    \n\n\n\n\n\n\n\n\nEs möchte nun MW SD je Variable und je Zeitpunkt sowie die Korrelation von Selbstkonzept und Leistung sowohl je Zeitpunkt als auch über beide Zeitpunkte hinweg berechnen.\n\n\n\nIn folgendem Codefenster sind die beiden Datensätze data_mathe_t1 und data_mathe_t2 als ebenso benannte Objekte hinterlegt. Führen Sie einen geeigneten Join durch und berechnen Sie die oben genannten MW, SD und Korrelationen.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHinweis:\n\n\n\n\n\n\nFür die Berechnung der MW und SD kann man schlicht alle Variablen außer ID in pivot_longer() an das Argument cols = übergeben und dann einen Split-Apply-Combine Ansatz fahren.\nFür die Berechnung einer Korrelation macht es im {tidyverse} Sinn, der Base-R-Funktion cor() einen slektierten Datensatz via Pipeoperator %&gt;% zu übergeben.\nDer cor() Funktion kann mit dem Argument use = pairwise signalisiert werden, dass es paarweise vollständige Beobachtungen in die Berechnung miteinbeziehen soll (fallweiser Ausschluss von fehlenden Werten).\n\n\n\n\n\n\n\n\n\n\n\n\nEine Lösung\n\n\n\n\n\n\n# MW und SD\nfull_join(data_t1, data_t2) %&gt;% \n  pivot_longer(names_to = \"variablen\",\n               values_to = \"werte\",\n               cols = -ID) %&gt;% \n  group_by(variablen) %&gt;% \n  summarize(means = mean(werte, na.rm = T),\n            sd = sd(werte, na.rm = T))\n\nJoining with `by = join_by(ID)`\n\n\n# A tibble: 4 × 3\n  variablen  means     sd\n  &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;\n1 mleist_t1 541.   65.4  \n2 mleist_t2 568.   81.6  \n3 selbst_t1   5.4   0.656\n4 selbst_t2   4.97  0.751\n\n# Korrelation t1\ndata_t1 %&gt;% \n  select(selbst_t1, mleist_t1) %&gt;% \n  cor(use = \"pairwise\")\n\n          selbst_t1 mleist_t1\nselbst_t1  1.000000  0.999847\nmleist_t1  0.999847  1.000000\n\n# Korrelation t2\ndata_t2 %&gt;% \n  select(selbst_t2, mleist_t2) %&gt;% \n  cor(use = \"pairwise\")\n\n          selbst_t2 mleist_t2\nselbst_t2 1.0000000 0.9951417\nmleist_t2 0.9951417 1.0000000\n\n# Korrelation gesamt\nfull_join(data_t1, data_t2) %&gt;% \n  pivot_longer(names_to = \"variablen\",\n               values_to = \"werte\",\n               cols = -ID) %&gt;% \n  mutate(time = substr(variablen, 8, 9),\n         variablen = substr(variablen, 1, 6)) %&gt;% \n  pivot_wider(values_from = \"werte\",\n              names_from = \"variablen\") %&gt;% \n  select(selbst, mleist) %&gt;% \n  cor(use = \"pairwise\")\n\nJoining with `by = join_by(ID)`\n\n\n         selbst   mleist\nselbst 1.000000 0.832984\nmleist 0.832984 1.000000",
+    "crumbs": [
+      "Data Wrangling",
+      "Data Pivoting"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/The_Split_Apply_Combine_Approach.html",
+    "href": "Section_DataWrangling/The_Split_Apply_Combine_Approach.html",
+    "title": "Der Split-Apply-Combine Approach",
+    "section": "",
+    "text": "Der sogenannte Split-Apply-Combine Approach in eine sehr mächtige Codingstrategie. Er wendet in summarize() oder mutate() gewrappte Funktionen getrennt auf Untergruppen des Datensatzes an und führt die Ergebnisse anschließend wieder zusammen:",
+    "crumbs": [
+      "Data Wrangling",
+      "Der Split-Apply-Combine Approach"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/The_Split_Apply_Combine_Approach.html#mw-und-sd-der-bill-variablen-je-species",
+    "href": "Section_DataWrangling/The_Split_Apply_Combine_Approach.html#mw-und-sd-der-bill-variablen-je-species",
+    "title": "Der Split-Apply-Combine Approach",
+    "section": "MW und SD der bill-Variablen je Species",
+    "text": "MW und SD der bill-Variablen je Species\n\n\n\n\n\n\nBeispielstudie\n\n\n\n\n\nAngenommen ein Forscher:innenteam möchte Mittelwert und Standardabweichungen der bill-Variablen je Spezies berichten - was wäre eine geeignete Syntax?\n\n\n\n1penguins %&gt;%\n2  group_by(species) %&gt;%\n3  summarize(\n    bill_length_mean = mean(bill_length_mm, na.rm = T),   \n    bill_depth_mean = mean(bill_depth_mm, na.rm = T),     \n    bill_length_sd = sd(bill_length_mm, na.rm = T) ,      \n    bill_depth_sd = sd(bill_depth_mm, na.rm = T))         \n\n1\n\nNimm das Objekt/den Datensatz penguins und\n\n2\n\nSplitte ihn Unterdatensätz je nach Ausprägung von species\n\n3\n\nBerechne Zusammenfassungen von Variablen",
+    "crumbs": [
+      "Data Wrangling",
+      "Der Split-Apply-Combine Approach"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/The_Split_Apply_Combine_Approach.html#übung-1",
+    "href": "Section_DataWrangling/The_Split_Apply_Combine_Approach.html#übung-1",
+    "title": "Der Split-Apply-Combine Approach",
+    "section": "Übung 1",
+    "text": "Übung 1\nFühren Sie die den obigen Code aus. Diskutieren Sie die Größe der Mittelwertsunterschiede als »bedeutsam« bezeichnen würden.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEine Lösung\n\n\n\n\n\nbill_length unterscheidet sich bspw. zwischen Adelie und Chinstrap um ca. 10mm. Nimmt man an, dass die bill_length normalverteilt ist, entspricht das bei einer \\(\\overline{SD} \\approx 3\\) einem Cohen’s \\(d \\approx 3.3\\), also liegen 99.9% der Bills der Gentoo länger als der durchschnittliche Adelie Bill bzw. die beiden Gruppen überlappen nur zu 9,9% (interaktive Übersicht).",
+    "crumbs": [
+      "Data Wrangling",
+      "Der Split-Apply-Combine Approach"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/The_Split_Apply_Combine_Approach.html#rowwise-als-extremfall",
+    "href": "Section_DataWrangling/The_Split_Apply_Combine_Approach.html#rowwise-als-extremfall",
+    "title": "Der Split-Apply-Combine Approach",
+    "section": "rowwise als Extremfall",
+    "text": "rowwise als Extremfall\nMan kann mit der Funktion rowwise() den Datensatz in so viele Teildatensätze aufteilen wie er Zeilen hat. Das ist für Sozialwissenschaftler:innen sehr nützlich, um z.B. Skalenwerte zu bilden. Möchte man etwa den Mittelwert von z-standandardisierten bill-Variablen berechnen, kann man in mutate() nicht mean() verwenden, da dies ja eine summary-Funktion ist und den Mittelwert der ganzen Spalte berechnen würde. Daher verwendet man besser rowwise() im Zusammenhang mit c_across():\n\npenguins %&gt;%                                                                 \n  mutate(bill_length_z = (bill_length_mm - mean(bill_length_mm, na.rm = T))/\n           sd(bill_length_mm, na.rm = T),\n         bill_depth_z = (bill_depth_mm - mean(bill_depth_mm, na.rm = T))/\n           sd(bill_depth_mm, na.rm = T)) %&gt;% \n  rowwise() %&gt;%\n  mutate(bills_z_mean = mean(c_across(c(bill_length_z, bill_depth_z)))) %&gt;% \n  select(contains(\"bill\"))\n\n# A tibble: 344 × 5\n# Rowwise: \n   bill_length_mm bill_depth_mm bill_length_z bill_depth_z bills_z_mean\n            &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;\n 1           39.1          18.7        -0.883        0.784      -0.0495\n 2           39.5          17.4        -0.810        0.126      -0.342 \n 3           40.3          18          -0.663        0.430      -0.117 \n 4           NA            NA          NA           NA          NA     \n 5           36.7          19.3        -1.32         1.09       -0.117 \n 6           39.3          20.6        -0.847        1.75        0.450 \n 7           38.9          17.8        -0.920        0.329      -0.296 \n 8           39.2          19.6        -0.865        1.24        0.188 \n 9           34.1          18.1        -1.80         0.480      -0.659 \n10           42            20.2        -0.352        1.54        0.596 \n# ℹ 334 more rows",
+    "crumbs": [
+      "Data Wrangling",
+      "Der Split-Apply-Combine Approach"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/The_Split_Apply_Combine_Approach.html#cheat-sheet",
+    "href": "Section_DataWrangling/The_Split_Apply_Combine_Approach.html#cheat-sheet",
+    "title": "Der Split-Apply-Combine Approach",
+    "section": "Cheat Sheet",
+    "text": "Cheat Sheet\nAuch die Funktionalitäten des Split-Apply-Combine Approaches sind gut im Cheat Sheet abgebildet.\n\n\n\n\n\nhttps://rstudio.github.io/cheatsheets/",
+    "crumbs": [
+      "Data Wrangling",
+      "Der Split-Apply-Combine Approach"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/Summarize_Variables.html",
+    "href": "Section_DataWrangling/Summarize_Variables.html",
+    "title": "Summarize Variables",
+    "section": "",
+    "text": "Am Anfang einer sozialwissenschaftlichen Datenanalyse stehen oft deskriptive Statistiken zur Beschreibung von Variablen. Im Gegensatz zu den zuvor (z.B. bei der z-Standardisierung) verwendeten vektorisierten Funktionen kommen dabei »summary functions« zum Zuge:\nDiese Funktionen werden oft innerhalb der Funktion summary() ausgeführt, welche eine sehr ähnliche Syntax wie mutate() aufweist (siehe Cheatsheet unten).",
+    "crumbs": [
+      "Data Wrangling",
+      "Summarize Variables"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/Summarize_Variables.html#mittelwert-und-standardabweichungen-der-bill-variablen",
+    "href": "Section_DataWrangling/Summarize_Variables.html#mittelwert-und-standardabweichungen-der-bill-variablen",
+    "title": "Summarize Variables",
+    "section": "Mittelwert und Standardabweichungen der bill-Variablen",
+    "text": "Mittelwert und Standardabweichungen der bill-Variablen\n\n\n\n\n\n\nBeispielstudie\n\n\n\n\n\nAngenommen ein Forscher:innenteam möchte Mittelwert und Standardabweichungen der bill-Variablen berichten - was wäre eine geignete Syntax?\n\n\n\n1penguins %&gt;%\n2  summarize(\n3    bill_length_mean = mean(bill_length_mm, na.rm = T),\n4    bill_depth_mean = mean(bill_depth_mm, na.rm = T),\n5    bill_length_sd = sd(bill_length_mm, na.rm = T) ,\n6    bill_depth_sd = sd(bill_depth_mm, na.rm = T))\n\n1\n\nNimm das Objekt/den Datensatz penguins und\n\n2\n\nberechne folgende Zusammenfassungen von Variablen:\n\n3\n\nDas arithmtische Mittel der Variable bill_length_mm.\n\n4\n\nDas arithmtische Mittel der Variable bill_depth_mm.\n\n5\n\nDie Standardabweichung der Variable bill_length_mm.\n\n6\n\nDie Standardabweichung der Variable bill_depth_mm.",
+    "crumbs": [
+      "Data Wrangling",
+      "Summarize Variables"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/Summarize_Variables.html#übung-1",
+    "href": "Section_DataWrangling/Summarize_Variables.html#übung-1",
+    "title": "Summarize Variables",
+    "section": "Übung 1",
+    "text": "Übung 1\nFühren Sie die den obigen Code aus. Ergänzen Sie dann um Median, Minimum und Maximum.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHinweise:\n\n\n\n\n\nSowohl in median() als auch in min() und max() ignoriert man fehlende Werte NA mit dem Funktionsargument na.rm = TRUE.\n\n\n\n\n\n\n\n\n\n\n\nEine Lösung\n\n\n\n\n\npenguins %&gt;%                                              \n  summarize(                                              \n    bill_length_mean = mean(bill_length_mm, na.rm = T),   \n    bill_depth_mean = mean(bill_depth_mm, na.rm = T),     \n    bill_length_sd = sd(bill_length_mm, na.rm = T) ,      \n    bill_depth_median = median(bill_depth_mm, na.rm = T),\n    bill_depth_max = max(bill_depth_mm, na.rm = T),\n    bill_depth_min = min(bill_depth_mm, na.rm = T))",
+    "crumbs": [
+      "Data Wrangling",
+      "Summarize Variables"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/Summarize_Variables.html#cheat-sheet",
+    "href": "Section_DataWrangling/Summarize_Variables.html#cheat-sheet",
+    "title": "Summarize Variables",
+    "section": "Cheat Sheet",
+    "text": "Cheat Sheet\n\n\n\n\n\nhttps://rstudio.github.io/cheatsheets/",
+    "crumbs": [
+      "Data Wrangling",
+      "Summarize Variables"
+    ]
+  },
+  {
+    "objectID": "Section_Arbeiten_mit_einem_IDE/Arbeiten_mit_einem_IDE.html",
+    "href": "Section_Arbeiten_mit_einem_IDE/Arbeiten_mit_einem_IDE.html",
+    "title": "Arbeiten mit RStudio als IDE",
+    "section": "",
+    "text": "Im ersten Kapitel wurde betont, dass  ein Kommandozeilenprogramm ist. Es kann daher in Terminal genutzt werden oder so kompiliert, dass es sogar im Browser ausgeführt werden kann (was wir bisher getan haben). Für die meisten Nutzer:innen ist es jedoch bequemer  innerhalb eines Integrated Developing Environment (IDE) wie RStudio, Positron oder VisualStudio lokal als Desktopapplikation zu nutzen. Denn dort hat man grafische Tools um etwa\nDie folgende Abbildung zeigt eine Standardkonfiguration von RStudio mit einer Hervorhebung der wichtigsten Funktionalitäten.",
+    "crumbs": [
+      "Arbeiten in RStudio",
+      "Arbeiten mit RStudio als IDE"
+    ]
+  },
+  {
+    "objectID": "Section_Arbeiten_mit_einem_IDE/Arbeiten_mit_einem_IDE.html#rstudio-projekte",
+    "href": "Section_Arbeiten_mit_einem_IDE/Arbeiten_mit_einem_IDE.html#rstudio-projekte",
+    "title": "Arbeiten mit RStudio als IDE",
+    "section": "RStudio-Projekte",
+    "text": "RStudio-Projekte\nSehr hilfreich ist auch die Verwendung von RStudio-Projekten. RStudio-Projekte sind eine Funktion in RStudio (nicht ), die helfen, Arbeit effizient zu organisieren und zu verwalten. Ein RStudio-Projekt erstellt eine in sich geschlossene Arbeitsumgebung, in der alle Dateien, Skripte, Datensätze, Ergebnisse etc. eines spezifischen Analyse- oder Forschungsprojekts gespeichert werden.\nErstellt man ein RStudio-Projekt, sorgt RStudio dafür, dass:\n\ndas Arbeitsverzeichnis (also der »Speicherort« an dem alle Objekte abgelegt werden) im Projektordner gesetzt wird,\n\nSkriptverlauf und Arbeitsumgebung automatisch gespeichert werden,\n\nman einfach zwischen verschiedenen Projekten wechseln kann, ohne Objekte zu verlieren,\n\n für die Versionskontrolle einfach integriert werden kann.\n\n\n1. Ein neues RStudio-Projekt erstellen\n\nRStudio öffen\nDatei → Neues Projekt.\n\nEine der folgenden Optionen wählen:\n\nNeues Verzeichnis: Erstellt einen neuen Ordner für dein Projekt.\n\nBestehendes Verzeichnis: Wandelt einen bereits existierenden Ordner in ein RStudio-Projekt um.\n\nVersionskontrolle (Git): Klont ein -Repository und richtet es als Projekt ein.\n\n\n»Projekt erstellen« klicken, um den Vorgang abzuschließen.\n\n\n\n2. Projektordner sinnvoll strukturieren\nInnerhalb deines Projektordners sollten Dateien systematisch organisiert sein, um eine saubere und reproduzierbare Arbeitsweise zu gewährleisten. Eine gute Struktur könnte wie folgt aussehen:\n/Mein_Projekt/ \n   │── data/                # Rohe und verarbeitete Daten \n   │── scripts/             # R-Skripte für Analysen \n   │── figures/             # Diagramme und Visualisierungen \n   │── reports/             # Markdown- oder LaTeX-Berichte \n   │── output/              # Finale Ergebnisse, Tabellen etc. \n   │── Mein_Projekt.Rproj   # Die RStudio-Projektdatei\n\n\n3. Projekte nutzen, um Pfadprobleme zu vermeiden\nDa RStudio beim Öffnen eines Projekts automatisch das Arbeitsverzeichnis setzt, können absolute Dateipfade (z.B. read.csv(\"C:/Users/DeinName/Desktop/MeineDaten.csv\")) vermeiden und stattdessen relative Pfade (z.B. read.csv(\"data/MeineDaten.csv\")) verwendet werden.",
+    "crumbs": [
+      "Arbeiten in RStudio",
+      "Arbeiten mit RStudio als IDE"
+    ]
+  },
+  {
+    "objectID": "Section_Arbeiten_mit_einem_IDE/Arbeiten_mit_einem_IDE.html#ein-vorhanden-rstudio-projekt-öffnen",
+    "href": "Section_Arbeiten_mit_einem_IDE/Arbeiten_mit_einem_IDE.html#ein-vorhanden-rstudio-projekt-öffnen",
+    "title": "Arbeiten mit RStudio als IDE",
+    "section": "Ein vorhanden RStudio-Projekt öffnen",
+    "text": "Ein vorhanden RStudio-Projekt öffnen\nRStudio-Projekte erlauben auch sehr gute Portabilität. Lädt man beispielsweise dieses zip-File herunter, dekomprimiert es und öffnet die .RProj-Datei, hat man direkt Code, Daten, Environment etc. zur Verfügung und muss nicht zuerst Pfadnamen etc. ändern.",
+    "crumbs": [
+      "Arbeiten in RStudio",
+      "Arbeiten mit RStudio als IDE"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/Manipulate_Variables.html",
+    "href": "Section_DataWrangling/Manipulate_Variables.html",
+    "title": "Manipulate Variables",
+    "section": "",
+    "text": "Variablen (also Spalten) werden von Sozialwissenschaftler:innen oft\nIn {dplyr} sind die korrespondierenden Funktionen mutate(), select() und relocate().",
+    "crumbs": [
+      "Data Wrangling",
+      "Manipulate Variables"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/Manipulate_Variables.html#beispiel-si-einheiten",
+    "href": "Section_DataWrangling/Manipulate_Variables.html#beispiel-si-einheiten",
+    "title": "Manipulate Variables",
+    "section": "Beispiel (SI-Einheiten)",
+    "text": "Beispiel (SI-Einheiten)\n\n\n\n\n\n\nBeispielstudie\n\n\n\n\n\nAngenommen ein Forscher:innenteam möchte den penguins-Datensatz in SI-Einheiten rekodieren (also m und kg statt mm und g) - was wäre eine geignete Syntax?\n\n\n\n1penguins %&gt;%\n2  mutate(\n3    bill_length_m = bill_length_mm/1000 ,\n    bill_depth_m = bill_depth_mm/1000,\n    flipper_length_m = flipper_length_mm/1000,\n    body_mass_kg = body_mass_g/1000) %&gt;%\n4  select(species, island, sex, year,\n         bill_length_m, bill_depth_m, \n         flipper_length_m, body_mass_kg) %&gt;% \n5  relocate(body_mass_kg)\n\n1\n\nNimm das Objekt/den Datensatz penguins und\n\n2\n\nberechne neue Variablen und zwar:\n\n3\n\ndie neue Variable namens bill_length_m, die sich aus der bestehenden Variable bill_length_mm geteilt durch 1000 ergibt…\n\n4\n\nWähle davon nun die Variablen species, island, sex, …\n\n5\n\nBringe die Variable body_mass_kg ganz nach vorne.",
+    "crumbs": [
+      "Data Wrangling",
+      "Manipulate Variables"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/Manipulate_Variables.html#übung-1",
+    "href": "Section_DataWrangling/Manipulate_Variables.html#übung-1",
+    "title": "Manipulate Variables",
+    "section": "Übung 1",
+    "text": "Übung 1\nFühren die den obigen Code Schritt für Schritt aus also zunächst nur 1, dann 1-3, dann 1-4, dann 1-5.",
+    "crumbs": [
+      "Data Wrangling",
+      "Manipulate Variables"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/Manipulate_Variables.html#übung-2",
+    "href": "Section_DataWrangling/Manipulate_Variables.html#übung-2",
+    "title": "Manipulate Variables",
+    "section": "Übung 2",
+    "text": "Übung 2\nBilden Sie eine bill_index-Variable aus der Summe der z-standardisierten bill length und depth. Selektieren Sie anschließend nur die den Schnabel betreffenden Variablen.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHinweise:\n\n\n\n\n\n\nsd() berechnet die Standardabweichung\nSowohl in mean() als auch in sd() ignoriert man fehlende Werte NA mit dem Funktionsargument na.rm = TRUE\nMan könnte sich zunächst eine Funktion definieren, welche die z-Standardisierung übernimmt\n\n\n\n\n\n\n\n\n\n\n\n\nEine Lösung\n\n\n\n\n\n\npenguins %&gt;% \n  mutate(bill_length_z = (bill_length_mm - mean(bill_length_mm, na.rm = T))/\n           sd(bill_length_mm, na.rm = T),\n         bill_depth_z = (bill_depth_mm - mean(bill_depth_mm, na.rm = T))/\n           sd(bill_depth_mm, na.rm = T),\n         bill_index = bill_length_z + bill_depth_z) %&gt;% \n  select(contains(\"bill\"))\n\n# A tibble: 344 × 5\n   bill_length_mm bill_depth_mm bill_length_z bill_depth_z bill_index\n            &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;\n 1           39.1          18.7        -0.883        0.784    -0.0989\n 2           39.5          17.4        -0.810        0.126    -0.684 \n 3           40.3          18          -0.663        0.430    -0.234 \n 4           NA            NA          NA           NA        NA     \n 5           36.7          19.3        -1.32         1.09     -0.235 \n 6           39.3          20.6        -0.847        1.75      0.900 \n 7           38.9          17.8        -0.920        0.329    -0.591 \n 8           39.2          19.6        -0.865        1.24      0.375 \n 9           34.1          18.1        -1.80         0.480    -1.32  \n10           42            20.2        -0.352        1.54      1.19  \n# ℹ 334 more rows\n\n\n\n\n\n\nWeitere hilfreiche Funktionen für die Manipulation von Variablen können dem dplyr-Cheatsheet entnommen werden:\n\n\n\n\n\nhttps://rstudio.github.io/cheatsheets/",
+    "crumbs": [
+      "Data Wrangling",
+      "Manipulate Variables"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/Das_Tidyverse.html",
+    "href": "Section_DataWrangling/Das_Tidyverse.html",
+    "title": "Das Tidyverse",
+    "section": "",
+    "text": "Das sog. tidyverse (Grolemund, 2025) ist eine Suite von -Paketen die besonders gut auf einander abgestimmt und nach bestimmten Prinzipien programmiert sind. Diese Pakete sind sehr populär und ersetzen in vielen Universitäten mittlerweile viele Funktionen die auch in Base- verfügbar sind. Die populärsten dieser Pakete sind:\n\n\n\nLogo\nPaket\nFunktion\n\n\n\n\n\nggplot2\nErstellen von Grafiken und Datenvisualisierungen\n\n\n\ndplyr\nDatenmanipulation (Filtern, Gruppieren, Aggregieren)\n\n\n\ntidyr\nUmstrukturierung und Bereinigung von Daten (z. B. pivot_longer(), pivot_wider())\n\n\n\nreadr\nEinlesen von CSV- und Textdateien effizient\n\n\n\ntibble\nAlternative zu data.frame, optimiert für Tidyverse\n\n\n\npurrr\nFunktionale Programmierung, Map-Funktionen (map(), map_df())\n\n\n\nstringr\nArbeiten mit Zeichenketten (z. B. str_detect(), str_replace())\n\n\n\nforcats\nHandhabung von Faktoren (z. B. fct_reorder(), fct_lump())\n\n\n\nlubridate\nErleichtert die Arbeit mit Datum/Zeit-Daten (ymd(), floor_date())\n\n\n\nWir werden primär mit {ggplot2}, {dplyr}, {tidyr}, {readr} arbeiten.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nReferences\n\nGrolemund, H. W. and G. (2025). Welcome  R for Data Science.",
+    "crumbs": [
+      "Data Wrangling",
+      "Das Tidyverse"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/Data_Joining.html",
+    "href": "Section_DataWrangling/Data_Joining.html",
+    "title": "Data Joining",
+    "section": "",
+    "text": "Oftmals liegen Rohdaten in unterschiedlichen files vor. Diese kommen etwa aus verschiedenen Erhebungswellen oder verschiedenen Erhebungsmethoden (z.B. Survey & Logdata). Meistens liegen dabei nicht alle Merkmalsträger in allen Teildatensätzen vor (z.B. aufgrund von Panelmortalität).\nIn {dplyr} sind die join-Funktionen für das Zusammenführen von Datensätzen geeignet:",
+    "crumbs": [
+      "Data Wrangling",
+      "Data Joining"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/Data_Joining.html#beispiel-1-full_join",
+    "href": "Section_DataWrangling/Data_Joining.html#beispiel-1-full_join",
+    "title": "Data Joining",
+    "section": "Beispiel 1 (full_join())",
+    "text": "Beispiel 1 (full_join())\nAls erstes wollen wir wie in folgender Abbildung dargestellt einen full_join() durchführen:\n\n\n\n\n\n\n\n    \n\n    \n    \n      \n        \n        \n              \n                ID\n                Species\n                D15N\n              \n        \n        \n        \n                \n                  N100A2\n                  Chinstrap\n                  9.39305\n                \n                \n                  N2A2\n                  Adelie\n                  NA\n                \n        \n      \n    \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    \n\n    \n    \n      \n        \n        \n              \n                ID\n                Species\n                bill_length_mm\n              \n        \n        \n        \n                \n                  N1A1\n                  Adelie\n                  39.1\n                \n                \n                  N100A2\n                  Chinstrap\n                  50.2\n                \n        \n      \n    \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    \n\n    \n    \n      \n        \n        \n              \n                ID\n                Species\n                D15N\n                bill_length_mm\n              \n        \n        \n        \n                \n                  N100A2\n                  Chinstrap\n                  9.39305\n                  50.2\n                \n                \n                  N2A2\n                  Adelie\n                  NA\n                  NA\n                \n                \n                  N1A1\n                  Adelie\n                  NA\n                  39.1\n                \n        \n      \n    \n\n\n\n\n\n\nBeide Tabellen enthalten Daten von insgesamt 3 Individuen, jeweils ein unterschiedliches Individuum fehlt in einer Tabelle. full_join() erhält alle individuen in der gejointen Tabelle und füllt fehlende Werte mit NA auf.",
+    "crumbs": [
+      "Data Wrangling",
+      "Data Joining"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/Data_Joining.html#beispiel-2-left_join",
+    "href": "Section_DataWrangling/Data_Joining.html#beispiel-2-left_join",
+    "title": "Data Joining",
+    "section": "Beispiel 2 (left_join())",
+    "text": "Beispiel 2 (left_join())\n\n\n\n\n\n\n\n    \n\n    \n    \n      \n        \n        \n              \n                ID\n                Species\n                D15N\n              \n        \n        \n        \n                \n                  N100A2\n                  Chinstrap\n                  9.39305\n                \n                \n                  N2A2\n                  Adelie\n                  NA\n                \n        \n      \n    \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    \n\n    \n    \n      \n        \n        \n              \n                ID\n                Species\n                bill_length_mm\n              \n        \n        \n        \n                \n                  N1A1\n                  Adelie\n                  39.1\n                \n                \n                  N100A2\n                  Chinstrap\n                  50.2\n                \n        \n      \n    \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    \n\n    \n    \n      \n        \n        \n              \n                ID\n                Species\n                D15N\n                bill_length_mm\n              \n        \n        \n        \n                \n                  N100A2\n                  Chinstrap\n                  9.39305\n                  50.2\n                \n                \n                  N2A2\n                  Adelie\n                  NA\n                  NA\n                \n        \n      \n    \n\n\n\n\n\n\nNutzt man left_join(tabelle_1, tabelle_2) bleiben nur die Individuen aus tabelle_1 erhalten. Zusätzliche Variablen von tabelle_2 werden jedoch aufgefüllt.",
+    "crumbs": [
+      "Data Wrangling",
+      "Data Joining"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/Data_Joining.html#beispiel-3-right_join",
+    "href": "Section_DataWrangling/Data_Joining.html#beispiel-3-right_join",
+    "title": "Data Joining",
+    "section": "Beispiel 3 (right_join())",
+    "text": "Beispiel 3 (right_join())\n\n\n\n\n\n\n\n    \n\n    \n    \n      \n        \n        \n              \n                ID\n                Species\n                D15N\n              \n        \n        \n        \n                \n                  N100A2\n                  Chinstrap\n                  9.39305\n                \n                \n                  N2A2\n                  Adelie\n                  NA\n                \n        \n      \n    \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    \n\n    \n    \n      \n        \n        \n              \n                ID\n                Species\n                bill_length_mm\n              \n        \n        \n        \n                \n                  N1A1\n                  Adelie\n                  39.1\n                \n                \n                  N100A2\n                  Chinstrap\n                  50.2\n                \n        \n      \n    \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    \n\n    \n    \n      \n        \n        \n              \n                ID\n                Species\n                D15N\n                bill_length_mm\n              \n        \n        \n        \n                \n                  N100A2\n                  Chinstrap\n                  9.39305\n                  50.2\n                \n                \n                  N1A1\n                  Adelie\n                  NA\n                  39.1\n                \n        \n      \n    \n\n\n\n\n\n\nNutzt man right_join(tabelle_1, tabelle_2) bleiben nur die Individuen aus tabelle_2 erhalten. Zusätzliche Variablen von tabelle_1 werden jedoch aufgefüllt.",
+    "crumbs": [
+      "Data Wrangling",
+      "Data Joining"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/Data_Joining.html#übung-1",
+    "href": "Section_DataWrangling/Data_Joining.html#übung-1",
+    "title": "Data Joining",
+    "section": "Übung 1",
+    "text": "Übung 1\nIm Folgenden Codefenster sind die beiden Minimaldatensätze data_A und data_B als Objekte hinterlegt:\n\ndata_A &lt;- tibble(ID = c(\"A\", \"B\"),\n                 Var_1 = c(4, 8))\ndata_B &lt;- tibble(ID = c(\"A\", \"C\"),\n                 Var_2 = c(3, 7))\ndata_A\n\n# A tibble: 2 × 2\n  ID    Var_1\n  &lt;chr&gt; &lt;dbl&gt;\n1 A         4\n2 B         8\n\ndata_B\n\n# A tibble: 2 × 2\n  ID    Var_2\n  &lt;chr&gt; &lt;dbl&gt;\n1 A         3\n2 C         7\n\n\nSagen Sie voraus, welche Ergebnisse\n\nfull_join(data_A, data_B)\nleft_join(data_A, data_B)\nright_join(data_A, data_B)\ninner_join(data_A, data_B)\n\nzeigen werden.",
+    "crumbs": [
+      "Data Wrangling",
+      "Data Joining"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/The_Penguins_Data.html",
+    "href": "Section_DataWrangling/The_Penguins_Data.html",
+    "title": "The Palmer Penguins Data",
+    "section": "",
+    "text": "Der Palmer Penguins Datensatz Horst, Hill, & Gorman (2020) ist ein beliebtes Datenbeispiel in der -Community und wird oft als Alternative zum berühmten Iris-Datensatz verwendet. Der Datensatz enthält Informationen zu verschiedenen Pinguinarten in der Antarktis und wurde von Allison Horst und Alison Hill berühmt gemacht und illustriert. Der Datensatz ist besonders nützlich, um statistische Methoden zu demonstrieren und Datenvisualisierungen zu erstellen.",
+    "crumbs": [
+      "Data Wrangling",
+      "The Palmer Penguins Data"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/The_Penguins_Data.html#paket",
+    "href": "Section_DataWrangling/The_Penguins_Data.html#paket",
+    "title": "The Palmer Penguins Data",
+    "section": "Paket",
+    "text": "Paket\nDie Daten sind im Paket {palmerpenguins} hinterlegt und und können mit dem Befehl penguins aufgerufen werden.",
+    "crumbs": [
+      "Data Wrangling",
+      "The Palmer Penguins Data"
+    ]
+  },
+  {
+    "objectID": "Section_DataWrangling/The_Penguins_Data.html#übung-1",
+    "href": "Section_DataWrangling/The_Penguins_Data.html#übung-1",
+    "title": "The Palmer Penguins Data",
+    "section": "Übung 1",
+    "text": "Übung 1\n\nLaden Sie die Bibliothek {palmerpenguins} (sie ist bereits vorinstalliert).\nLassen Sie sich die Klasse des Objekts penguins ausgeben, sowie die\nVariablennamen,\nden Kopf des Datensatzes (Variablennamen und die ersten 6 Zeilen) und\ndie Zeilenanzahl.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLösung:\n\n\n\n\n\n# laden der Bibiothek\nlibrary(palmerpenguins) \n\n# Prüfen der Klasse\nclass(penguins)\n\n# Ausgabe des Kopfes\nhead(penguins)\n\n# Ausgabe der Variablennamen\nnames(penguins)\n\n# Ausgabe der Zeilenanzahl\nnrow(penguins)",
+    "crumbs": [
+      "Data Wrangling",
+      "The Palmer Penguins Data"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Polymorphie.html",
+    "href": "Section_Basics/Polymorphie.html",
+    "title": "Polymorphie",
+    "section": "",
+    "text": "Die verschiedenen Datenklassen sind für die Arbeit mit  essentiell, da sie erlauben ein und denselben Operator/ein und dieselbe Funktion (z.B. das +) auf verschiedene Art und Weise sinnvoll auszuführen: So resultiert etwa 2 + 2 in 4 aber as.Date(\"2019-12-24\") + 2 in \"2019-12-26\". Diese Polymorphie (»Vielgestaltigkeit«) des + Operators erleichter die Arbeit mit Daten, da so nicht für jede Datenklasse ein anderer Operator für die jeweilige »Addition« verwendet werden muss.\nAllerdings sind einige Operatoren für einige Datenklassen nicht sinnvoll und daher nicht in  hinterlegt.",
+    "crumbs": [
+      "Basics",
+      "Polymorphie"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Polymorphie.html#weitere-beispiele-für-die-polymorphie-in",
+    "href": "Section_Basics/Polymorphie.html#weitere-beispiele-für-die-polymorphie-in",
+    "title": "Polymorphie",
+    "section": "Weitere Beispiele für die Polymorphie in ",
+    "text": "Weitere Beispiele für die Polymorphie in \n\nPolymorphie des &gt;-Operators\n\n5 &gt; 3\n\n[1] TRUE\n\nas.Date(\"2019-12-24\") &gt; as.Date(\"2019-12-24\")\n\n[1] FALSE\n\nas.character(\"Hund\") &gt; as.character(\"Katze\")\n\n[1] FALSE\n\nas.character(\"groß\") &gt; as.character(\"klein\")\n\n[1] FALSE",
+    "crumbs": [
+      "Basics",
+      "Polymorphie"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Polymorphie.html#übung-1",
+    "href": "Section_Basics/Polymorphie.html#übung-1",
+    "title": "Polymorphie",
+    "section": "Übung 1",
+    "text": "Übung 1\nAuch der ==-Operator ist polymorph. Welcher der folgenden Syntaxen wird im Output TRUE resultieren (gerne im folgenden Code-Fenster di eiegene Einschätzung überprüfen)?\n\n5 == 3\n2 + 4 == 6\n\"hund\" == \"Hund\"\nas.Date(\"2019-12-24\") == as.Date(\"2019-11-24\")",
+    "crumbs": [
+      "Basics",
+      "Polymorphie"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Polymorphie.html#übung-1-1",
+    "href": "Section_Basics/Polymorphie.html#übung-1-1",
+    "title": "Polymorphie",
+    "section": "Übung 1",
+    "text": "Übung 1\nNicht alle Funktionen sind polymorph für alle Datenklassen. Prüfen Sie, ob die Polymorphie der mean()-Funktion - die das arithmetische Mittel berechnet - für die Klasse \"Date\" definiert ist.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHinweis:\n\n\n\n\n\nMan kann zuerst einen Vektor mit Dates definieren und diesen dann an die mean()-Funktion übergeben.\n\n\n\n\n\n\n\n\n\n\n\nLösung:\n\n\n\n\n\n\ndates1 &lt;- c(as.Date(\"2024-02-27\"), as.Date(\"2024-03-02\")) \nmean(dates1)\n\n[1] \"2024-02-29\"\n\ndates2 &lt;- c(as.Date(\"2025-02-27\"), as.Date(\"2025-03-02\")) \nmean(dates2)\n\n[1] \"2025-02-28\"\n\n\nDie Funktion mean()ist also polymorph für die Klasse \"Date\" definiert und  kennt auch die Schaltjahre.",
+    "crumbs": [
+      "Basics",
+      "Polymorphie"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Funktionen.html",
+    "href": "Section_Basics/Funktionen.html",
+    "title": "Funktionen",
+    "section": "",
+    "text": "Funktionen sind sehr oft gebrauchte Entitäten in , mithilfe derer man sich hauptsächlich sparen kann sich wiederholenden Code zu schreiben. Als praktische:r Anwender:in schreibt in der Regel Funktionen eher selten selbst, nutzt aber sehr häufig Funktionen anderer. Um damit besser klar zu kommen, lohnt es sich anfangs einige wenige Funktionen selbst zu schreiben.\nDie klassische Struktur einer Funktion in  sieht wie folgt aus:\n1durchschnittsbilder &lt;-\n2  function(a,b,c) {\n3   return((a + b + c)/3)\n}                                 \n\n1\n\nZuweisung des Objektnamens\n\n2\n\nBefehl für »Erstellung einer Funktion« (function()) und Festlegung deren Argumente\n\n3\n\nFestlegung des Outputs der Funktion",
+    "crumbs": [
+      "Basics",
+      "Funktionen"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Funktionen.html#custom-funktionen",
+    "href": "Section_Basics/Funktionen.html#custom-funktionen",
+    "title": "Funktionen",
+    "section": "",
+    "text": "Funktionen sind sehr oft gebrauchte Entitäten in , mithilfe derer man sich hauptsächlich sparen kann sich wiederholenden Code zu schreiben. Als praktische:r Anwender:in schreibt in der Regel Funktionen eher selten selbst, nutzt aber sehr häufig Funktionen anderer. Um damit besser klar zu kommen, lohnt es sich anfangs einige wenige Funktionen selbst zu schreiben.\nDie klassische Struktur einer Funktion in  sieht wie folgt aus:\n1durchschnittsbilder &lt;-\n2  function(a,b,c) {\n3   return((a + b + c)/3)\n}                                 \n\n1\n\nZuweisung des Objektnamens\n\n2\n\nBefehl für »Erstellung einer Funktion« (function()) und Festlegung deren Argumente\n\n3\n\nFestlegung des Outputs der Funktion",
+    "crumbs": [
+      "Basics",
+      "Funktionen"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Funktionen.html#übung-1",
+    "href": "Section_Basics/Funktionen.html#übung-1",
+    "title": "Funktionen",
+    "section": "Übung 1",
+    "text": "Übung 1\nErstellen Sie eine Funktion durchschnittsbilder() die das arithmetische Mittel von vier numerischen atomic vectors (»Zahlen«) berechnet.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHinweis:\n\n\n\n\n\nDas schaffst du auch ohne Hinweis 💪🏽!\n\n\n\n\n\n\n\n\n\n\n\nLösung:\n\n\n\n\n\ndurchschnittsbilder &lt;-      \n  function(hund,katze,maus,zahlvier) {         \n   return((hund + katze + maus + zahlvier)/4)    \n} \n\n\n\n\n Während die durchschnittsbilder-Funktion keinen Output ergibt, wenn man nicht alle Argumente spezifiziert, haben die meisten Funktionen, die wir später nutzen werden defaults für viele Argumente.",
+    "crumbs": [
+      "Basics",
+      "Funktionen"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Funktionen.html#übung-2",
+    "href": "Section_Basics/Funktionen.html#übung-2",
+    "title": "Funktionen",
+    "section": "Übung 2",
+    "text": "Übung 2\nDie folgende Funktion hat den default summe für das Srgument methode. Denken Sie über den Code nach und diskutieren Sie welchen Output die Inputs in den Zeilen 9-11 zeigen werden.",
+    "crumbs": [
+      "Basics",
+      "Funktionen"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Funktionen.html#vektorisierte-funktionen",
+    "href": "Section_Basics/Funktionen.html#vektorisierte-funktionen",
+    "title": "Funktionen",
+    "section": "Vektorisierte Funktionen",
+    "text": "Vektorisierte Funktionen\nViele vordefinierte Funktionen sind vektorisiert. Das bedeutet, dass sie ihre Funktion mehrfach ausführen, wenn sie keine atomare Struktur sondern einen Vektor übergeben bekommen. Diese Vektorisierung kann elementweise erfolgen,\n\nc(5, 2, 8) &gt; 3\n\n[1]  TRUE FALSE  TRUE\n\nc(5, 2, 8) &gt; c(4, 3, 9)\n\n[1]  TRUE FALSE FALSE\n\n\noder über alle paarweisen Kombinationen hinweg:\n\nouter(c(5, 2, 8), c(4, 3, 9), `&gt;`)\n\n      [,1]  [,2]  [,3]\n[1,]  TRUE  TRUE FALSE\n[2,] FALSE FALSE FALSE\n[3,]  TRUE  TRUE FALSE",
+    "crumbs": [
+      "Basics",
+      "Funktionen"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Funktionen.html#modularität-via-bibliotheken",
+    "href": "Section_Basics/Funktionen.html#modularität-via-bibliotheken",
+    "title": "Funktionen",
+    "section": "Modularität via Bibliotheken",
+    "text": "Modularität via Bibliotheken\n gilt als eine der »schnellsten« Statistiksoftwarelösungen - und zwar im doppelten Sinne: Zum einen dauern auch komplexe Modellierungen nur kurze Zeit, zum anderen werden neu entwickelte statistische Verfahren sehr schnell implementiert. Dies geschieht anhand von »Softwareteilstücken« den sogenannten Bibliotheken (»packages«). Entwickelt ein:e Forscher:in ein neues statistisches Verfahren oder programmiert ein fortgeschrittener User benutzerfreudlichere Operatoren/Funktionen, können diese anhand der Bibliotheken bereitgestellt werden.\n\nBibliotheken installieren\nZentrale Repositorien halten derzeit über 15.000 Bibliotheken bereit, weshalb es nicht empfehlenswert ist alle zu installieren. Nutz man  lokal auf einem Rechner und nicht wie hier im Browser installiert man einzelne Bibliotheken mit der Syntax install.packages(\"packagename\"). Dieser Befehl sorgt dafür, dass die Bibliothek von einem Repositorium via Internet auf den Rechner geladen wird.\n\n\nBibliotheken laden\nDie Operatoren/Funktionen der Bibliothek stehen allerdings erst für eine Anwendung zur Verfügung, wenn eine Bibliothek »geladen« wird. Dies erfolgt (lokal und hier im Browser) mithilfe der Syntax library(packagename).\n\n\nFunktionen aus ungeladenen Bibliotheken nutzen\nMöchte man nur eine bestimmte Funktion aus einem bestimmten Paket nutzen, verwendet man die Syntax paketname::funktionsname().",
+    "crumbs": [
+      "Basics",
+      "Funktionen"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Arithmetische_Operationen.html",
+    "href": "Section_Basics/Arithmetische_Operationen.html",
+    "title": "Arithmetische Operationen",
+    "section": "",
+    "text": "Neben komplexeren statistischen Modellierungen kann  natürlich auch einfache arithmetische Operationen ausführen.\n\nAddition: +\nSubtraktion: -\nMultiplikation: *\nDivision: /\nExponentiation: ^\nQuadratwurzel: sqrt()\n…\n\nDabei wendet  (genau wie Taschenrechner) die üblichen Konventionen (z.B. »Punktrechnung vor Strichrechnung« oder »Klammer zuerst« an), wie an folgendem In- und Output erkennbar:\n\n(2 + 3)*5\n\n[1] 25",
+    "crumbs": [
+      "Basics",
+      "Arithmetische Operationen"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Arithmetische_Operationen.html#syntax-für-arithmetische-operationen",
+    "href": "Section_Basics/Arithmetische_Operationen.html#syntax-für-arithmetische-operationen",
+    "title": "Arithmetische Operationen",
+    "section": "",
+    "text": "Neben komplexeren statistischen Modellierungen kann  natürlich auch einfache arithmetische Operationen ausführen.\n\nAddition: +\nSubtraktion: -\nMultiplikation: *\nDivision: /\nExponentiation: ^\nQuadratwurzel: sqrt()\n…\n\nDabei wendet  (genau wie Taschenrechner) die üblichen Konventionen (z.B. »Punktrechnung vor Strichrechnung« oder »Klammer zuerst« an), wie an folgendem In- und Output erkennbar:\n\n(2 + 3)*5\n\n[1] 25",
+    "crumbs": [
+      "Basics",
+      "Arithmetische Operationen"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Arithmetische_Operationen.html#übung-1",
+    "href": "Section_Basics/Arithmetische_Operationen.html#übung-1",
+    "title": "Arithmetische Operationen",
+    "section": "Übung 1",
+    "text": "Übung 1\nAddieren Sie im folgenden Fenster 5 und 13.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHinweis:\n\n\n\n\n\n______ + ______\n\n\n\n\n\n\n\n\n\n\n\nLösung:\n\n\n\n\n\n5 + 13",
+    "crumbs": [
+      "Basics",
+      "Arithmetische Operationen"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Arithmetische_Operationen.html#übung-2",
+    "href": "Section_Basics/Arithmetische_Operationen.html#übung-2",
+    "title": "Arithmetische Operationen",
+    "section": "Übung 2",
+    "text": "Übung 2\nBerechnen Sie im folgenden Fenster die Wurzel aus 16.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHinweis:\n\n\n\n\n\nFragen Sie eine Suchmaschine oder KI nach einer passenden Funktion.\n\n\n\n\n\n\n\n\n\n\n\nLösung:\n\n\n\n\n\nsqrt(16)",
+    "crumbs": [
+      "Basics",
+      "Arithmetische Operationen"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Arithmetische_Operationen.html#übung-3",
+    "href": "Section_Basics/Arithmetische_Operationen.html#übung-3",
+    "title": "Arithmetische Operationen",
+    "section": "Übung 3",
+    "text": "Übung 3\nRecherchieren Sie die Funktion (»das Zeichen« auch »den Operator« genannt) für den Logarithmus zur Basis 10. Berechnen Sie im folgenden Fenster log10(100).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHinweis:\n\n\n\n\n\nlog(______, base = ______)\n\n\n\n\n\n\n\n\n\n\n\nLösung:\n\n\n\n\n\nlog(100, base = 10)",
+    "crumbs": [
+      "Basics",
+      "Arithmetische Operationen"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Variablenzuweisung.html",
+    "href": "Section_Basics/Variablenzuweisung.html",
+    "title": "Variablenzuweisung",
+    "section": "",
+    "text": "Ein grundlegendes Konzept der Sprache  stellen sogenannte Objekte dar. Mit deren Hilfe kann man bestimmte Werte (z.B. 32 oder TRUE) unter einem Namen speichern und diese dann später wiederverwenden. Dazu verwendet man den Zuweisungsoperator &lt;-. Damit kann man beispielsweise das Objekt mein_objekt1 mit dem Wert 32 generieren:\n\nmein_objekt1 &lt;- 32\nmein_objekt2 &lt;- 2\n\nMöchte man das so generierte Objekt wieder ausgeben (»print«), führt man eine Zeile aus, in der nur der Objektname steht.\n\nmein_objekt2\n\n[1] 2\n\n\nBeispiele für die Wiederverwendung der Objekte sind:\n\nmein_objekt1*2\n\n[1] 64\n\nmein_objekt1 &gt; 30\n\n[1] TRUE\n\nmein_objekt2 == TRUE\n\n[1] FALSE",
+    "crumbs": [
+      "Basics",
+      "Variablenzuweisung"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Variablenzuweisung.html#der-zuweisungsoperator--",
+    "href": "Section_Basics/Variablenzuweisung.html#der-zuweisungsoperator--",
+    "title": "Variablenzuweisung",
+    "section": "",
+    "text": "Ein grundlegendes Konzept der Sprache  stellen sogenannte Objekte dar. Mit deren Hilfe kann man bestimmte Werte (z.B. 32 oder TRUE) unter einem Namen speichern und diese dann später wiederverwenden. Dazu verwendet man den Zuweisungsoperator &lt;-. Damit kann man beispielsweise das Objekt mein_objekt1 mit dem Wert 32 generieren:\n\nmein_objekt1 &lt;- 32\nmein_objekt2 &lt;- 2\n\nMöchte man das so generierte Objekt wieder ausgeben (»print«), führt man eine Zeile aus, in der nur der Objektname steht.\n\nmein_objekt2\n\n[1] 2\n\n\nBeispiele für die Wiederverwendung der Objekte sind:\n\nmein_objekt1*2\n\n[1] 64\n\nmein_objekt1 &gt; 30\n\n[1] TRUE\n\nmein_objekt2 == TRUE\n\n[1] FALSE",
+    "crumbs": [
+      "Basics",
+      "Variablenzuweisung"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Variablenzuweisung.html#übung-1",
+    "href": "Section_Basics/Variablenzuweisung.html#übung-1",
+    "title": "Variablenzuweisung",
+    "section": "Übung 1",
+    "text": "Übung 1\nWeisen Sie im folgenden Fenster dem Variablennamen x den Wert 4 zu und geben Sie diesen Wert wieder aus. Ersetzen Sie dazu die Leerstellen ______ .\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHinweis:\n\n\n\n\n\n`x` ist gleichwertig mit `print(x)`\n\n\n\n\n\n\n\n\n\n\n\nLösung:\n\n\n\n\n\nx &lt;- 4\nx",
+    "crumbs": [
+      "Basics",
+      "Variablenzuweisung"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Variablenzuweisung.html#übung-2",
+    "href": "Section_Basics/Variablenzuweisung.html#übung-2",
+    "title": "Variablenzuweisung",
+    "section": "Übung 2",
+    "text": "Übung 2\nSpeichern Sie im folgenden Fenster \\(\\frac{2}{3}\\) unter dem Variablennamen bruch. Geben Sie dieses Objekt wieder aus und multiplizieren Sie es mit 3. Ersetzen Sie dazu die Leerstellen ______ .\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHinweis:\n\n\n\n\n\n`x` ist gleichwertig mit `print(x)`\n\n\n\n\n\n\n\n\n\n\n\nLösung:\n\n\n\n\n\nbruch &lt;- 2/3\nbruch\nbruch*3",
+    "crumbs": [
+      "Basics",
+      "Variablenzuweisung"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Kontrollstrukturen.html",
+    "href": "Section_Basics/Kontrollstrukturen.html",
+    "title": "Kontrollstrukturen",
+    "section": "",
+    "text": "Kontrollstrukturen sind die Befehle an die man wahrscheinlich als erstes denkt, wenn man das Stichwort »programmieren« hört. Sie kommen in nahezu allen Sprachen vor - auch in . Im Folgenden sind zwei ausgewählte Kontrollstrukturen etwas genauer beschrieben: ifelse() und die for-Schleife.",
+    "crumbs": [
+      "Basics",
+      "Kontrollstrukturen"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Kontrollstrukturen.html#ifelse",
+    "href": "Section_Basics/Kontrollstrukturen.html#ifelse",
+    "title": "Kontrollstrukturen",
+    "section": "ifelse",
+    "text": "ifelse\nifelse wird von Sozialwissenschaftler:innen sehr oft zum Rekodieren von Variablen benutzt. Es hat die Struktur\n\nifelse(Wahrheitsprüfung, falls TRUE, falls FASLE)\n\n1berufe &lt;- c(\"Bäcker\", \"Grundschullehrer\", \"Studienrätin\", \"Architektin\")\n\n2lehrer_in &lt;-\n3  ifelse(berufe %in% c(\"Grundschullehrer\", \"Studienrätin\"),\n4         \"Lehrer:in\",\n5         \"keine Lehrer:in\")\nprint(lehrer_in)                                                                \n\n1\n\nDefinion der Daten\n\n2\n\nErstellung neues Objekts\n\n3\n\nWahrheitsprüfung ob die Elemente von berufe gleich Grundschullehrer oder Studienrätin sind\n\n4\n\nFalls 3 TRUE, schreibe \"Lehrer:in\"\n\n5\n\nFalls 3 FALSE, schreibe \"keine Lehrer:in\"",
+    "crumbs": [
+      "Basics",
+      "Kontrollstrukturen"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Kontrollstrukturen.html#übung-1",
+    "href": "Section_Basics/Kontrollstrukturen.html#übung-1",
+    "title": "Kontrollstrukturen",
+    "section": "Übung 1",
+    "text": "Übung 1\nWie kann der Vektor c(\"kein Abschluss\", \"Abitur\", \"Fachhochschulreife\") in einen Vektor c(\"keine HZB\", \"HZB\", \"HZB\") (HZB = Hochschulzugangsberechtigung) rekodiert werden?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHinweis:\n\n\n\n\n\nPasse das zuvor gegebene Beispiel an.\n\n\n\n\n\n\n\n\n\n\n\nLösung:\n\n\n\n\n\nabschluesse &lt;- c(\"kein Abschluss\", \"Abitur\", \"Fachhochschulreife\")  \n\nhzb &lt;-                                                               \n  ifelse(abschluesse %in% c(\"Abitur\", \"Fachhochschulreife\"),                \n         \"HZB\",                                                      \n         \"keine HZB\")                                                \nprint(hzb)",
+    "crumbs": [
+      "Basics",
+      "Kontrollstrukturen"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Kontrollstrukturen.html#schleifen",
+    "href": "Section_Basics/Kontrollstrukturen.html#schleifen",
+    "title": "Kontrollstrukturen",
+    "section": "Schleifen",
+    "text": "Schleifen\nSchleifen kommen in  eher selten vor, weil es dort oft elegantere Wege gibt, dasselbe zu erreichen. Sozialwissenschaftler:innen nutzen sie aber oft für Simulationen (z.B. für Poweranalysen).\nIn R gibt es die folgenden Schleifen\n\n\n\nSchleife\nBeschreibung\n\n\n\n\nfor\nWiederholt Code für eine feste Anzahl von Durchläufen\n\n\nwhile\nWiederholt Code, solange eine Bedingung erfüllt ist\n\n\nrepeat\nWiederholt Code unendlich, bis break aufgerufen wird\n\n\nnext\nÜberspringt die aktuelle Iteration, fährt aber fort\n\n\nbreak\nBricht die Schleife sofort ab\n\n\n\n\nfor-Schleifen\n\n\n\n\n\n\nBeispielstudie\n\n\n\n\n\nAngenommen ein Forscher:innenteam möchte eine deskriptive Studie durchführen und die Forschungsfrage fragt nach der Prävalenz von Klassenwiederholung in der Grundschule. Da sich die Behörden nicht auskunftsbereit zeigen, startet das Team eine Random Digit Dialling Befragung - wählt also zufällig generierte Telefonnummern, fragt ob Eltern von Grundschüler:innen am Telefon sind und falls ja, ob diese:r Grundschüler:in dieses Jahr die Klasse wiederholt. Das Team hat jedoch nur die Ressourcen für 1000 Anrufe bei Eltern und fragt sich, wie präzise es damit die Prävalenz schätzen kann.\n\n\n\nDiese Abschätzung kann man mit einer for-Schleife erzielen. Dazu\n\nnimmt man eine Prävalenz an (z.B. 3%)\nsimuliert dann das Ziehen (mit zurücklegen) von 1000 Kugeln aus einer Urne in der 97 Kugeln mit 0 beschriftet sind (Versetzung) und 3 Kugeln mit 1 (Sitzenbleiben)\nberechnet die Summe der Kugeln geteilt durch 1000 (Anteil der Wiederholer:innen)\nwiederholt 2 und 3 sehr oft (hier 100 mal - realistischerweise eher \\(10^5\\) mal).\n\n1for(i in 1:100){\n2    stichprobe_i &lt;-\n        sample(c(0,1),\n               size = 1000,\n               replace = TRUE,\n               prob = c(.97, .03))\n3    mean_i &lt;- mean(stichprobe_i)\n4    print(mean_i)\n}                               \n\n1\n\nStartet die for-Schleife. Die Runde Klammer definiert den »Laufindex«, in der geschweiften Klammer wird definiert was für jeden Laufindex passieren soll.\n\n2\n\nFür jedes i wird ein Objekt namens stichprobe_i angelegt, das 1000 Einträge hat, die mit Wahrscheinlichkeit 97% 0 und 3% 1 betragen.\n\n3\n\nVon dieser Stichprobe wird das arithmetische Mittel berechnet\n\n4\n\nDieses arithmetische Mittel wird ausgegeben",
+    "crumbs": [
+      "Basics",
+      "Kontrollstrukturen"
+    ]
+  },
+  {
+    "objectID": "Section_Basics/Kontrollstrukturen.html#übung-2",
+    "href": "Section_Basics/Kontrollstrukturen.html#übung-2",
+    "title": "Kontrollstrukturen",
+    "section": "Übung 2",
+    "text": "Übung 2\nExekutieren Sie die gegebene for-Schleife und interpretiert das Ergebnis. Verändern Sie die Stichprobengröße (size =) auf 5, 50 und 50000 und sagen Sie jeweils vorher wie sich das Ergebnis ändern wird.",
+    "crumbs": [
+      "Basics",
+      "Kontrollstrukturen"
+    ]
+  },
+  {
+    "objectID": "Section_Reproducible_Reporting_mit_quarto/Literal_Programming_mit_quarto.html",
+    "href": "Section_Reproducible_Reporting_mit_quarto/Literal_Programming_mit_quarto.html",
+    "title": "Literal Programming (a.k.a. Reproducible Reporting) mit quarto",
+    "section": "",
+    "text": "Im vorherigen Kapiteln hat man gesehen, dass  ein Kommandozeilenprogramm ist, das in einem Terminal genutzt oder in einer IDE wie RStudio ausgeführt werden kann. Doch oft reicht es nicht aus, nur Code zu schreiben – man will seine Analysen verständlich dokumentieren, reproduzierbar machen und in einer lesbaren Form präsentieren. Dazu dient das sogenannte Literate Programming (Knuth, 1992) ins Spiel. Dabei werden Code und erklärender Text in einem einzigen Dokument kombiniert. Statt reinen Code zu schreiben, dokumentiert man den Gedankenprozess hinter der Analyse, indem Code-Blöcke mit Fließtext, Formeln und Visualisierungen gemischt werden.\nMit quarto, einem modernen Dokumentations- und Publishing-Framework, kann das leicht umgesetzt werden. quarto ermöglicht es, Code, Ergebnisse und erklärenden Text in einem einzigen .qmd-Dokument zu verfassen und in verschiedene Formate zu rendern, z. B.:\nquarto bietet in einer IDE wie RStudio grafische Tools, um:",
+    "crumbs": [
+      "Reproducible Reporting",
+      "Literal Programming (a.k.a. Reproducible Reporting) mit quarto"
+    ]
+  },
+  {
+    "objectID": "Section_Reproducible_Reporting_mit_quarto/Literal_Programming_mit_quarto.html#ein-neues-quarto-dokument-erstellen",
+    "href": "Section_Reproducible_Reporting_mit_quarto/Literal_Programming_mit_quarto.html#ein-neues-quarto-dokument-erstellen",
+    "title": "Literal Programming (a.k.a. Reproducible Reporting) mit quarto",
+    "section": "Ein neues Quarto-Dokument erstellen",
+    "text": "Ein neues Quarto-Dokument erstellen\n\nRStudio öffnen\nDatei → Neues Datei → Quarto Document…\nGewünschte Format (z. B. HTML, PDF, Word) wählen (empfehlenswert ist zu Beginn .html)\nNamen für die Datei eingeben und als mein_report.qmd speichern.\nAuf das Render-Symbol klicken. quarto führt dann den R-Code aus und fügt In- wie Output mit dem gerenderten Markdown zu einem Dokument zusammen",
+    "crumbs": [
+      "Reproducible Reporting",
+      "Literal Programming (a.k.a. Reproducible Reporting) mit quarto"
+    ]
+  },
+  {
+    "objectID": "Section_Reproducible_Reporting_mit_quarto/Literal_Programming_mit_quarto.html#beispielergebnis",
+    "href": "Section_Reproducible_Reporting_mit_quarto/Literal_Programming_mit_quarto.html#beispielergebnis",
+    "title": "Literal Programming (a.k.a. Reproducible Reporting) mit quarto",
+    "section": "Beispielergebnis",
+    "text": "Beispielergebnis\n\n\n\n.qmd-File und gerenderte Ergebnisse",
+    "crumbs": [
+      "Reproducible Reporting",
+      "Literal Programming (a.k.a. Reproducible Reporting) mit quarto"
+    ]
+  },
+  {
+    "objectID": "Section_Reproducible_Reporting_mit_quarto/Literal_Programming_mit_quarto.html#übung-1",
+    "href": "Section_Reproducible_Reporting_mit_quarto/Literal_Programming_mit_quarto.html#übung-1",
+    "title": "Literal Programming (a.k.a. Reproducible Reporting) mit quarto",
+    "section": "Übung 1",
+    "text": "Übung 1\nLaden Sie dieses zip-File herunter, dekomprimieren Sie es und öffnen Sie das .Rproj-File. Nach Installation der notwendigen Pakete können Sie mit dem Render-Button den im Abschnitt zuvor dargestellten Report erzeugen.",
+    "crumbs": [
+      "Reproducible Reporting",
+      "Literal Programming (a.k.a. Reproducible Reporting) mit quarto"
+    ]
+  },
+  {
+    "objectID": "Section_Visualization/tidyplots.html#datenvisualisierung",
+    "href": "Section_Visualization/tidyplots.html#datenvisualisierung",
+    "title": "Das {tidyplots}-Paket",
+    "section": "Datenvisualisierung",
+    "text": "Datenvisualisierung\nDatenvisualisierung stellt auch für Sozialwissenschaftler:innen eine essentielle Methode der Datenanalyse dar. Das menschliche System visueller Perzeption ist derart mächtig (Franconeri, Padilla, Shah, Zacks, & Hullman, 2021), dass es bei geeigneten Aufbereitungen selbst Laien leicht möglich ist, komplexere statistische Entitäten wie Effektstärken für Mittelwerte (Schneider, Schmidt, Bohrer, & Merk, 2025) vergleichweise unverzerrt zu rezipieren. Zudem sind graphische Darstellungen sehr gut für die Aufdeckung von Artefakten in Daten und für die explorative Analyse geeignet (Grolemund, 2025).",
+    "crumbs": [
+      "Data Visualization",
+      "Das `{tidyplots}`-Paket"
+    ]
+  },
+  {
+    "objectID": "Section_Visualization/tidyplots.html#unterschiede-zwischen-tidyplots-und-ggplot2",
+    "href": "Section_Visualization/tidyplots.html#unterschiede-zwischen-tidyplots-und-ggplot2",
+    "title": "Das {tidyplots}-Paket",
+    "section": "Unterschiede zwischen {tidyplots} und {ggplot2}",
+    "text": "Unterschiede zwischen {tidyplots} und {ggplot2}\nIm Folgenden wird in Visualisierungen mit den Paketen {tidyplots} und {ggplot2} eingeführt. Vergleichende Vor- und Nachteile sind in Tabelle 1 gegeben. Am Ende dieses Abschnitts ist zudem ein Cheatsheet für einen Überblick verlinkt.\n\n\n\n\nTabelle 1: Vergleich der besprochenen Pakete\n\n\n\n\n\n    \n\n    \n    \n      \n        \n        \n              \n                Kategorie\n                Vorteile\n                Nachteile\n              \n        \n        \n        \n                \n                  \n                  Sehr einfache Syntax, wenig Code nötig\n                  Weniger flexibel, begrenzte Anpassungsmöglichkeiten\n                \n                \n                  \n                  Automatische gute Designs\n                  Nicht ideal für komplexe oder Publikationsplots\n                \n                \n                  \n                  Perfekt für schnelle Explorationsplots\n                  Kaum Unterstützung für Interaktivität\n                \n                \n                  \n                  Extrem flexibel und anpassbar\n                  Steilere Lernkurve, mehr Code nötig\n                \n                \n                  \n                  Sehr gut für komplexe Visualisierungen\n                  Standarddesign oft zu schlicht\n                \n                \n                  \n                  Interaktivität leicht hinzufügbar\n                  Erfordert manuelle Stilisierung für ansprechende Plots",
+    "crumbs": [
+      "Data Visualization",
+      "Das `{tidyplots}`-Paket"
+    ]
+  },
+  {
+    "objectID": "Section_Visualization/tidyplots.html#tidyplots",
+    "href": "Section_Visualization/tidyplots.html#tidyplots",
+    "title": "Das {tidyplots}-Paket",
+    "section": "{tidyplots}",
+    "text": "{tidyplots}\nDie grundlegende Konstruktion erfolgt in {tidyplots} in den folgenden Schritten:\n\nFestlegung des Datensatzes\nZuweisung von Variablen des Datensatzes zu\n\nx-Achse\ny-Achse\nFarbe\n\nHinzufügen von grafischen Elementen (Punkte, Balken, …)\nAufteilung in Unterplots\n\n\nBeispiel 1: bill_length_mm per Species\n\n\n\n\n\n\nBeispielstudie\n\n\n\n\n\nAngenommen ein Forscher:innenteam möchte explorieren wie groß die Effekte der Mittelwertunterschiede in bill_length_mm sind und ob diese statistisch signifikant sind. Was wäre ein geeigneter Plot?\n\n\n\n\n1penguins %&gt;%\n2  tidyplot(x = species,\n3           y = bill_length_mm,\n4           color = species) %&gt;%\n5  add_data_points_beeswarm() %&gt;%\n6  add_sd_errorbar(linewidth = .2,\n7                  width = .21,\n8                  color = \"#111\") %&gt;%\n9  add_ci95_errorbar(linewidth = .8,\n10                    width = 0,\n11                    color = \"#111\")\n\n\n1\n\nWähle den Datensatz penguins\n\n2\n\nLege die Variable species auf die x-Achse\n\n3\n\nLege die Variable bill_length_mm auf die y-Achse\n\n4\n\nEnkodiere die Variable species farblich\n\n5\n\nStelle jeden Datenpunkt sortiert nach dem beeswarm-Algorithmus dar\n\n6\n\nTrage die Standardabweichung als vertikalen Balken der Breite .2,\n\n7\n\nmit horizontalen Enden der Länge .21\n\n8\n\nund der Farbe schwarz auf.\n\n9\n\nTrage ein 95%-Konfidenzinterval als vertikalen Balken der Breite .8,\n\n10\n\nmit horizontalen Enden der Länge 0\n\n11\n\nund der Farbe schwarz auf.\n\n\n\n\n\n\n\n\n\n\n\n\n\nÜbung 1: Korrelation bill_depth_mm und bill_depth_mm\nPlotten Sie die penguins-Daten so dass Sie die Korrelation bill_depth_mm und bill_depth_mm innerhalb der Spezies und speziesübergreifend explorieren können.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHinweis:\n\n\n\n\n\nMit add_curve_fit(method = \"lm\") können Regressionsgeraden eingefügt werden.\n\n\n\n\n\n\n\n\n\n\n\nEine Lösung:\n\n\n\n\n\n# Speziesübergreifend\npenguins %&gt;% \n  tidyplot(x = bill_depth_mm,\n           y = bill_length_mm) %&gt;% \n  add_data_points() %&gt;%\n  add_curve_fit(method = \"lm\")\n\n# Für jede Spezies\npenguins %&gt;% \n  tidyplot(x = bill_depth_mm,\n           y = bill_length_mm,\n           color = species) %&gt;% \n  add_data_points() %&gt;%\n  add_curve_fit(method = \"lm\")\n\n\n\n\n\n\nÜbung 2: Verteilungsform der flipper_length\nPlotten Sie mithilfe des Cheatsheet die Verteilungsform der flipper_length per Spezies in unterschiedlichen Farben als Violinplots und fügen sie das arithmetische Mittel je Species als Punkt hinzu.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEine Lösung:\n\n\n\n\n\npenguins %&gt;% \n  tidyplot(x = species,\n           y = flipper_length_mm,\n           color = species) %&gt;% \n  add_violin() %&gt;% \n  add_mean_dot()\n\n\n\n\n\n\nCheatsheet {tidyplots}\n\n\n\n\n\nhttps://tidyplots.org",
+    "crumbs": [
+      "Data Visualization",
+      "Das `{tidyplots}`-Paket"
+    ]
+  }
+]

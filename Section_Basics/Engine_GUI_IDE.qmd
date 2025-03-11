@@ -1,0 +1,17 @@
+---
+title: Engine, GUI & IDE
+engine: knitr
+format: live-html
+toc: true
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+Die Software `r fontawesome::fa(name = "r-project", fill = "#18bc9c")` ist eine Programmiersprache, die darauf spezialisiert ist statistische Modellierungen vorzunehmen. `r fontawesome::fa(name = "r-project", fill = "#18bc9c")` führt jedoch nur Computationen aus. Die Steuerung dieser Computationen mithilfe von Syntax (Befehle in Textform) und die Darstellung der Ergebnisse wird von sogenannten Graphical User Interfaces (GUI) oder Integrated Development Environments (IDE) übernommen.  
+
+Einige Autoren [@ismay2020] erklären diesen Unterschied (`r fontawesome::fa(name = "r-project", fill = "#18bc9c")` vs. GUI/IDE) mit einer Analogie zu dem Verhältnis eines Automotors (= `r fontawesome::fa(name = "r-project", fill = "#18bc9c")`) zu einem Autocockpit (= GUI/IDE). Die eigentliche Arbeit verrichtet der Motor, er wird jedoch vom Cockpit aus gesteuert und sein »Output« (Drehzahl, Geschwindigkeit, etc.) wird ebenfalls dort angezeigt.  
+
+R: Motor            |  GUI/IDE: Cockpit 
+:-------------------------:|:-------------------------:
+![](../img/engine.jpg){ height=2in }  |  ![](../img/cockpit.jpg){ height=2in }
+Im Rahmen dieses Kapitels verwenden wir ein sehr einfaches GUI (siehe folgender Abschnitt), das die Eingabe von Syntax in einem kleinen Textfenster erlaubt, diese Syntax via Klick auf den `r fontawesome::fa(name = "play", fill = "#18bc9c")`-Button an R übergibt und dann Output unterhalb des Fensters darstellt.

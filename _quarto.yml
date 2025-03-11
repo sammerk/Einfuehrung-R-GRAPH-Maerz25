@@ -1,0 +1,52 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: GRAPH Winterakademie 2025
+  search: true
+  page-navigation: true
+  sidebar:
+    logo: img/graph_logo.jpg
+    contents:
+      - href: index.qmd
+      - section: Basics
+        contents:
+          - Section_Basics/Engine_GUI_IDE.qmd
+          - Section_Basics/Arithmetische_Operationen.qmd
+          - Section_Basics/Logische_Vergleichsoperatoren.qmd
+          - Section_Basics/Variablenzuweisung.qmd
+          - Section_Basics/Datentypen_und_klassen.qmd
+          - Section_Basics/Datenstrukturen.qmd
+          - Section_Basics/Kontrollstrukturen.qmd
+          - Section_Basics/Funktionen.qmd
+          - Section_Basics/Polymorphie.qmd
+      - section: Data Wrangling
+        contents:
+          - Section_DataWrangling/Das_Tidyverse.qmd
+          - Section_DataWrangling/The_Penguins_Data.qmd
+          - Section_DataWrangling/Manipulate_Cases.qmd
+          - Section_DataWrangling/Manipulate_Variables.qmd
+          - Section_DataWrangling/Summarize_Variables.qmd
+          - Section_DataWrangling/The_Split_Apply_Combine_Approach.qmd
+          - Section_DataWrangling/Data_Joining.qmd
+          - Section_DataWrangling/Data_Pivoting.qmd
+      - section: Data Visualization
+        contents:
+          - Section_Visualization/tidyplots.qmd
+          - Section_Visualization/ggplot2.qmd
+      - section: Arbeiten in RStudio
+        contents:
+          - Section_Arbeiten_mit_einem_IDE/Arbeiten_mit_einem_IDE.qmd
+      - section:  Reproducible Reporting
+        contents:
+          - Section_Reproducible_Reporting_mit_quarto/Literal_Programming_mit_quarto.qmd
+      - section: Literatur
+          - references.qmd
+
+theme:
+  light: flatly
+  dark: darkly
+
+bibliography: references.bib
+csl: apa.csl

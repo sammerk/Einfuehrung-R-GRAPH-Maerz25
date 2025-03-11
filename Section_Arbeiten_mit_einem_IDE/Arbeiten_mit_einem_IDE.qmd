@@ -1,0 +1,70 @@
+---
+title: Arbeiten mit RStudio als IDE
+engine: knitr
+format: live-html
+toc: true
+webr:
+  packages:
+lang: de
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+Im ersten Kapitel wurde betont, dass `r fontawesome::fa(name = "r-project", fill = "#18bc9c")` ein Kommandozeilenprogramm ist. Es kann daher in Terminal genutzt werden oder so kompiliert, dass es sogar im Browser ausgeführt werden kann (was wir bisher getan haben). Für die meisten Nutzer:innen ist es jedoch bequemer `r fontawesome::fa(name = "r-project", fill = "#18bc9c")` innerhalb eines Integrated Developing Environment (IDE) wie RStudio, Positron oder VisualStudio lokal als Desktopapplikation zu nutzen. Denn dort hat man grafische Tools um etwa
+
+* Hilfefiles zu lesen
+* Dateien zu managen (erstellen, speichern, verschieben etc.)
+* via History in zuvor auseführten Befehlen zu blättern
+* sich Plots anzeigen zu lassen und diese zu exportieren
+* Pakete via Menü zu suchen und zu installieren
+* eine grafische Übersicht über angelegte Objekte zu haben,
+* diese Objekte interaktiv zu explorieren
+* etc.
+
+
+Die folgende Abbildung zeigt eine Standardkonfiguration von RStudio mit einer Hervorhebung der wichtigsten Funktionalitäten. 
+
+![](../img/RStudio.svg){.lightbox}
+
+
+## RStudio-Projekte
+Sehr hilfreich ist auch die Verwendung von RStudio-Projekten.
+RStudio-Projekte sind eine Funktion in **RStudio** (nicht `r fontawesome::fa(name = "r-project", fill = "#18bc9c")`), die helfen, Arbeit effizient zu organisieren und zu verwalten. Ein **RStudio-Projekt** erstellt eine in sich geschlossene Arbeitsumgebung, in der alle Dateien, Skripte, Datensätze, Ergebnisse etc. eines spezifischen Analyse- oder Forschungsprojekts gespeichert werden.  
+
+Erstellt man ein RStudio-Projekt, sorgt RStudio dafür, dass:  
+
+* das Arbeitsverzeichnis (also der »Speicherort« an dem alle Objekte abgelegt werden) im Projektordner gesetzt wird,  
+* Skriptverlauf und Arbeitsumgebung automatisch gespeichert werden,  
+* man einfach zwischen verschiedenen Projekten wechseln kann, ohne Objekte zu verlieren,  
+* `r fontawesome::fa(name = "git", fill = "#18bc9c")` für die Versionskontrolle einfach integriert werden kann.
+
+### **1. Ein neues RStudio-Projekt erstellen**  
+
+- RStudio öffen
+- **Datei** → **Neues Projekt**.  
+- Eine der folgenden Optionen wählen:  
+  - **Neues Verzeichnis**: Erstellt einen neuen Ordner für dein Projekt.  
+  - **Bestehendes Verzeichnis**: Wandelt einen bereits existierenden Ordner in ein RStudio-Projekt um.  
+  - **Versionskontrolle (Git)**: Klont ein `r fontawesome::fa(name = "git", fill = "#18bc9c")`-Repository und richtet es als Projekt ein.  
+- »Projekt erstellen« klicken, um den Vorgang abzuschließen.  
+
+### **2. Projektordner sinnvoll strukturieren**  
+Innerhalb deines Projektordners sollten Dateien systematisch organisiert sein, um eine saubere und reproduzierbare Arbeitsweise zu gewährleisten. Eine gute Struktur könnte wie folgt aussehen:  
+
+```
+/Mein_Projekt/ 
+   │── data/                # Rohe und verarbeitete Daten 
+   │── scripts/             # R-Skripte für Analysen 
+   │── figures/             # Diagramme und Visualisierungen 
+   │── reports/             # Markdown- oder LaTeX-Berichte 
+   │── output/              # Finale Ergebnisse, Tabellen etc. 
+   │── Mein_Projekt.Rproj   # Die RStudio-Projektdatei
+```
+
+
+### **3. Projekte nutzen, um Pfadprobleme zu vermeiden**  
+Da RStudio beim Öffnen eines Projekts automatisch das Arbeitsverzeichnis setzt, können absolute Dateipfade (z.B. `read.csv("C:/Users/DeinName/Desktop/MeineDaten.csv")`) vermeiden und stattdessen relative Pfade (z.B. `read.csv("data/MeineDaten.csv")`) verwendet werden.
+
+
+## Ein vorhanden RStudio-Projekt öffnen
+RStudio-Projekte erlauben auch sehr gute Portabilität. Lädt man beispielsweise [dieses zip-File](../../Penguin_Analyses_RStudioProject.zip) herunter, dekomprimiert es und öffnet die `.RProj`-Datei, hat man direkt Code, Daten, Environment etc. zur Verfügung und muss nicht zuerst Pfadnamen etc. ändern.

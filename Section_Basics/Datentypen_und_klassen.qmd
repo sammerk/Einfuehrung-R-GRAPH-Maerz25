@@ -1,0 +1,136 @@
+---
+title: Datentypen und -klassen
+engine: knitr
+format: live-html
+toc: true
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+In `r fontawesome::fa(name = "r-project", fill = "#18bc9c")` unterscheidet man zwischen Datentypen und Datenklassen. Datentypen entscheiden darüber, wie die Daten intern *gespeichert* werden und Datenklassen darüber, wie die Daten *verarbeitet* werden.
+
+## Die basalen Datentypen
+Da für die angewandte Statistik die technische Prozessierung weniger interessant ist seien die Datentypen hier nur der Vollständigkeit halber gelistet:
+
+| Datentyp | Beschreibung | Beispiel |
+| :--- | :--- | :--- |
+| Numeric | Gleitkommazahlen (Dezimalzahlen) | `x <- 3.14` |
+| Integer | Ganze Zahlen (mit L gekennzeichnet) | `x <- 42L` |
+| Logical | Wahrheitswerte (Boolean) | `x <-  TRUE` |
+| Character | Zeichenketten (Strings) | `x <- "Hallo"` |
+| Complex | Komplexe Zahlen | `x <- 2+3 i` |
+| Raw | Rohdaten (Byte-Daten) | `x <- charToRaw("text")` |
+
+Möchte man abfragen, welchen Datentyps ein Objekt ist, kann die Funktion `typeof()` verwendet werden.
+
+## Datenklassen setzen und abfragen
+Generiert man ein Objekt mithilfe des `<-` Zuweisungsoperator, weist `r fontawesome::fa(name = "r-project", fill = "#18bc9c")` diesem Objekt auch eine Datenklasse zu. Dabei versucht `r fontawesome::fa(name = "r-project", fill = "#18bc9c")` aufgrund des Objektes eine »naheliegende« Datenklasse zu wählen. Welcher Datentyp von R gewählt wird kann mit dem Befehl `class()` abgerufen werden, wie folgendes Beispiel zeigt: 
+
+```{r, echo = T}
+objekt <- 7
+class(objekt)
+```
+
+Man kann die Datenklasse aber auch explizit festlegen, indem man Befehle wie   
+
+* `as.numeric()`
+* `as.integer()`
+* `as.factor()`
+* `as.ordered()`
+* `as.character()`
+* `as.Date()`
+* `as.logical()`
+
+verwendet.
+
+Mit dem Code `object <- as.integer(7)` generiert man also ein Objekt, mit dem Wert `7` der Klasse `integer`. 
+
+```{r, echo = T}
+object <- as.integer(7)
+class(object)
+```
+
+
+## Übung 1
+Prüfen Sie im folgenden Fenster welche Datenklasse `r fontawesome::fa(name = "r-project", fill = "#18bc9c")` einem Objekt `"democracy dies in darkness"` zuweist. 
+
+```{webr}
+#| exercise: dtype_ex1
+#| min-lines: 2
+
+
+
+```
+
+
+::: { .hint exercise="dtype_ex1"}
+::: { .callout-note collapse="false"}
+## Hinweis:
+Die Datenklasse eines Objektes `x` kann mit `class()` abgefragt werden
+:::
+:::
+
+::: { .solution exercise="dtype_ex1" }
+::: { .callout-tip collapse="false"}
+## Lösungen:
+z.B.
+
+```r
+y <- "democracy dies in darkness"
+class(y)
+```
+
+oder direkt
+
+```r
+class("democracy dies in darkness")
+```
+
+:::
+:::
+
+
+## Übung 2
+Generieren Sie im folgenden Fenster ein Objekt namens `Datumsobjekt`, das die Klasse `Date` hat und den Wert `"2019-12-25"`. Geben Sie dieses Objekt anschließend aus.
+
+```{webr}
+#| exercise: dtype_ex2
+#| min-lines: 2
+
+
+```
+
+
+::: { .hint exercise="dtype_ex2"}
+::: { .callout-note collapse="false"}
+## Hinweis:
+Die Datenklasse eines Objektes `x` kann mit `class()` abgefragt werden
+:::
+:::
+
+::: { .solution exercise="dtype_ex2" }
+::: { .callout-tip collapse="false"}
+## Lösungen:
+
+```r
+Datumsobjekt <- as.Date("2019-12-25")
+Datumsobjekt
+```
+
+:::
+:::
+
+
+## Übung 3
+Sagen Sie vorher, ob die folgenden Ausdrücke `TRUE` oder `FALSE` ergeben und prüfen Sie dies anschließend in folgendem Code-Fenster:
+
+* `is.character("Kaninchen")`
+* `is.integer(23.3)`
+* `is.factor(ordered(5))`
+
+
+```{webr}
+#| exercise: dtype_ex3
+
+
+```

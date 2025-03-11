@@ -1,0 +1,105 @@
+---
+title: Summarize Variables
+engine: knitr
+format: live-html
+toc: true
+webr:
+  packages:
+    - dplyr
+    - palmerpenguins
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+Am Anfang einer sozialwissenschaftlichen Datenanalyse stehen oft deskriptive Statistiken zur Beschreibung von Variablen. Im Gegensatz zu den zuvor (z.B. bei der z-Standardisierung) verwendeten vektorisierten Funktionen kommen dabei »summary functions« zum Zuge:
+
+![https://rstudio.github.io/cheatsheets/](../img/vec_vs_sum.jpg)
+
+
+Diese Funktionen werden oft innerhalb der Funktion `summary()` ausgeführt, welche eine sehr ähnliche Syntax wie `mutate()` aufweist (siehe Cheatsheet unten).
+
+## Mittelwert und Standardabweichungen der `bill`-Variablen
+```{r}
+#| echo: false
+#| results: hide
+#| message: false
+#| warning: false
+library(dplyr)
+library(palmerpenguins)
+```
+
+:::{.callout-tip collapse=false appearance='default' icon=true}
+## Beispielstudie
+Angenommen ein Forscher:innenteam möchte Mittelwert und Standardabweichungen der `bill`-Variablen berichten - was wäre eine geignete Syntax?
+:::
+
+```r
+penguins %>%                                              # <1>
+  summarize(                                              # <2>
+    bill_length_mean = mean(bill_length_mm, na.rm = T),  # <3>
+    bill_depth_mean = mean(bill_depth_mm, na.rm = T),     # <4>
+    bill_length_sd = sd(bill_length_mm, na.rm = T) ,      # <5>
+    bill_depth_sd = sd(bill_depth_mm, na.rm = T))         # <6>
+```
+
+1. Nimm das Objekt/den Datensatz `penguins` und
+2. berechne folgende **Zusammenfassungen** von Variablen:
+3. Das arithmtische Mittel der Variable `bill_length_mm`.
+4. Das arithmtische Mittel der Variable `bill_depth_mm`.
+5. Die Standardabweichung der Variable `bill_length_mm`.
+6. Die Standardabweichung der Variable `bill_depth_mm`.
+
+## Übung 1
+Führen Sie die den obigen Code aus. Ergänzen Sie dann um Median, Minimum und Maximum.
+
+```{webr}
+#| exercise: sum_ex1
+#| min-lines: 10
+
+
+```
+
+
+::: { .hint exercise="sum_ex1"}
+::: { .callout-note collapse="false"}
+## Hinweise:
+Sowohl in `median()` als auch in `min()` und `max()` ignoriert man fehlende Werte `NA` mit dem Funktionsargument `na.rm = TRUE`.
+
+:::
+:::
+
+::: { .solution exercise="sum_ex1" }
+::: { .callout-tip collapse="false"}
+## Eine Lösung
+
+```r
+penguins %>%                                              
+  summarize(                                              
+    bill_length_mean = mean(bill_length_mm, na.rm = T),   
+    bill_depth_mean = mean(bill_depth_mm, na.rm = T),     
+    bill_length_sd = sd(bill_length_mm, na.rm = T) ,      
+    bill_depth_median = median(bill_depth_mm, na.rm = T),
+    bill_depth_max = max(bill_depth_mm, na.rm = T),
+    bill_depth_min = min(bill_depth_mm, na.rm = T))         
+```
+
+:::
+:::
+
+
+## Cheat Sheet
+
+:::: {.columns}
+
+::: {.column width='47%'}
+![https://rstudio.github.io/cheatsheets/](../img/dpylr_cs1.jpg){.lightbox}
+:::
+
+::: {.column width='6%'}
+:::
+
+::: {.column width='47%'}
+![](../img/dpylr_cs2.jpg){.lightbox}
+:::
+
+::::

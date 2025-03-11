@@ -1,0 +1,34 @@
+---
+title: Datenstrukturen
+engine: knitr
+format: live-html
+toc: true
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+Bei den bisher behandelten Beispielen handelte es sicher immer um so genannte *atomare Datenstrukturen*. Damit ist gemeint, dass wir - egal welcher Datentyp oder welche Datenklasse - immer nur einen einzigen »Datenpunkt« vorliegen hatten. Da Statistik ja nach Mustern in Daten sucht sind atomare Datenstrukturen in der Regel uninteressant.
+
+Sozialwissenschaftler:innen denken bei Datenstrukturen meistens an eine »Datentabelle«, in der die Zeilen Merkmalsträger:innen darstellen und Spalten Variablen.
+
+In `r fontawesome::fa(name = "r-project", fill = "#18bc9c")` unterscheidet man zunächst *homogene* von *heterogenen* *Datenstrukturen*, welche wiederum vielerlei Untertypen haben können. In homogenen Datenstrukturen haben alle Elemente dieselbe Datenklasse (und damit denselben Datentyp), während diese in heterogenen Datenstrukturen variieren können. Die typische sozialwissenschaftliche »Datentabelle« stellt meistens eine heterogene Datenstruktur dar, da sie typischerweise Variablen verschiedener Skalenniveaus enthält. 
+
+Während die typische sozialwissenschaftliche »Datentabelle« eine zwei dimensionale Struktur darstellt (Zeilen x Spalten), können Datenstrukturen in R eine oder mehrere Dimensionen besitzen. 
+
+Die Kombination von Homogenität und Dimensionalität stellt eine gute Heuristik für die Definition gängiger Datenstrukturen in `r fontawesome::fa(name = "r-project", fill = "#18bc9c")` dar:
+
+| Datenstruktur  | Homogenität | Dimensionalität  | Beispiel                                           |
+|----------------|-------------|------------------|----------------------------------------------------|
+| **Vektor**     | homogen     | 1                | `c(1, 2, 3)`                                       |
+| **Matrix**     | homogen     | 2                | `matrix(1:6, nrow = 2, ncol = 3)`                  |
+| **Array**      | homogen     | n                | `array(1:8, dim = c(2,2,2))`                       |
+| **Liste**      | heterogen   | 1 (aber nestbar) | `list(1, "text", TRUE)`                            |
+| **Data Frame** | heterogen   | 2                | `data.frame(Name = c("A", "B"), Alter = c(25,30))` |
+
+
+
+```{webr}
+#| caption: Codefenster zum Ausprobieren obiger Syntax
+#| min-lines: 8
+
+```

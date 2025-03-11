@@ -1,0 +1,81 @@
+---
+title: Logische Vergleichsoperatoren
+engine: knitr
+format: live-html
+toc: true
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+## Syntax für arithmetische Operationen/Funktionen
+Für Wahrheitsabfragen hält `r fontawesome::fa(name = "r-project", fill = "#18bc9c")` einige Vergleichsoperatoren bereit:</p>
+
+* `<` für *»kleiner als«*
+* `>` für *»größer als«*
+* `<=` für *»kleiner als oder gleich wie«*
+* `>=` für *»größer als oder gleich wie«*
+* `==` für *»gleich«*
+* `!=` für *»ungleich«*
+* `%in%` für *»liegt in der Menge«*
+
+Als Ergebnis eines solchen Vergleichs erhält man `TRUE` oder `FALSE`, wie folgende Beispiele zeigen:
+
+```{r, echo=TRUE}
+4 + 2 < 3
+
+10 == 4 + 6
+```
+
+Zusätzlich werden oftmals noch die logischen Operatoren
+
+* `&` für *»und«*
+* `|` für *»oder«*
+
+benutzt.
+
+
+## Übung 1
+Prüfen Sie im folgenden Fenster ob $2^2 + 3^2$ gleich $5^2$ ist.
+
+```{webr}
+#| exercise: log_ex1
+
+
+```
+
+
+::: { .hint exercise="log_ex1"}
+::: { .callout-note collapse="false"}
+## Hinweis:
+
+Der Funktion für das exponentieren ist `^`. Also `25` erhält man z.B. via `5^2`.
+
+:::
+:::
+
+::: { .solution exercise="log_ex1" }
+::: { .callout-tip collapse="false"}
+## Lösung:
+
+```r
+2^2 + 3^2 == 5^2
+```
+
+:::
+:::
+
+## Übung 2
+Sagen Sie vorher, ob die folgenden Ausdrücke `TRUE` oder `FALSE` ergeben und prüfen Sie dies anschließend in folgendem Code-Fenster:
+
+* `2*3 == 6`
+* `4 + 4 = 8` 
+* `2 < 1 | 5 > 3`
+* `6 < 7 & 7 < 5`
+
+
+```{webr}
+#| exercise: log_ex2
+
+
+```
+

@@ -1,0 +1,300 @@
+---
+title: Data Joining
+engine: knitr
+format: live-html
+toc: true
+webr:
+  packages:
+    - dplyr
+    - palmerpenguins
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+Oftmals liegen Rohdaten in unterschiedlichen files vor. Diese kommen etwa aus verschiedenen Erhebungswellen oder verschiedenen Erhebungsmethoden (z.B. Survey & Logdata).
+Meistens liegen dabei nicht alle Merkmalsträger in allen Teildatensätzen vor (z.B. aufgrund von Panelmortalität). 
+
+
+In `{dplyr}` sind die `join`-Funktionen für das Zusammenführen von Datensätzen geeignet:
+
+| Join-Typ     | Beschreibung |
+|-------------|-------------|
+| `full_join()` | Behält alle Zeilen aus beiden Tabellen |
+| `left_join()` | Behält alle Zeilen aus der linken Tabelle und ergänzt passende Werte aus der rechten Tabelle |
+| `right_join()` | Behält alle Zeilen aus der rechten Tabelle und ergänzt passende Werte aus der linken Tabelle |
+| `inner_join()` | Behält nur die Zeilen mit passenden Werten in beiden Tabellen |
+
+
+## Beispiel 1 (`full_join()`)
+```{r}
+#| echo: false
+#| results: hide
+#| message: false
+#| warning: false
+library(dplyr)
+library(palmerpenguins)
+```
+
+Als erstes wollen wir wie in folgender Abbildung dargestellt einen `full_join()` durchführen:
+
+:::: {.columns}
+
+::: {.column width='30%'}
+::: {style="font-size: 10px; line-height: 0.8  "}
+```{r}
+#| echo: false
+#| warning: false
+library(tinytable)
+penguins_raw_subset1 <- 
+penguins_raw %>% 
+  mutate(Species = stringr::str_extract(Species, "^[^ ]+")) %>% 
+  rename(bill_length_mm = `Culmen Length (mm)`,
+         ID = `Individual ID`,
+         D15N = `Delta 15 N (o/oo)`) %>% 
+  select(ID, Species, D15N) %>% 
+  slice(c(344, 4)) 
+
+penguins_raw_subset1%>% 
+  tt()
+```
+:::
+:::
+
+::: {.column  width='5%'}
+<br><br>
+<center>`r fontawesome::fa(name = "plus-circle", fill = "#18bc9c")`</center>
+:::
+
+::: {.column width='30%'}
+::: {style="font-size: 10px; line-height: 0.8"}
+```{r}
+#| echo: false
+penguins_raw_subset2 <- 
+  penguins_raw %>% 
+  mutate(Species = stringr::str_extract(Species, "^[^ ]+")) %>% 
+  rename(bill_length_mm = `Culmen Length (mm)`,
+         ID = `Individual ID`,
+         D15N = `Delta 15 N (o/oo)`) %>% 
+  select(ID, Species, bill_length_mm) %>% 
+  slice(c(1, 344)) 
+
+penguins_raw_subset2 %>% 
+  tt()
+```
+:::
+:::
+
+::: {.column  width='5%'}
+<br><br>
+<center>`r fontawesome::fa(name = "equals", fill = "#18bc9c")`</center>
+:::
+
+::: {.column width='30%'}
+::: {style="font-size: 10px; line-height: 0.8"}
+```{r}
+#| echo: false
+#| message: false
+full_join(penguins_raw_subset1, penguins_raw_subset2) %>% 
+  tt()
+```
+:::
+:::
+
+::::
+
+Beide Tabellen enthalten Daten von insgesamt 3 Individuen, jeweils ein unterschiedliches Individuum fehlt in einer Tabelle. `full_join()` erhält alle individuen in der gejointen Tabelle und füllt fehlende Werte mit `NA` auf.
+
+
+## Beispiel 2 (`left_join()`)
+```{r}
+#| echo: false
+#| results: hide
+#| message: false
+#| warning: false
+library(dplyr)
+library(palmerpenguins)
+```
+
+:::: {.columns}
+
+::: {.column width='30%'}
+::: {style="font-size: 10px; line-height: 0.8  "}
+```{r}
+#| echo: false
+#| warning: false
+library(tinytable)
+penguins_raw_subset1 <- 
+penguins_raw %>% 
+  mutate(Species = stringr::str_extract(Species, "^[^ ]+")) %>% 
+  rename(bill_length_mm = `Culmen Length (mm)`,
+         ID = `Individual ID`,
+         D15N = `Delta 15 N (o/oo)`) %>% 
+  select(ID, Species, D15N) %>% 
+  slice(c(344, 4)) 
+
+penguins_raw_subset1%>% 
+  tt()
+```
+:::
+:::
+
+::: {.column  width='5%'}
+<br><br>
+<center>`r fontawesome::fa(name = "plus-circle", fill = "#18bc9c")`</center>
+:::
+
+::: {.column width='30%'}
+::: {style="font-size: 10px; line-height: 0.8"}
+```{r}
+#| echo: false
+penguins_raw_subset2 <- 
+  penguins_raw %>% 
+  mutate(Species = stringr::str_extract(Species, "^[^ ]+")) %>% 
+  rename(bill_length_mm = `Culmen Length (mm)`,
+         ID = `Individual ID`,
+         D15N = `Delta 15 N (o/oo)`) %>% 
+  select(ID, Species, bill_length_mm) %>% 
+  slice(c(1, 344)) 
+
+penguins_raw_subset2 %>% 
+  tt()
+```
+:::
+:::
+
+::: {.column  width='5%'}
+<br><br>
+<center>`r fontawesome::fa(name = "equals", fill = "#18bc9c")`</center>
+:::
+
+::: {.column width='30%'}
+::: {style="font-size: 10px; line-height: 0.8"}
+```{r}
+#| echo: false
+#| message: false
+left_join(penguins_raw_subset1, penguins_raw_subset2) %>% 
+  tt()
+```
+:::
+:::
+
+::::
+
+Nutzt man `left_join(tabelle_1, tabelle_2)` bleiben nur die Individuen aus `tabelle_1` erhalten. Zusätzliche Variablen von `tabelle_2` werden jedoch aufgefüllt.
+
+
+## Beispiel 3 (`right_join()`)
+```{r}
+#| echo: false
+#| results: hide
+#| message: false
+#| warning: false
+library(dplyr)
+library(palmerpenguins)
+```
+
+:::: {.columns}
+
+::: {.column width='30%'}
+::: {style="font-size: 10px; line-height: 0.8  "}
+```{r}
+#| echo: false
+#| warning: false
+library(tinytable)
+penguins_raw_subset1 <- 
+penguins_raw %>% 
+  mutate(Species = stringr::str_extract(Species, "^[^ ]+")) %>% 
+  rename(bill_length_mm = `Culmen Length (mm)`,
+         ID = `Individual ID`,
+         D15N = `Delta 15 N (o/oo)`) %>% 
+  select(ID, Species, D15N) %>% 
+  slice(c(344, 4)) 
+
+penguins_raw_subset1%>% 
+  tt()
+```
+:::
+:::
+
+::: {.column  width='5%'}
+<br><br>
+<center>`r fontawesome::fa(name = "plus-circle", fill = "#18bc9c")`</center>
+:::
+
+::: {.column width='30%'}
+::: {style="font-size: 10px; line-height: 0.8"}
+```{r}
+#| echo: false
+penguins_raw_subset2 <- 
+  penguins_raw %>% 
+  mutate(Species = stringr::str_extract(Species, "^[^ ]+")) %>% 
+  rename(bill_length_mm = `Culmen Length (mm)`,
+         ID = `Individual ID`,
+         D15N = `Delta 15 N (o/oo)`) %>% 
+  select(ID, Species, bill_length_mm) %>% 
+  slice(c(1, 344)) 
+
+penguins_raw_subset2 %>% 
+  tt()
+```
+:::
+:::
+
+::: {.column  width='5%'}
+<br><br>
+<center>`r fontawesome::fa(name = "equals", fill = "#18bc9c")`</center>
+:::
+
+::: {.column width='30%'}
+::: {style="font-size: 10px; line-height: 0.8"}
+```{r}
+#| echo: false
+#| message: false
+right_join(penguins_raw_subset1, penguins_raw_subset2) %>% 
+  tt()
+```
+:::
+:::
+::::
+
+Nutzt man `right_join(tabelle_1, tabelle_2)` bleiben nur die Individuen aus `tabelle_2` erhalten. Zusätzliche Variablen von `tabelle_1` werden jedoch aufgefüllt.
+
+## Übung 1
+Im Folgenden Codefenster sind die beiden Minimaldatensätze `data_A` und `data_B` als Objekte hinterlegt:
+
+```{r}
+data_A <- tibble(ID = c("A", "B"),
+                 Var_1 = c(4, 8))
+data_B <- tibble(ID = c("A", "C"),
+                 Var_2 = c(3, 7))
+data_A
+data_B
+```
+
+Sagen Sie voraus, welche Ergebnisse
+
+* `full_join(data_A, data_B)`
+* `left_join(data_A, data_B)`
+* `right_join(data_A, data_B)`
+* `inner_join(data_A, data_B)`
+
+zeigen werden.
+
+```{webr}
+#| setup: true
+#| exercise: join_ex1
+data_A <- tibble(ID = c("A", "B"),
+                 Var_1 = c(4, 8))
+data_B <- tibble(ID = c("A", "C"),
+                 Var_2 = c(3, 7))
+```
+
+```{webr}
+#| exercise: join_ex1
+#| min-lines: 5
+
+
+```
+
+
+

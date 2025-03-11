@@ -1,0 +1,20 @@
+# Willkommen 👋! {.unnumbered}
+
+Hier finden sich
+
+* Erklärungen,
+* interaktive Aufgaben,
+* Daten und
+* Code
+
+für unseren Kurs **Einführung in R** auf der GRAPH Winterakademie 2025.  
+Zu Beginn des Kurses bitte ich alle eine aktuelle Version von {{< iconify fa6-brands r-project >}} und {{< iconify devicon:rstudio >}} Studio zu installieren.
+
+
+:::{.callout-note collapse=false appearance='default' icon=false}
+## Zweck dieses E-Books {{< iconify fa6-solid lightbulb >}}
+Dieses E-Book soll kein Lehrbuch für {{< iconify fa6-brands r-project >}} sein. Vielmehr ein Notizbuch für den Workshop mit einer Sammlung von Erklärungen, Aufgaben, Code, Links, Datensätzen und Literaturverweisen.
+Diese sollen als Ausgangpunkt für eigene Literatur- und Netzrecherche sowie vielfältiger AI-Chats sein.
+:::
+
+

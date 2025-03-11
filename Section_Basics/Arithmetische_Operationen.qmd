@@ -1,0 +1,116 @@
+---
+title: Arithmetische Operationen
+engine: knitr
+format: live-html
+toc: true
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+## Syntax für arithmetische Operationen
+Neben komplexeren statistischen Modellierungen kann `r fontawesome::fa(name = "r-project", fill = "#18bc9c")` natürlich auch einfache arithmetische Operationen ausführen. 
+
+* Addition: `+`
+* Subtraktion: `-`
+* Multiplikation: `*`
+* Division: `/`
+* Exponentiation: `^`
+* Quadratwurzel: `sqrt()`
+* ...
+
+Dabei wendet `r fontawesome::fa(name = "r-project", fill = "#18bc9c")` (genau wie Taschenrechner) die üblichen Konventionen (z.B. »Punktrechnung vor Strichrechnung« oder »Klammer zuerst« an), wie an folgendem In- und Output erkennbar: 
+
+```{r, echo = T}
+(2 + 3)*5
+```
+
+## Übung 1
+Addieren Sie im folgenden Fenster 5 und 13.
+
+```{webr}
+#| exercise: arith_ex1
+
+
+```
+
+
+::: { .hint exercise="arith_ex1"}
+::: { .callout-note collapse="false"}
+## Hinweis:
+
+```r
+______ + ______
+```
+:::
+:::
+
+::: { .solution exercise="arith_ex1" }
+::: { .callout-tip collapse="false"}
+## Lösung:
+
+```r
+5 + 13
+```
+
+:::
+:::
+
+## Übung 2
+Berechnen Sie im folgenden Fenster die Wurzel aus 16.
+
+```{webr}
+#| exercise: arith_ex2
+
+
+```
+
+
+::: { .hint exercise="arith_ex2"}
+::: { .callout-note collapse="false"}
+## Hinweis:
+Fragen Sie eine Suchmaschine oder KI nach einer passenden Funktion.
+:::
+:::
+
+::: { .solution exercise="arith_ex2" }
+::: { .callout-tip collapse="false"}
+## Lösung:
+
+```r
+sqrt(16)
+```
+
+:::
+:::
+
+## Übung 3
+Recherchieren Sie die Funktion (»das Zeichen« auch »den Operator« genannt) für den Logarithmus zur Basis 10. 
+Berechnen Sie im folgenden Fenster log~10~(100). 
+
+```{webr}
+#| exercise: arith_ex3
+
+
+```
+
+
+::: { .hint exercise="arith_ex3"}
+::: { .callout-note collapse="false"}
+## Hinweis:
+
+```r
+log(______, base = ______)
+```
+:::
+:::
+
+::: { .solution exercise="arith_ex3" }
+::: { .callout-tip collapse="false"}
+## Lösung:
+
+```r
+log(100, base = 10)
+```
+
+:::
+:::

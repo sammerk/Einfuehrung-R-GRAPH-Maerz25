@@ -1,0 +1,119 @@
+---
+title: Manipulate Variables
+engine: knitr
+format: live-html
+toc: true
+webr:
+  packages:
+    - dplyr
+    - palmerpenguins
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+Variablen (also Spalten) werden von Sozialwissenschaftler:innen oft
+
+* neu generiert (zum Beispiel Skalenwerte aus Items erzeugen),
+* selektiert (Variablen auswählen/weglassen)
+* und relokalisiert (Variablenreihenfolge tauschen).
+
+In `{dplyr}` sind die korrespondierenden Funktionen `mutate()`, `select()` und `relocate()`.
+
+## Beispiel (SI-Einheiten)
+```{r}
+#| echo: false
+#| results: hide
+#| message: false
+#| warning: false
+library(dplyr)
+library(palmerpenguins)
+```
+
+:::{.callout-tip collapse=false appearance='default' icon=true}
+## Beispielstudie
+Angenommen ein Forscher:innenteam möchte den `penguins`-Datensatz in SI-Einheiten rekodieren (also m und kg statt mm und g) - was wäre eine geignete Syntax?
+:::
+
+```r
+penguins %>%                                     # <1>
+  mutate(                                        # <2>
+    bill_length_m = bill_length_mm/1000 ,        # <3>
+    bill_depth_m = bill_depth_mm/1000,           # <3>
+    flipper_length_m = flipper_length_mm/1000,   # <3>
+    body_mass_kg = body_mass_g/1000) %>%         # <3>
+  select(species, island, sex, year,             # <4>
+         bill_length_m, bill_depth_m, 
+         flipper_length_m, body_mass_kg) %>% 
+  relocate(body_mass_kg)                         # <5>
+```
+1. Nimm das Objekt/den Datensatz `penguins` und
+2. berechne neue Variablen und zwar:
+3. die neue Variable namens `bill_length_m`, die sich aus der bestehenden Variable `bill_length_mm` geteilt durch 1000 ergibt...
+4. Wähle davon nun die Variablen `species`, `island`, `sex`, ...
+5. Bringe die Variable `body_mass_kg` ganz nach vorne.
+
+## Übung 1
+Führen die den obigen Code Schritt für Schritt aus also zunächst nur 1, dann 1-3, dann 1-4, dann 1-5.
+
+```{webr}
+#| min-lines: 12
+
+```
+
+## Übung 2
+Bilden Sie eine `bill_index`-Variable aus der Summe der z-standardisierten bill length und depth. Selektieren Sie anschließend nur die den Schnabel betreffenden Variablen.
+
+```{webr}
+#| exercise: manipc_ex2
+#| min-lines: 12
+
+
+```
+
+
+::: { .hint exercise="manipc_ex2"}
+::: { .callout-note collapse="false"}
+## Hinweise:
+
+* `sd()` berechnet die Standardabweichung
+* Sowohl in `mean()` als auch in `sd()` ignoriert man fehlende Werte `NA` mit dem Funktionsargument `na.rm = TRUE`
+* Man könnte sich zunächst eine Funktion definieren, welche die z-Standardisierung übernimmt
+
+:::
+:::
+
+::: { .solution exercise="manipc_ex2" }
+::: { .callout-tip collapse="false"}
+## Eine Lösung 
+
+```{r}
+penguins %>% 
+  mutate(bill_length_z = (bill_length_mm - mean(bill_length_mm, na.rm = T))/
+           sd(bill_length_mm, na.rm = T),
+         bill_depth_z = (bill_depth_mm - mean(bill_depth_mm, na.rm = T))/
+           sd(bill_depth_mm, na.rm = T),
+         bill_index = bill_length_z + bill_depth_z) %>% 
+  select(contains("bill"))
+```
+
+:::
+:::
+
+
+
+Weitere hilfreiche Funktionen für die Manipulation von Variablen können dem `dplyr`-Cheatsheet entnommen werden:
+
+:::: {.columns}
+
+::: {.column width='47%'}
+![https://rstudio.github.io/cheatsheets/](../img/dpylr_cs1.jpg){.lightbox}
+:::
+
+::: {.column width='6%'}
+:::
+
+::: {.column width='47%'}
+![](../img/dpylr_cs2.jpg){.lightbox}
+:::
+
+::::

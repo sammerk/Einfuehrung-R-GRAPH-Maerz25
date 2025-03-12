@@ -164,12 +164,12 @@ In folgendem Codefenster sind die beiden Datensätze `data_mathe_t1` und `data_m
 ```{webr}
 #| setup: true
 #| exercise: piv_ex1
-data_t1 <- 
+data_mathe_t1 <- 
   tibble(ID = c("A", "B", "C"),
          selbst_t1 = c(5.3, 6.1, 4.8),
          mleist_t1 = c(532, 610, 480))
 
-data_t2 <- 
+data_mathe_t2 <- 
   tibble(ID = c("A", "B", "C"),
          selbst_t2 = c(5.0, 5.7, 4.2),
          mleist_t2 = c(562, 652, 489))

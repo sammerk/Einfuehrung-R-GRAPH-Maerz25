@@ -201,9 +201,9 @@ data_mathe_t2 <-
 ::: { .callout-tip collapse="false"}
 ## Eine Lösung
 
-```{r}
+```r
 # MW und SD
-full_join(data_t1, data_t2) %>% 
+full_join(data_mathe_t1, data_mathe_t2) %>% 
   pivot_longer(names_to = "variablen",
                values_to = "werte",
                cols = -ID) %>% 
@@ -212,17 +212,17 @@ full_join(data_t1, data_t2) %>%
             sd = sd(werte, na.rm = T))
 
 # Korrelation t1
-data_t1 %>% 
+data_mathe_t1 %>% 
   select(selbst_t1, mleist_t1) %>% 
   cor(use = "pairwise")
 
 # Korrelation t2
-data_t2 %>% 
+data_mathe_t2 %>% 
   select(selbst_t2, mleist_t2) %>% 
   cor(use = "pairwise")
 
 # Korrelation gesamt
-full_join(data_t1, data_t2) %>% 
+full_join(data_mathe_t1, data_mathe_t2) %>% 
   pivot_longer(names_to = "variablen",
                values_to = "werte",
                cols = -ID) %>% 

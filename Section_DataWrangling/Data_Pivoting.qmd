@@ -236,3 +236,21 @@ full_join(data_t1, data_t2) %>%
 
 :::
 :::
+
+
+## Cheat Sheet
+
+:::: {.columns}
+
+::: {.column width='47%'}
+![https://rstudio.github.io/cheatsheets/](../img/tidyr_cs1.png){.lightbox}
+:::
+
+::: {.column width='6%'}
+:::
+
+::: {.column width='47%'}
+![](../img/tidyr_cs2.png){.lightbox}
+:::
+
+::::

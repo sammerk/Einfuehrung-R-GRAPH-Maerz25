@@ -241,6 +241,17 @@
     ]
   },
   {
+    "objectID": "Section_DataWrangling/Data_Pivoting.html#cheat-sheet",
+    "href": "Section_DataWrangling/Data_Pivoting.html#cheat-sheet",
+    "title": "Data Pivoting",
+    "section": "Cheat Sheet",
+    "text": "Cheat Sheet\n\n\n\n\n\nhttps://rstudio.github.io/cheatsheets/",
+    "crumbs": [
+      "Data Wrangling",
+      "Data Pivoting"
+    ]
+  },
+  {
     "objectID": "Section_DataWrangling/The_Split_Apply_Combine_Approach.html",
     "href": "Section_DataWrangling/The_Split_Apply_Combine_Approach.html",
     "title": "Der Split-Apply-Combine Approach",

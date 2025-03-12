@@ -239,7 +239,7 @@ full_join(data_mathe_t1, data_mathe_t2) %>%
 :::
 
 
-## Cheat Sheet
+## Cheat Sheet `{tidyr}`
 
 :::: {.columns}
 

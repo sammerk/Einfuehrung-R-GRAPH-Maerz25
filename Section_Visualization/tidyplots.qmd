@@ -110,8 +110,8 @@ penguins %>%                              # <1>
 10. mit horizontalen Enden der Länge 0
 11. und der Farbe schwarz auf.
 
-### Übung 1: Korrelation `bill_depth_mm` und `bill_depth_mm`
-Plotten Sie die `penguins`-Daten so dass Sie die Korrelation `bill_depth_mm` und `bill_depth_mm` innerhalb der Spezies und speziesübergreifend explorieren können.
+### Übung 1: Korrelation `bill_depth_mm` und `bill_length_mm`
+Plotten Sie die `penguins`-Daten so dass Sie die Korrelation `bill_depth_mm` und `bill_length_mm` innerhalb der Spezies und speziesübergreifend explorieren können.
 
 ```{webr}
 #| exercise: tidyplot_ex1
